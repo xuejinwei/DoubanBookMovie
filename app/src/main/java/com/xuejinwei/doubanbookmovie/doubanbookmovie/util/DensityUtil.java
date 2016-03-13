@@ -7,7 +7,7 @@ import android.view.ContextThemeWrapper;
 /**
  * Created by xuejinwei on 16/3/12.
  */
-public class Density {
+public class DensityUtil {
 
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
