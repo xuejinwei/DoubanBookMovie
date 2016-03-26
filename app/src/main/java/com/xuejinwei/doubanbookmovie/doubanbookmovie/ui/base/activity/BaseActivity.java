@@ -3,6 +3,9 @@ package com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.api.ApiFactory;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.api.ApiWrapper;
+
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
@@ -13,6 +16,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
  */
 public class BaseActivity extends AppCompatActivity implements SwipeBackActivityBase {
     private SwipeBackActivityHelper mSwipeBackHelper;
+    public static final ApiWrapper mApiWrapper = ApiFactory.getApiWrapper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

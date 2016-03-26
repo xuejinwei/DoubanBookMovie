@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+    >
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/md_white_100"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:hint="图书搜索"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="12dp"
+            android:paddingStart="12dp"
+            android:singleLine="true"
+            android:textColor="@color/text_color_dark"
+            android:textColorHint="@color/text_color_grey_light"
+            android:textSize="14sp"/>
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/ll_more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_padding"
+        android:background="@drawable/bg_white_gray"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/activity_padding">
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="14dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="0dp"
+            android:background="@color/colorPrimary"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="热门图书"
+            android:textColor="@color/text_color_dark_full"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:textColor="@color/colorPrimary"/>
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_book_hot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_book_hot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md_white_100"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>
