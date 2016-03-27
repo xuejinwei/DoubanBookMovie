@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
-import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.BaseFragment;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.fragment.BaseFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

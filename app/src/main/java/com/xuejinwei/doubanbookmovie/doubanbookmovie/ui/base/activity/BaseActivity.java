@@ -5,10 +5,18 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.api.ApiFactory;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.api.ApiWrapper;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.api.FlatHandler;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
+import rx.Observable;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * activity基础类，该项目每个activity都要继承此类或者其子类
@@ -17,6 +25,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
 public class BaseActivity extends AppCompatActivity implements SwipeBackActivityBase {
     private SwipeBackActivityHelper mSwipeBackHelper;
     public static final ApiWrapper mApiWrapper = ApiFactory.getApiWrapper();
+    public CompositeSubscription mSubscriptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +33,17 @@ public class BaseActivity extends AppCompatActivity implements SwipeBackActivity
         this.mSwipeBackHelper = new SwipeBackActivityHelper(this);
         this.mSwipeBackHelper.onActivityCreate();
         setSwipeBackEnable(canSwipeBack());
+        mSubscriptions = new CompositeSubscription();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 界面退出时，退订本界面所有 subscription（需要使用 addSubscription 或者 runRxTaskXXXX 方法才有效）
+        if (mSubscriptions != null) {
+            mSubscriptions.unsubscribe();
+        }
     }
 
     @Override
@@ -52,5 +72,57 @@ public class BaseActivity extends AppCompatActivity implements SwipeBackActivity
      */
     public boolean canSwipeBack() {
         return false;
+    }
+
+    public void addSubscription(Subscription subscription) {
+        mSubscriptions.add(subscription);
+    }
+
+    /**
+     * Activity 中启动新 rx 任务的方法，可以保证在 Activity 生命周期结束时退订 Observable
+     *
+     * @param observable 任务的 observable
+     * @param result     任务结果的回调
+     * @param error      任务出错时的回调
+     * @param onComplete 任务完成后的回调
+     * @param <T>        任务中的实体类型
+     */
+    public <T> void runRxTaskOnUi(Observable<T> observable, Action1<T> result,
+                                  Action1<Throwable> error, Action0 onComplete) {
+        addSubscription(observable
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(result, error, onComplete));
+    }
+
+    /**
+     * Activity 中启动新 rx 任务的方法，可以保证在 Activity 生命周期结束时退订 Observable
+     *
+     * @param observable 任务的 observable
+     * @param result     任务结果的回调
+     * @param error      任务出错时的回调
+     * @param <T>        任务中的实体类型
+     */
+    public <T> void runRxTaskOnUi(Observable<T> observable, Action1<T> result,
+                                  Action1<Throwable> error) {
+        addSubscription(observable
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(result, error));
+    }
+
+    /**
+     * Activity 中启动新 rx 任务的方法，可以保证在 Activity 生命周期结束时退订 Observable
+     * 使用默认的 Error Handler 处理错误
+     *
+     * @param observable 任务的 observable
+     * @param result     任务结果的回调
+     * @param <T>        任务中的实体类型
+     */
+    public <T> void runRxTaskOnUi(Observable<T> observable, Action1<T> result) {
+        addSubscription(observable
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(result, FlatHandler::handleError));
     }
 }
