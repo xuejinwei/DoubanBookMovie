@@ -31,6 +31,16 @@ public class ApiWrapper {
         return mApi.getMovieComingSoon(star, count).flatMap(FlatHandler::flatResult);
     }
 
+    /**
+     * 查询Top250
+     *
+     * @param star  int 开始数
+     * @param count 查询数量，传入0 为默认数量
+     */
+    public Observable<MovieResult> getMovieTop250(int star, int count) {
+        return mApi.getMovieTop250(star, count).flatMap(FlatHandler::flatResult);
+    }
+
     public Observable<Movie> getMovieById(String movie_id) {
         return mApi.getMovieById(movie_id).flatMap(FlatHandler::flatResult);
     }

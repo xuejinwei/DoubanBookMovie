@@ -16,32 +16,32 @@ public interface Api {
 
     /**
      * 查询正在热映movie
-     * @param star  int 开始数
+     * @param start  int 开始数
      * @param count 查询数量，传入0 为默认数量
      * @return
      */
     @GET("/v2/movie/in_theaters")
-    Observable<Result<MovieResult>> getMovieInTheaters(@Query("star") int star, @Query("count") int count);
+    Observable<Result<MovieResult>> getMovieInTheaters(@Query("start") int start, @Query("count") int count);
 
     /**
      * 查询即将上映映movie
      *
-     * @param star  int 开始数
+     * @param start  int 开始数
      * @param count 查询数量，传入0 为默认数量
      * @return
      */
     @GET("/v2/movie/coming_soon")
-    Observable<Result<MovieResult>> getMovieComingSoon(@Query("star") int star, @Query("count") int count);
+    Observable<Result<MovieResult>> getMovieComingSoon(@Query("start") int start, @Query("count") int count);
 
     /**
      * 查询TOP250
      *
-     * @param star  int 开始数
+     * @param start  int 开始数
      * @param count 查询数量，传入0 为默认数量
      * @return
      */
     @GET("/v2/movie/top250")
-    Observable<Result<MovieResult>> getMovieTop250(@Query("star") int star, @Query("count") int count);
+    Observable<Result<MovieResult>> getMovieTop250(@Query("start") int start, @Query("count") int count);
 
     @GET("/v2/movie/subject/{id}")
     Observable<Result<Movie>> getMovieById(@Path("id") String id);

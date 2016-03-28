@@ -15,7 +15,9 @@ import android.widget.LinearLayout;
 import com.twiceyuan.commonadapter.library.adapter.CommonAdapter;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.adapter.MovieBoxHolder;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.api.FlatHandler;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieSimple;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.MovieListActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.fragment.BaseFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.RxUtils;
 
@@ -23,6 +25,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import rx.functions.Action1;
 
 /**
@@ -76,25 +79,25 @@ public class MovieFragment extends BaseFragment implements SwipeRefreshLayout.On
         return view;
     }
 
-//    @OnClick(R.id.ll_in_theaters)
-//    public void in_theaters() {
-//        MovieListActivity.start(getActivity(), MovieListActivity.Type.IN_THEATERS);
-//    }
-//
-//    @OnClick(R.id.ll_coming_soon)
-//    public void coming_soon() {
-//        MovieListActivity.start(getActivity(), MovieListActivity.Type.COMMING_SOON);
-//    }
+    @OnClick(R.id.ll_in_theaters)
+    public void in_theaters() {
+        MovieListActivity.start(getActivity(), MovieListActivity.Type.IN_THEATERS);
+    }
+
+    @OnClick(R.id.ll_coming_soon)
+    public void coming_soon() {
+        MovieListActivity.start(getActivity(), MovieListActivity.Type.COMMING_SOON);
+    }
 //
 //    @OnClick(R.id.ll_america)
 //    public void ll_america() {
 //        MovieListActivity.start(getActivity(), MovieListActivity.Type.AMERICA);
 //    }
-//
-//    @OnClick(R.id.ll_top250)
-//    public void ll_top250() {
-//        MovieListActivity.start(getActivity(), MovieListActivity.Type.TOP250);
-//    }
+
+    @OnClick(R.id.ll_top250)
+    public void ll_top250() {
+        MovieListActivity.start(getActivity(), MovieListActivity.Type.TOP250);
+    }
 
     /**
      * 更新适配器数据，并且通知
@@ -124,7 +127,7 @@ public class MovieFragment extends BaseFragment implements SwipeRefreshLayout.On
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-//                        FlatHandler.handleError(throwable);
+                        FlatHandler.handleError(throwable);
                         swipe_movie_in_theaters.setRefreshing(false);
                     }
                 });
