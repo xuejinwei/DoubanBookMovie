@@ -1,5 +1,7 @@
 package com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.fragment;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.api.ApiFactory;
@@ -21,6 +23,12 @@ public class BaseFragment extends Fragment{
 
     public void addSubscription(Subscription subscription) {
         mSubscriptions.add(subscription);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mSubscriptions = new CompositeSubscription();
     }
 
     @Override public void onDestroy() {

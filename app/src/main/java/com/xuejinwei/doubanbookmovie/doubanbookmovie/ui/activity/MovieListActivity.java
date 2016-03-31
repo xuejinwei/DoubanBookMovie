@@ -3,6 +3,7 @@ package com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.api.FlatHandler;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieSimple;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity.SwipeBackActivity;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.widget.DividerItemDecoration;
 
 import java.util.List;
 
@@ -64,6 +66,9 @@ public class MovieListActivity extends SwipeBackActivity implements SwipeRefresh
         rv_movie_list.setLayoutManager(new LinearLayoutManager(this));
         rv_movie_list.setItemAnimator(new DefaultItemAnimator());
         rv_movie_list.setAdapter(mMovieListAdapter);
+        rv_movie_list.addItemDecoration(
+                new DividerItemDecoration(
+                        ContextCompat.getDrawable(this, R.drawable.divider)));
 
         mPaginate = Paginate.with(rv_movie_list, new Paginate.Callbacks() {
             @Override

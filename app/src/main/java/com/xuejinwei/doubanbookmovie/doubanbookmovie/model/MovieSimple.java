@@ -28,10 +28,49 @@ public class MovieSimple {
     public String original_title;
     public String subtype;
 
-    public MovieRating rating;
-    public Images images;
-    public List<String> genres;
+    public MovieRating           rating;
+    public Images                images;
+    public List<String>          genres;
     public List<SimpleCelebrity> casts;
     public List<SimpleCelebrity> directors;
 
+    /**
+     * @return 电影类型字符串，中间以空格分隔
+     */
+    public String getGenres() {
+        String strGenres = "";
+
+        for (int i = 0; i < genres.size(); i++) {
+            if (i == 0) {
+                strGenres = genres.get(i);
+            } else {
+                strGenres = strGenres + "\t\t" + genres.get(i);
+            }
+        }
+        return strGenres;
+    }
+
+    public String getDirectors() {
+        String strDirectors = "";
+        for (int i = 0; i < directors.size(); i++) {
+            if (i == 0) {
+                strDirectors = directors.get(i).name;
+            } else {
+                strDirectors = strDirectors + "\t\t" + directors.get(i).name;
+            }
+        }
+        return strDirectors;
+    }
+
+    public String getCasts() {
+        String strCasts = "";
+        for (int i = 0; i < casts.size(); i++) {
+            if (i == 0) {
+                strCasts = casts.get(i).name;
+            } else {
+                strCasts = strCasts + "\t\t" + casts.get(i).name;
+            }
+        }
+        return strCasts;
+    }
 }
