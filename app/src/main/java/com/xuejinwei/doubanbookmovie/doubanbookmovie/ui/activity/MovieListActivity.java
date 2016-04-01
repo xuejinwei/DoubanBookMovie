@@ -63,6 +63,7 @@ public class MovieListActivity extends SwipeBackActivity implements SwipeRefresh
         mType = (Type) getIntent().getSerializableExtra(ARG_TYPE);
 
         mMovieListAdapter = new CommonAdapter<>(this, MovieListHolder.class);
+        mMovieListAdapter.setOnItemClickListener((position, movieSimple) -> MovieDetailActivity.start(MovieListActivity.this, movieSimple.id));
         rv_movie_list.setLayoutManager(new LinearLayoutManager(this));
         rv_movie_list.setItemAnimator(new DefaultItemAnimator());
         rv_movie_list.setAdapter(mMovieListAdapter);

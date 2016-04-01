@@ -21,8 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MovieListActivity">
-        </activity>
+        <activity android:name=".ui.activity.MovieListActivity"/>
+        <activity
+            android:name=".ui.activity.MovieDetailActivity"
+            android:theme="@style/AppTheme.StatusBar"
+            android:label=""/>
     </application>
 
 </manifest>

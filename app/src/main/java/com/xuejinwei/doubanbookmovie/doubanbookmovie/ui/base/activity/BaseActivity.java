@@ -1,5 +1,6 @@
 package com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -25,7 +26,8 @@ import rx.subscriptions.CompositeSubscription;
 public class BaseActivity extends AppCompatActivity implements SwipeBackActivityBase {
     private SwipeBackActivityHelper mSwipeBackHelper;
     public static final ApiWrapper mApiWrapper = ApiFactory.getApiWrapper();
-    public CompositeSubscription mSubscriptions;
+    public  CompositeSubscription mSubscriptions;
+    private ProgressDialog        mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +36,18 @@ public class BaseActivity extends AppCompatActivity implements SwipeBackActivity
         this.mSwipeBackHelper.onActivityCreate();
         setSwipeBackEnable(canSwipeBack());
         mSubscriptions = new CompositeSubscription();
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setCancelable(true);
 
     }
 
     @Override
     protected void onDestroy() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+            mProgressDialog = null;
+        }
         super.onDestroy();
         // 界面退出时，退订本界面所有 subscription（需要使用 addSubscription 或者 runRxTaskXXXX 方法才有效）
         if (mSubscriptions != null) {
@@ -124,5 +133,28 @@ public class BaseActivity extends AppCompatActivity implements SwipeBackActivity
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(result, FlatHandler::handleError));
+    }
+    /**
+     * 显示progressBar
+     *
+     * @param show 是否显示
+     */
+    protected void showProgressDialog(boolean show) {
+        showProgressDialog(show, "");
+    }
+
+    /**
+     * 显示progressBar
+     *
+     * @param show    是否显示
+     * @param message progressBar 消息提示
+     */
+    protected void showProgressDialog(boolean show, String message) {
+        if (show) {
+            mProgressDialog.setMessage(message);
+            mProgressDialog.show();
+        } else {
+            mProgressDialog.hide();
+        }
     }
 }

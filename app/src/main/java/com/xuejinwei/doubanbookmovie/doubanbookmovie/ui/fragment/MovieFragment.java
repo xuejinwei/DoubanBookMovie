@@ -17,6 +17,7 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.adapter.MovieBoxHolder;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.api.FlatHandler;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieSimple;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.MovieDetailActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.MovieListActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.fragment.BaseFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.RxUtils;
@@ -63,6 +64,7 @@ public class MovieFragment extends BaseFragment implements SwipeRefreshLayout.On
         ButterKnife.bind(this, view);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
         mMovieBoxAdapter = new CommonAdapter<>(getActivity(), MovieBoxHolder.class);
+        mMovieBoxAdapter.setOnItemClickListener((position, movieSimple) -> MovieDetailActivity.start(getActivity(),movieSimple.id));
 
         rv_movie_in_theaters.setLayoutManager(gridLayoutManager);
         rv_movie_in_theaters.setItemAnimator(new DefaultItemAnimator());

@@ -30,7 +30,7 @@ public class MovieSimple {
 
     public MovieRating           rating;
     public Images                images;
-    public List<String>          genres;
+    public List<String>          genres; //影片类型，最多提供3个
     public List<SimpleCelebrity> casts;
     public List<SimpleCelebrity> directors;
 
