@@ -1,6 +1,7 @@
 package com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -17,6 +18,7 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.adapter.MovieBoxHolder;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.api.FlatHandler;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieSimple;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.AuthActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.MovieDetailActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.MovieListActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.fragment.BaseFragment;
@@ -89,11 +91,12 @@ public class MovieFragment extends BaseFragment implements SwipeRefreshLayout.On
     public void coming_soon() {
         MovieListActivity.start(getActivity(), MovieListActivity.Type.COMMING_SOON);
     }
-//
-//    @OnClick(R.id.ll_america)
-//    public void ll_america() {
+
+    @OnClick(R.id.ll_america)
+    public void ll_america() {
 //        MovieListActivity.start(getActivity(), MovieListActivity.Type.AMERICA);
-//    }
+        startActivity(new Intent(getActivity(), AuthActivity.class));
+    }
 
     @OnClick(R.id.ll_top250)
     public void ll_top250() {

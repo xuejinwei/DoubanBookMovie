@@ -22,14 +22,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.MovieListActivity"/>
+        <activity android:name=".ui.activity.AuthActivity"/>
         <activity
             android:name=".ui.activity.MovieDetailActivity"
-            android:theme="@style/AppTheme.StatusBar"
-            android:label=""/>
+            android:label=""
+            android:theme="@style/AppTheme.StatusBar"/>
         <activity
             android:name=".ui.activity.CelebrityDetailActivity"
-            android:theme="@style/AppTheme.StatusBar"
-            android:label=""/>
+            android:label=""
+            android:theme="@style/AppTheme.StatusBar"/>
     </application>
 
 </manifest>

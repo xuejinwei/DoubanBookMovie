@@ -1,8 +1,12 @@
 package com.xuejinwei.doubanbookmovie.doubanbookmovie.api;
 
 import com.orhanobut.logger.Logger;
-import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.ErrorResult;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.App;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.Setting;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Result;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.AuthActivity;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.CommonUtil;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.RxUtils;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -13,6 +17,7 @@ import rx.Subscriber;
  * Flat 之后返回结果对 Error 的统一处理
  */
 public class FlatHandler {
+    public static final ApiWrapper mApiWrapper = ApiFactory.getApiWrapper();
 
     /**
      * 将带 Result 的请求结果转换为更为直接的结果对象，非法结果交给 Error handler 处理
@@ -41,10 +46,38 @@ public class FlatHandler {
      * 的错误码进行统一处理。
      */
     public static void handleError(Throwable exception) {
-        Logger.e("Error_code", exception);
-        if (exception instanceof ErrorResult) {
-            // TODO: 16/3/26 这里对错误进行统一处理
-            Logger.e("Error_code", ((ErrorResult) exception).code);
+        Logger.e(exception.getMessage());
+        if (exception instanceof ApiException) {
+            switch (((ApiException) exception).code) {
+                case 1000:
+                    CommonUtil.toast("请登陆");
+                    AuthActivity.start(App.getApp());
+                    break;
+                case 106:
+                    RxUtils.callOnUI(mApiWrapper.refreshOauthResult()).subscribe(oAuthResult -> {
+                        Setting.putSetting(Setting.Key.access_token, oAuthResult.access_token);
+                        Setting.putSetting(Setting.Key.expires_in, oAuthResult.expires_in);
+                        Setting.putSetting(Setting.Key.refresh_token, oAuthResult.refresh_token);
+                        Setting.putSetting(Setting.Key.douban_user_id, oAuthResult.douban_user_id);
+                        Setting.putSetting(Setting.Key.douban_user_name, oAuthResult.douban_user_name);
+                        CommonUtil.toast("授权已刷新，请重新进入");
+
+                    });
+                    break;
+                case 103:
+                    Setting.putSetting(Setting.Key.access_token, "");
+                    Setting.putSetting(Setting.Key.expires_in, "");
+                    Setting.putSetting(Setting.Key.refresh_token, "");
+                    Setting.putSetting(Setting.Key.douban_user_id, "");
+                    Setting.putSetting(Setting.Key.douban_user_name, "");
+                    AuthActivity.start(App.getApp());
+                    CommonUtil.toast("请重新登陆");
+                    break;
+                default:
+                    Logger.e(((ApiException) exception).code+((ApiException) exception).message);
+                    break;
+            }
+            return;
         }
     }
 }

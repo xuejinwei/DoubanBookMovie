@@ -1,9 +1,11 @@
 package com.xuejinwei.doubanbookmovie.doubanbookmovie.api;
 
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.Setting;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Celebrity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.HtmlResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Movie;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieResult;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.OAuthResult;
 
 import rx.Observable;
 
@@ -12,6 +14,20 @@ import rx.Observable;
  */
 public class ApiWrapper {
     Api mApi = ApiFactory.getApi();
+
+    /**
+     * @param authorization_code auth认证上一步获取到的authorization_code
+     */
+    public Observable<OAuthResult> getOauthResult(String authorization_code) {
+        return mApi.getOauthResult(Setting.APIKEY, Setting.SERCET, Setting.REDIRECT_URL, "authorization_code", authorization_code).flatMap(FlatHandler::flatResult);
+    }
+
+    /**
+     * 用来刷新access_token 的
+     */
+    public Observable<OAuthResult> refreshOauthResult() {
+        return mApi.refreshOauthResult(Setting.APIKEY, Setting.SERCET, Setting.REDIRECT_URL, "refresh_token", Setting.getSetting(Setting.Key.refresh_token,"")).flatMap(FlatHandler::flatResult);
+    }
 
     /**
      * 查询正在热映movie
@@ -51,11 +67,11 @@ public class ApiWrapper {
         return mApi.getCelebrityDetail(celebrity_id).flatMap(FlatHandler::flatResult);
     }
 
-    public Observable<HtmlResult> getComment(){
+    public Observable<HtmlResult> getComment() {
         return mApi.getComment();
     }
 
-    public Observable<String> getCollectionDetail(String Authorization){
+    public Observable<String> getCollectionDetail(String Authorization) {
         return mApi.getCollectionDetail(Authorization).flatMap(FlatHandler::flatResult);
     }
 }
