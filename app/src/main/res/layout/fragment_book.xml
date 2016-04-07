@@ -61,6 +61,11 @@
             android:textColor="@color/colorPrimary"/>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="aaaaaa"/>
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_book_hot"
         android:layout_width="match_parent"

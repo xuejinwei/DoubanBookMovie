@@ -77,7 +77,6 @@ public class MovieFragment extends BaseFragment implements SwipeRefreshLayout.On
                 onRefresh();
             }
         });
-
         return view;
     }
 

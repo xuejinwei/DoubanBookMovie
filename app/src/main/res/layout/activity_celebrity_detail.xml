@@ -33,12 +33,11 @@
 
             <ImageView
                 android:id="@+id/imagehead"
-                android:layout_width="150dp"
+                android:layout_width="130dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
                 android:layout_marginTop="80dp"
-                android:scaleType="fitXY"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.4"/>
 
@@ -87,54 +86,7 @@
                     android:textSize="18sp"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <android.support.v7.widget.AppCompatRatingBar
-                        android:id="@+id/ratingBar"
-                        style="?android:attr/ratingBarStyleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        android:isIndicator="true"
-                        android:maxHeight="14dp"
-                        android:maxWidth="14dp"
-                        android:minHeight="14dp"
-                        android:numStars="5"
-                        android:stepSize="0.1"/>
-
-                    <TextView
-                        android:id="@+id/tv_rating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="7.9"
-                        android:textColor="@color/google_red"
-                        android:textSize="16sp"/>
-
-                    <TextView
-                        android:id="@+id/tv_rating_sum"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:text="(112人评分)"
-                        android:textSize="13sp"/>
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_genres"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:singleLine="true"
-                    android:text="剧情\t\t科幻"
-                    android:textColor="@color/google_blue"
-                    android:textSize="13sp"
-                    />
-
-                <LinearLayout
+                    android:id="@+id/ll_name_en"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -143,23 +95,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="导演："
+                        android:text="英文名："
                         android:textSize="13sp"
                         />
 
                     <TextView
-                        android:id="@+id/tv_directors"
+                        android:id="@+id/tv_name_en"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:singleLine="true"
-                        android:text="冯小刚"
+                        android:text=""
                         android:textColor="@color/google_blue"
                         android:textSize="13sp"
                         />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_born_place"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -168,17 +121,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="主演："
+                        android:text="出生地："
                         android:textSize="13sp"
                         />
 
                     <TextView
-                        android:id="@+id/tv_casts"
+                        android:id="@+id/tv_born_place"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:singleLine="true"
-                        android:text="冯小刚"
+                        android:text=""
                         android:textColor="@color/google_blue"
                         android:textSize="13sp"
                         />
@@ -211,14 +164,13 @@
                 </com.ms.square.android.expandabletextview.ExpandableTextView>
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_casts"
+                    android:id="@+id/rv_works"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                 </android.support.v7.widget.RecyclerView>
             </LinearLayout>
         </FrameLayout>
-
 
     </android.support.v4.widget.NestedScrollView>
 

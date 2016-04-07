@@ -1,5 +1,6 @@
 package com.xuejinwei.doubanbookmovie.doubanbookmovie.api;
 
+import com.orhanobut.logger.Logger;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.ErrorResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Result;
 
@@ -40,8 +41,10 @@ public class FlatHandler {
      * 的错误码进行统一处理。
      */
     public static void handleError(Throwable exception) {
+        Logger.e("Error_code", exception);
         if (exception instanceof ErrorResult) {
             // TODO: 16/3/26 这里对错误进行统一处理
+            Logger.e("Error_code", ((ErrorResult) exception).code);
         }
     }
 }

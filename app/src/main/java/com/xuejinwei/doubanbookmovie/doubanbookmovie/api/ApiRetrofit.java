@@ -45,8 +45,14 @@ public class ApiRetrofit {
             try {
                 wrapper.put("code", response.code());
                 String responseString = response.body().string();
-                JSONObject raw = new JSONObject(responseString);
-                if (responseString.contains("code") && responseString.contains("msg")) {
+                JSONObject raw = new JSONObject();
+                if (!responseString.startsWith("<!DOCTYPE html>")) {
+                    raw = new JSONObject(responseString);
+                }
+                if (responseString.startsWith("<!DOCTYPE html>")) {
+                    wrapper.put("htmlBody", responseString);
+
+                } else if (responseString.contains("code") && responseString.contains("msg")) {
                     wrapper.put("error", raw);
                 } else {
                     wrapper.put("body", raw);
@@ -66,6 +72,8 @@ public class ApiRetrofit {
             // 打印logo
             if (message.startsWith("{")) {
                 Logger.json(message);
+            } else if (message.startsWith("<!DOCTYPE html>")) {
+                Logger.d(message);
             } else {
                 Log.i("Api_head", message);
             }

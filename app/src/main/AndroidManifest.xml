@@ -26,6 +26,10 @@
             android:name=".ui.activity.MovieDetailActivity"
             android:theme="@style/AppTheme.StatusBar"
             android:label=""/>
+        <activity
+            android:name=".ui.activity.CelebrityDetailActivity"
+            android:theme="@style/AppTheme.StatusBar"
+            android:label=""/>
     </application>
 
 </manifest>

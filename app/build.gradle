@@ -66,4 +66,5 @@ dependencies {
     // 分页textview
     compile 'com.ms-square:expandableTextView:0.1.4'
     compile 'net.qiujuer.genius:blur:1.5.0'
+    compile 'com.zhy:okhttputils:2.3.8'
 }
