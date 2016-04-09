@@ -132,7 +132,9 @@ public class BaseActivity extends AppCompatActivity implements SwipeBackActivity
         addSubscription(observable
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
-                .subscribe(result, FlatHandler::handleError));
+                .subscribe(result, exception -> {
+                    FlatHandler.handleError(BaseActivity.this, exception);
+                }));
     }
     /**
      * 显示progressBar

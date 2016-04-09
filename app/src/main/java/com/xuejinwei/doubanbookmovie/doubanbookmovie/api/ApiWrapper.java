@@ -3,6 +3,7 @@ package com.xuejinwei.doubanbookmovie.doubanbookmovie.api;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.Setting;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Celebrity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.HtmlResult;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Me;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Movie;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.OAuthResult;
@@ -26,7 +27,15 @@ public class ApiWrapper {
      * 用来刷新access_token 的
      */
     public Observable<OAuthResult> refreshOauthResult() {
-        return mApi.refreshOauthResult(Setting.APIKEY, Setting.SERCET, Setting.REDIRECT_URL, "refresh_token", Setting.getSetting(Setting.Key.refresh_token,"")).flatMap(FlatHandler::flatResult);
+        return mApi.refreshOauthResult(Setting.APIKEY, Setting.SERCET, Setting.REDIRECT_URL, "refresh_token", Setting.getSetting(Setting.Key.refresh_token, "")).flatMap(FlatHandler::flatResult);
+    }
+
+    /**
+     * 获取个人信息
+     */
+    public Observable<Me> getMeInformation() {
+
+        return mApi.getMeInformation(Setting.getSetting(Setting.Key.access_token, "")).flatMap(FlatHandler::flatResult);
     }
 
     /**
@@ -71,7 +80,4 @@ public class ApiWrapper {
         return mApi.getComment();
     }
 
-    public Observable<String> getCollectionDetail(String Authorization) {
-        return mApi.getCollectionDetail(Authorization).flatMap(FlatHandler::flatResult);
-    }
 }

@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 import com.twiceyuan.commonadapter.library.adapter.CommonAdapter;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.adapter.MovieBoxHolder;
-import com.xuejinwei.doubanbookmovie.doubanbookmovie.api.FlatHandler;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieSimple;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.AuthActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.MovieDetailActivity;
@@ -131,7 +130,8 @@ public class MovieFragment extends BaseFragment implements SwipeRefreshLayout.On
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        FlatHandler.handleError(throwable);
+                        // TODO: 16/4/9 待处理错误
+//                        FlatHandler.handleError(throwable);
                         swipe_movie_in_theaters.setRefreshing(false);
                     }
                 });

@@ -2,6 +2,7 @@ package com.xuejinwei.doubanbookmovie.doubanbookmovie.api;
 
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Celebrity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.HtmlResult;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Me;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Movie;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.OAuthResult;
@@ -37,6 +38,9 @@ public interface Api {
                                                        @Field("redirect_uri") String redirect_uri,
                                                        @Field("grant_type") String grant_type,
                                                        @Field("refresh_token") String refresh_token);
+
+    @GET("user/~me")
+    Observable<Result<Me>> getMeInformation(@Header("Authorization") String Authorization);
 
     /**
      * 查询正在热映movie

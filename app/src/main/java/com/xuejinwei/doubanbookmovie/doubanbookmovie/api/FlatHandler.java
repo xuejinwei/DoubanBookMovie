@@ -1,8 +1,10 @@
 package com.xuejinwei.doubanbookmovie.doubanbookmovie.api;
 
+import android.app.Activity;
+
 import com.orhanobut.logger.Logger;
-import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.App;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.Setting;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.ErrorResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Result;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.AuthActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.CommonUtil;
@@ -45,36 +47,28 @@ public class FlatHandler {
      * onNext 发布的可以直接进行处理的正确结果，一种是 onError 抛出的异常 ErrorResult，这里根据 ErrorResult
      * 的错误码进行统一处理。
      */
-    public static void handleError(Throwable exception) {
+    public static void handleError(Activity activity, Throwable exception) {
         Logger.e(exception.getMessage());
-        if (exception instanceof ApiException) {
-            switch (((ApiException) exception).code) {
+        if (exception instanceof ErrorResult) {
+            switch (((ErrorResult) exception).code) {
                 case 1000:
                     CommonUtil.toast("请登陆");
-                    AuthActivity.start(App.getApp());
+                    AuthActivity.start(activity);
                     break;
                 case 106:
                     RxUtils.callOnUI(mApiWrapper.refreshOauthResult()).subscribe(oAuthResult -> {
-                        Setting.putSetting(Setting.Key.access_token, oAuthResult.access_token);
-                        Setting.putSetting(Setting.Key.expires_in, oAuthResult.expires_in);
-                        Setting.putSetting(Setting.Key.refresh_token, oAuthResult.refresh_token);
-                        Setting.putSetting(Setting.Key.douban_user_id, oAuthResult.douban_user_id);
-                        Setting.putSetting(Setting.Key.douban_user_name, oAuthResult.douban_user_name);
+                        Setting.Login(oAuthResult);
                         CommonUtil.toast("授权已刷新，请重新进入");
 
                     });
                     break;
                 case 103:
-                    Setting.putSetting(Setting.Key.access_token, "");
-                    Setting.putSetting(Setting.Key.expires_in, "");
-                    Setting.putSetting(Setting.Key.refresh_token, "");
-                    Setting.putSetting(Setting.Key.douban_user_id, "");
-                    Setting.putSetting(Setting.Key.douban_user_name, "");
-                    AuthActivity.start(App.getApp());
+                    Setting.Logout();
+                    AuthActivity.start(activity);
                     CommonUtil.toast("请重新登陆");
                     break;
                 default:
-                    Logger.e(((ApiException) exception).code+((ApiException) exception).message);
+                    Logger.e(((ErrorResult) exception).code + ((ErrorResult) exception).msg);
                     break;
             }
             return;

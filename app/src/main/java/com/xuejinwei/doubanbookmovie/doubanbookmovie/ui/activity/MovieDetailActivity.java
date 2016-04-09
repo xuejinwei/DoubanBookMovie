@@ -30,7 +30,6 @@ import net.qiujuer.genius.blur.StackBlur;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import rx.functions.Action1;
 
 /**
  * Created by xuejinwei on 16/3/31.
@@ -86,12 +85,6 @@ public class MovieDetailActivity extends SwipeBackActivity {
         rv_casts.setLayoutManager(linearLayoutManager);
         rv_casts.setAdapter(mSimpleCelebrityCommonAdapter);
 
-        runRxTaskOnUi(mApiWrapper.getCollectionDetail("Bearer f08d8efe9726d9bfd1a8acfbc5748d3d"), new Action1<String>() {
-            @Override
-            public void call(String s) {
-
-            }
-        });
         runRxTaskOnUi(mApiWrapper.getMovieById(mMovieId), movie -> {
             Glide.with(MovieDetailActivity.this).load(movie.images.large).into(imagehead);
             Glide.with(MovieDetailActivity.this).load(movie.images.small).asBitmap().into(new SimpleTarget<Bitmap>() {

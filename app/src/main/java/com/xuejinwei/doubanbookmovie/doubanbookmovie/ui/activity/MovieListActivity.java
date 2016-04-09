@@ -156,7 +156,8 @@ public class MovieListActivity extends SwipeBackActivity implements SwipeRefresh
             }
             srl_refresh.setRefreshing(false);
         }, throwable -> {
-            FlatHandler.handleError(throwable);
+            // TODO: 16/4/9 重新处理错误
+//            FlatHandler.handleError(this,throwable);
             srl_refresh.setRefreshing(false);
         });
 

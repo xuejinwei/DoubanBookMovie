@@ -1,17 +1,33 @@
 package com.xuejinwei.doubanbookmovie.doubanbookmovie;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
-import android.widget.LinearLayout;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
-import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity.AbsToolbarActivity;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.github.siyamed.shapeimageview.CircularImageView;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.App;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.Setting;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.AuthActivity;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity.BackActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.BookFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.MovieFragment;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,38 +35,85 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AbsToolbarActivity {
+public class MainActivity extends BackActivity {
 
-    @Bind(R.id.toolbar)      Toolbar      toolbar;
-    @Bind(R.id.tabLayout)    TabLayout    tabLayout;
-    @Bind(R.id.viewPager)    ViewPager    viewPager;
-    @Bind(R.id.main_content) LinearLayout main_content;
+    @Bind(R.id.tabLayout)     TabLayout      tabLayout;
+    @Bind(R.id.viewPager)     ViewPager      viewPager;
+    @Bind(R.id.navigation)    NavigationView navigation;
+    @Bind(R.id.drawer_layout) DrawerLayout   drawer_layout;
+
+    TextView          tv_header_title;
+    TextView          tv_header_login;
+    TextView          tv_header_desc;
+    CircularImageView img_header_avatars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        setTitle("");
+
+        View headview = navigation.getHeaderView(0);
+        tv_header_title = (TextView) headview.findViewById(R.id.tv_header_title);
+        tv_header_login = (TextView) headview.findViewById(R.id.tv_header_login);
+        tv_header_desc = (TextView) headview.findViewById(R.id.tv_header_description);
+        img_header_avatars = (CircularImageView) headview.findViewById(R.id.iv_header_avatar);
+
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawer_layout, mToolbar, R.string.drawer_open,
+                R.string.drawer_close);
+        drawerToggle.syncState();
+        drawer_layout.addDrawerListener(drawerToggle);
+        setupDrawerContent(navigation);
+
         if (viewPager != null) {
             setupViewPager(viewPager);
         }
         tabLayout.setupWithViewPager(viewPager);
+        tv_header_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Setting.getAuthState()) {
+                    Setting.Logout();
+                    refresh();
+                    CommonUtil.toast("注销成功");
+                } else {
+                    AuthActivity.start(MainActivity.this);
+                }
+                if (drawer_layout.isDrawerOpen(Gravity.LEFT)) {
+                    drawer_layout.closeDrawer(Gravity.LEFT);
+                }
+            }
+        });
+        refresh();
 
-//        btn_click.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                RxUtils.callOnUI(mApiWrapper.getMovieInTheaters(0, 1))
-//                        .subscribe(new Action1<List<MovieSimple>>() {
-//                            @Override
-//                            public void call(List<MovieSimple> movieSimples) {
-//                                List<MovieSimple> movieSimpleList = movieSimples;
-//                                Toast.makeText(MainActivity.this, "aa", Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-//            }
-//        });
+    }
+
+    private void refresh() {
+        if (Setting.getAuthState()) {
+            if (!Setting.getSetting(Setting.Key.large_avatar, "").equals("")) {
+                Glide.with(App.getApp()).load(Setting.getSetting(Setting.Key.large_avatar, "")).asBitmap().into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        img_header_avatars.setImageBitmap(resource);
+                    }
+                });
+            }
+            tv_header_title.setText(Setting.getSetting(Setting.Key.douban_user_name, ""));
+            tv_header_desc.setText(Setting.getSetting(Setting.Key.desc, ""));
+            tv_header_login.setText("注销");
+        } else {
+            img_header_avatars.setImageBitmap(null);
+            tv_header_title.setText("");
+            tv_header_desc.setText("");
+            tv_header_login.setText("登录");
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK)
+            refresh();
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -58,6 +121,16 @@ public class MainActivity extends AbsToolbarActivity {
         adapter.addFragment(new MovieFragment(), "电影");
         adapter.addFragment(new BookFragment(), "我的图书");
         viewPager.setAdapter(adapter);
+    }
+
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+
+                menuItem -> {
+                    menuItem.setChecked(true);
+                    drawer_layout.closeDrawers();
+                    return true;
+                });
     }
 
     /**
@@ -92,5 +165,40 @@ public class MainActivity extends AbsToolbarActivity {
             return mFragmentTitles.get(position);
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_navigation_items, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == android.R.id.home) {
+//            drawer_layout.openDrawer(GravityCompat.START);
+//            return true;
+//        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawer_layout.isDrawerOpen(Gravity.LEFT)) {
+            drawer_layout.closeDrawer(Gravity.LEFT);
+        } else {
+            doExitApp();
+        }
+    }
+
+    private long exitTime = 0;
+
+    public void doExitApp() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            CommonUtil.toast("再按一次退出");
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+        }
     }
 }
