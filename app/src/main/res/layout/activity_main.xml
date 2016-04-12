@@ -27,7 +27,7 @@
                 android:background="?attr/colorPrimary"
                 android:minHeight="@dimen/toolbar_heigh"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             </android.support.v7.widget.Toolbar>
@@ -36,7 +36,7 @@
                 android:id="@+id/tabLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:paddingLeft="56dp"
+                android:layout_gravity="center_horizontal"
                 app:tabIndicatorColor="@color/md_white_100"
                 app:tabIndicatorHeight="2dp"
                 app:tabMode="scrollable"/>

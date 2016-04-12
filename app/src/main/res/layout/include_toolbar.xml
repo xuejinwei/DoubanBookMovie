@@ -9,6 +9,6 @@
     android:background="?attr/colorPrimary"
     android:fitsSystemWindows="true"
     android:minHeight="@dimen/toolbar_heigh"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     tools:ignore="UnusedAttribute"/>

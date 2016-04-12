@@ -48,7 +48,7 @@
                 android:layout_height="@dimen/toolbar_heigh"
                 android:minHeight="@dimen/toolbar_heigh"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 >
             </android.support.v7.widget.Toolbar>

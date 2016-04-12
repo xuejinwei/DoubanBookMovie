@@ -26,6 +26,7 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.Setting;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.AuthActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity.BackActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.BookFragment;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.HotFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.MovieFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.CommonUtil;
 
@@ -69,19 +70,16 @@ public class MainActivity extends BackActivity {
             setupViewPager(viewPager);
         }
         tabLayout.setupWithViewPager(viewPager);
-        tv_header_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Setting.getAuthState()) {
-                    Setting.Logout();
-                    refresh();
-                    CommonUtil.toast("注销成功");
-                } else {
-                    AuthActivity.start(MainActivity.this);
-                }
-                if (drawer_layout.isDrawerOpen(Gravity.LEFT)) {
-                    drawer_layout.closeDrawer(Gravity.LEFT);
-                }
+        tv_header_login.setOnClickListener(v -> {
+            if (Setting.getAuthState()) {
+                Setting.Logout();
+                refresh();
+                CommonUtil.toast("注销成功");
+            } else {
+                AuthActivity.start(MainActivity.this);
+            }
+            if (drawer_layout.isDrawerOpen(Gravity.LEFT)) {
+                drawer_layout.closeDrawer(Gravity.LEFT);
             }
         });
         refresh();
@@ -118,18 +116,39 @@ public class MainActivity extends BackActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
+        adapter.addFragment(new HotFragment(), "热门");
         adapter.addFragment(new MovieFragment(), "电影");
-        adapter.addFragment(new BookFragment(), "我的图书");
+        adapter.addFragment(new BookFragment(), "读书");
+        adapter.addFragment(new HotFragment(), "我的");
         viewPager.setAdapter(adapter);
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
 
-                menuItem -> {
-                    menuItem.setChecked(true);
-                    drawer_layout.closeDrawers();
-                    return true;
+                        switch (menuItem.getItemId()) {
+
+                            case R.id.navigation_hot:
+                                selectPage(0);
+                                break;
+                            case R.id.navigation_movies:
+                                selectPage(1);
+                                break;
+                            case R.id.navigation_book:
+                                selectPage(2);
+                                break;
+                            case R.id.navigation_my:
+                                selectPage(3);
+                                break;
+
+                        }
+                        menuItem.setChecked(true);
+                        drawer_layout.closeDrawers();
+                        return true;
+                    }
                 });
     }
 
@@ -167,9 +186,14 @@ public class MainActivity extends BackActivity {
 
     }
 
+    void selectPage(int pageIndex) {
+        tabLayout.setScrollPosition(pageIndex, 0f, true);
+        viewPager.setCurrentItem(pageIndex);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.my_navigation_items, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
