@@ -77,7 +77,7 @@ public class MovieBoxHolder extends CommonHolder<MovieSimple> {
                     }
                 });
         tv_title.setText(movieSimple.title);
-        if (movieSimple.rating.average.equals(0)) {
+        if (movieSimple.rating.average.equals("0")) {
             tv_rating.setText("暂无评分");
             ratingBar.setVisibility(View.GONE);
         } else {

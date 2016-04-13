@@ -7,6 +7,7 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Movie;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.OAuthResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Result;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.SubjectCollectionResult;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -83,4 +84,8 @@ public interface Api {
 
     @GET("book/25843319/collection")
     Observable<Result<String>> getCollectionDetail(@Header("Authorization") String Authorization);
+
+    @GET("https://frodo.douban.com/jsonp/subject_collection/{type}/items")
+    Observable<Result<SubjectCollectionResult>> getSubjectCollection(@Path("type") String type, @Query("start") int start, @Query("count") int count);
+
 }

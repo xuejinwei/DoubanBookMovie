@@ -133,19 +133,22 @@ public class MainActivity extends BackActivity {
 
                             case R.id.navigation_hot:
                                 selectPage(0);
+                                menuItem.setChecked(true);
                                 break;
                             case R.id.navigation_movies:
                                 selectPage(1);
+                                menuItem.setChecked(true);
                                 break;
                             case R.id.navigation_book:
                                 selectPage(2);
+                                menuItem.setChecked(true);
                                 break;
                             case R.id.navigation_my:
                                 selectPage(3);
+                                menuItem.setChecked(true);
                                 break;
 
                         }
-                        menuItem.setChecked(true);
                         drawer_layout.closeDrawers();
                         return true;
                     }

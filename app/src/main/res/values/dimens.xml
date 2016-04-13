@@ -4,4 +4,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="toolbar_heigh">56dp</dimen>
     <dimen name="activity_padding">12dp</dimen>
+    <dimen name="box_padding">16dp</dimen>
 </resources>

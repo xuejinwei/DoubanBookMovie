@@ -7,6 +7,7 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Me;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Movie;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.OAuthResult;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.SubjectCollectionResult;
 
 import rx.Observable;
 
@@ -78,6 +79,18 @@ public class ApiWrapper {
 
     public Observable<HtmlResult> getComment() {
         return mApi.getComment();
+    }
+
+    /**
+     * 通过移动端豆瓣网页根据类型获取subjectcollection，
+     *
+     * @param type  类型，{@link com.xuejinwei.doubanbookmovie.doubanbookmovie.model.SubjectCollectionType}有book_nonfiction，book_fiction，filter_movie_classic_hot，movie_latest…………等等
+     * @param star  返回结果起始值
+     * @param count 返回结果个数
+     * @return 返回有movie 和book
+     */
+    public Observable<SubjectCollectionResult> getSubjectCollection(String type, int star, int count) {
+        return mApi.getSubjectCollection(type, star, count).flatMap(FlatHandler::flatResult);
     }
 
 }
