@@ -3,63 +3,33 @@ package com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.SubjectCollectionType;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.fragment.BaseFragment;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BookFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
-
-    @Bind(R.id.et_search)
-    EditText           et_search;
-    @Bind(R.id.ll_more)
-    LinearLayout       ll_more;
-    @Bind(R.id.rv_book_hot)
-    RecyclerView       rv_book_hot;
-    @Bind(R.id.swipe_book_hot)
-    SwipeRefreshLayout swipe_book_hot;
-    @Bind(R.id.tv_body) TextView tv_body;
-//    private BookBoxAdapter mBookBoxAdapter;
-
-    public BookFragment() {
-        // Required empty public constructor
-    }
+public class BookFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_book, container, false);
         ButterKnife.bind(this, view);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
-
+        Box3Fragment.inject((AppCompatActivity) getActivity(), R.id.ll_fragment_book_root, SubjectCollectionType.book_latest, "新书速递");
+        Box3Fragment.inject((AppCompatActivity) getActivity(), R.id.ll_fragment_book_root, SubjectCollectionType.book_fiction, "最受关注图书|虚构类");
+        Box3Fragment.inject((AppCompatActivity) getActivity(), R.id.ll_fragment_book_root, SubjectCollectionType.book_nonfiction, "最受关注图书|非虚构类");
+        Box3Fragment.inject((AppCompatActivity) getActivity(), R.id.ll_fragment_book_root, SubjectCollectionType.book_bestseller, "畅销图书榜");
+        Box3Fragment.inject((AppCompatActivity) getActivity(), R.id.ll_fragment_book_root, SubjectCollectionType.ebook_hot, "热门电子书");
         return view;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-
-    @Override
-    public void onRefresh() {
-        swipe_book_hot.setRefreshing(true);
-
     }
 
 }

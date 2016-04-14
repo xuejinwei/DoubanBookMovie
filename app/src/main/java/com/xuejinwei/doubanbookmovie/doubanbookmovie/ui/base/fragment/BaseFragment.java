@@ -17,7 +17,7 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * Created by xuejinwei on 16/3/24.
  */
-public class BaseFragment extends Fragment{
+public class BaseFragment extends Fragment {
     public static final ApiWrapper mApiWrapper = ApiFactory.getApiWrapper();
     private CompositeSubscription mSubscriptions;
 
@@ -31,9 +31,15 @@ public class BaseFragment extends Fragment{
         mSubscriptions = new CompositeSubscription();
     }
 
-    @Override public void onDestroy() {
-        super.onDestroy();
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
         mSubscriptions.unsubscribe();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
 

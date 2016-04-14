@@ -1,6 +1,7 @@
 package com.xuejinwei.doubanbookmovie.doubanbookmovie.api;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.orhanobut.logger.Logger;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.Setting;
@@ -48,7 +49,7 @@ public class FlatHandler {
      * 的错误码进行统一处理。
      */
     public static void handleError(Activity activity, Throwable exception) {
-        Logger.e(exception.getMessage());
+
         if (exception instanceof ErrorResult) {
             switch (((ErrorResult) exception).code) {
                 case 1000:
@@ -67,11 +68,15 @@ public class FlatHandler {
                     AuthActivity.start(activity);
                     CommonUtil.toast("请重新登陆");
                     break;
+                case 1998:
+                    CommonUtil.toast("访问太频繁，请更换IP");
+                    break;
                 default:
-                    Logger.e(((ErrorResult) exception).code + ((ErrorResult) exception).msg);
+                    Logger.e("code:" + ((ErrorResult) exception).code + ".msg:" + ((ErrorResult) exception).msg + ".request:" + ((ErrorResult) exception).request);
                     break;
             }
             return;
         }
+        Log.e("Error", String.valueOf(exception));
     }
 }

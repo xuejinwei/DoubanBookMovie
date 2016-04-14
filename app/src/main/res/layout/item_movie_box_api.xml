@@ -47,7 +47,7 @@
             android:layout_marginRight="4dp"
             android:isIndicator="true"
             android:numStars="5"
-            android:stepSize="0.1"/>
+            android:stepSize="0.5"/>
 
         <TextView
             android:id="@+id/tv_rating"

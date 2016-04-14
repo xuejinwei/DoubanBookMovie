@@ -28,6 +28,7 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity.BackActivi
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.BookFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.HotFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.MovieFragment;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.MyFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.CommonUtil;
 
 import java.util.ArrayList;
@@ -119,8 +120,9 @@ public class MainActivity extends BackActivity {
         adapter.addFragment(new HotFragment(), "热门");
         adapter.addFragment(new MovieFragment(), "电影");
         adapter.addFragment(new BookFragment(), "读书");
-        adapter.addFragment(new HotFragment(), "我的");
+        adapter.addFragment(new MyFragment(), "我的");
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(adapter.getCount());
     }
 
     private void setupDrawerContent(NavigationView navigationView) {

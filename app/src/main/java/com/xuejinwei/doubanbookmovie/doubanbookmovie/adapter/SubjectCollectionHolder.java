@@ -55,6 +55,9 @@ public class SubjectCollectionHolder extends CommonHolder<SubjectCollectionItems
                 ratingBar.setRating(Float.parseFloat(subjectCollectionItems.rating.value) / 2);
                 ratingBar.setVisibility(View.VISIBLE);
             }
+        }else {
+            tv_rating.setVisibility(View.GONE);
+            ratingBar.setVisibility(View.GONE);
         }
         getItemView().setOnClickListener(v -> {
             switch (subjectCollectionItems.type) {
