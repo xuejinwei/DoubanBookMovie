@@ -101,4 +101,40 @@ public class BaseFragment extends Fragment {
             super("该 Fragment 不属于 BaseActivity 的子类，不能执行 RxTask 相关任务，请自行管理。");
         }
     }
+
+    public static class BaseFragmentBuilder {
+
+        Bundle args;
+
+        public BaseFragmentBuilder() {
+            args = new Bundle();
+        }
+
+        public interface PutArguments {
+            void put(Bundle args);
+        }
+
+        public BaseFragmentBuilder put(PutArguments putArguments) {
+            putArguments.put(args);
+            return this;
+        }
+
+        public <T extends BaseFragment> T build(Class<T> clazz) {
+            T fragment = null;
+            //noinspection TryWithIdenticalCatches
+            try {
+                //noinspection unchecked
+                fragment = clazz.newInstance();
+            } catch (java.lang.InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            if (fragment != null) {
+                fragment.setArguments(args);
+            }
+            //noinspection unchecked
+            return fragment;
+        }
+    }
 }

@@ -16,12 +16,11 @@ import com.twiceyuan.commonadapter.library.adapter.CommonAdapter;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.adapter.SubjectCollectionHolder;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.SubjectCollectionItems;
-import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.SubjectCollectionResult;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.SubjectCollectionActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.fragment.BaseFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import rx.functions.Action1;
 
 /**
  * Created by xuejinwei on 16/4/14.
@@ -70,17 +69,15 @@ public class Box3Fragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         tv_title.setText(mTitle);
-        runRxTaskOnUi(mApiWrapper.getSubjectCollection(mSubjectCollectionType, 0, 3), new Action1<SubjectCollectionResult>() {
-            @Override
-            public void call(SubjectCollectionResult subjectCollectionResult) {
-                if (subjectCollectionResult.subject_collection_items.size() == 3) {
-                    mSubjectCollectionAdapterBookLatest.clear();
-                    mSubjectCollectionAdapterBookLatest.addAll(subjectCollectionResult.subject_collection_items);
-                    mSubjectCollectionAdapterBookLatest.notifyDataSetChanged();
-                    onRefreshSuccess();
-                }
+        runRxTaskOnUi(mApiWrapper.getSubjectCollection(mSubjectCollectionType, 0, 3), subjectCollectionResult -> {
+            if (subjectCollectionResult.subject_collection_items.size() == 3) {
+                mSubjectCollectionAdapterBookLatest.clear();
+                mSubjectCollectionAdapterBookLatest.addAll(subjectCollectionResult.subject_collection_items);
+                mSubjectCollectionAdapterBookLatest.notifyDataSetChanged();
+                onRefreshSuccess();
             }
         });
+        ll_movie.setOnClickListener(v -> SubjectCollectionActivity.start(getActivity(), mSubjectCollectionType));
     }
 
     /**

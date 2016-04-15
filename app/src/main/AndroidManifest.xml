@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".ui.activity.MovieListActivity"/>
         <activity android:name=".ui.activity.AuthActivity"/>
+        <activity android:name=".ui.activity.SubjectCollectionActivity"/>
         <activity android:name=".ui.activity.WebViewActivity"
                   android:hardwareAccelerated="true"/>
         <activity

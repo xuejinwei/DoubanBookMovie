@@ -14,13 +14,10 @@ import com.paginate.Paginate;
 import com.twiceyuan.commonadapter.library.adapter.CommonAdapter;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.adapter.MovieListHolder;
-import com.xuejinwei.doubanbookmovie.doubanbookmovie.api.FlatHandler;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieSimple;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity.SwipeBackActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.widget.DividerItemDecoration;
-
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -42,7 +39,6 @@ public class MovieListActivity extends SwipeBackActivity implements SwipeRefresh
 
     private Type                                        mType; // 类型
     private CommonAdapter<MovieSimple, MovieListHolder> mMovieListAdapter;
-    private final Object monitor = new Object();
 
     private int     mStart       = 0; // 当前页
     private boolean mIsLoading   = false;
@@ -118,17 +114,6 @@ public class MovieListActivity extends SwipeBackActivity implements SwipeRefresh
     public void onRefresh() {
         mStart = 0;
         load();
-    }
-
-    /**
-     * 更新适配器数据，并且通知
-     *
-     * @param movieList movie列表
-     */
-    public void upData(List<MovieSimple> movieList) {
-        mMovieListAdapter.clear();
-        mMovieListAdapter.addAll(movieList);
-        mMovieListAdapter.notifyDataSetChanged();
     }
 
     /**

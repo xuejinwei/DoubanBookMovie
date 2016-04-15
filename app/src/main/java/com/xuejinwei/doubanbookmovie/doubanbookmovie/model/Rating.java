@@ -7,5 +7,5 @@ package com.xuejinwei.doubanbookmovie.doubanbookmovie.model;
 public class Rating {
     public String count;
     public String max;
-    public String value;
+    public Double value;
 }

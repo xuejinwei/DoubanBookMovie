@@ -18,6 +18,8 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.MovieDetailActi
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.CommonUtil;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.DensityUtil;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by xuejinwei on 16/4/13.
  * Email:xuejinwei@outlook.com
@@ -47,16 +49,16 @@ public class SubjectCollectionHolder extends CommonHolder<SubjectCollectionItems
         tv_title.setText(subjectCollectionItems.title);
         if (subjectCollectionItems.rating != null) {
 
-            if (subjectCollectionItems.rating.value.equals(0)) {
+            if (subjectCollectionItems.rating.value == null) {
                 tv_rating.setText("暂无评分");
                 ratingBar.setVisibility(View.GONE);
             } else {
-                tv_rating.setText(subjectCollectionItems.rating.value.substring(0, 3));
-                ratingBar.setRating(Float.parseFloat(subjectCollectionItems.rating.value) / 2);
+                tv_rating.setText(new DecimalFormat("#.0").format(subjectCollectionItems.rating.value));
+                ratingBar.setRating((float) (subjectCollectionItems.rating.value / 2));
                 ratingBar.setVisibility(View.VISIBLE);
             }
-        }else {
-            tv_rating.setVisibility(View.GONE);
+        } else {
+            tv_rating.setText("暂无评分");
             ratingBar.setVisibility(View.GONE);
         }
         getItemView().setOnClickListener(v -> {
