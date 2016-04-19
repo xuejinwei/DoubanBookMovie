@@ -1,6 +1,7 @@
 package com.xuejinwei.doubanbookmovie.doubanbookmovie.api;
 
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.Setting;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Book;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Celebrity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.HtmlResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Me;
@@ -71,6 +72,10 @@ public class ApiWrapper {
 
     public Observable<Movie> getMovieById(String movie_id) {
         return mApi.getMovieById(movie_id).flatMap(FlatHandler::flatResult);
+    }
+
+    public Observable<Book> getBookById(String book_id) {
+        return mApi.getBookById(book_id).flatMap(FlatHandler::flatResult);
     }
 
     public Observable<Celebrity> getCelebrityDetail(String celebrity_id) {

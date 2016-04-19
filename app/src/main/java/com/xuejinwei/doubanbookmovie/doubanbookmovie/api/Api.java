@@ -1,5 +1,6 @@
 package com.xuejinwei.doubanbookmovie.doubanbookmovie.api;
 
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Book;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Celebrity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.HtmlResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Me;
@@ -75,6 +76,9 @@ public interface Api {
 
     @GET("movie/subject/{id}")
     Observable<Result<Movie>> getMovieById(@Path("id") String id);
+
+    @GET("book/{id}")
+    Observable<Result<Book>> getBookById(@Path("id") String id);
 
     @GET("movie/celebrity/{id}")
     Observable<Result<Celebrity>> getCelebrityDetail(@Path("id") String id);

@@ -14,6 +14,7 @@ import com.twiceyuan.commonadapter.library.ViewId;
 import com.twiceyuan.commonadapter.library.holder.CommonHolder;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.SubjectCollectionItems;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.BookDetailActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.MovieDetailActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.CommonUtil;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.DensityUtil;
@@ -67,7 +68,7 @@ public class SubjectCollectionHolder extends CommonHolder<SubjectCollectionItems
                     MovieDetailActivity.start((AppCompatActivity) getItemView().getContext(), subjectCollectionItems.id);
                     break;
                 case "book":
-                    CommonUtil.toast("bookdetail待开发");
+                    BookDetailActivity.start((AppCompatActivity) getItemView().getContext(), subjectCollectionItems.id);
                     break;
                 default:
                     CommonUtil.toast("类型错误");

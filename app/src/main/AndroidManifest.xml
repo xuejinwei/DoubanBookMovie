@@ -31,6 +31,10 @@
             android:label=""
             android:theme="@style/AppTheme.StatusBar"/>
         <activity
+            android:name=".ui.activity.BookDetailActivity"
+            android:label=""
+            android:theme="@style/AppTheme.StatusBar"/>
+        <activity
             android:name=".ui.activity.CelebrityDetailActivity"
             android:label=""
             android:theme="@style/AppTheme.StatusBar"/>
