@@ -36,7 +36,7 @@ public class MovieListHolder extends CommonHolder<MovieSimple> {
 
     @Override
     public void bindData(MovieSimple movieSimple) {
-        Glide.with(getItemView().getContext()).load(movieSimple.images.large).into(iv_avatar);
+        Glide.with(getItemView().getContext()).load(movieSimple.images.large).crossFade().into(iv_avatar);
         tv_title.setText(movieSimple.title);
         if (!movieSimple.rating.average.equals("0")) {
             tv_rating.setText(movieSimple.rating.average);

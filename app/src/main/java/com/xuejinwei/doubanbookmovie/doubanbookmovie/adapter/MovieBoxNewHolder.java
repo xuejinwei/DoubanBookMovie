@@ -44,7 +44,7 @@ public class MovieBoxNewHolder extends CommonHolder<MovieSimple> {
     @Override
     public void bindData(MovieSimple movieSimple) {
         rl_root_view.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, img_heigh));
-        Glide.with(getItemView().getContext()).load(movieSimple.images.large).into(img_avatar);
+        Glide.with(getItemView().getContext()).load(movieSimple.images.large).crossFade().into(img_avatar);
         tv_title.setText(movieSimple.title);
         if (movieSimple.rating.average.equals("0")) {
             tv_rating.setText("暂无评分");

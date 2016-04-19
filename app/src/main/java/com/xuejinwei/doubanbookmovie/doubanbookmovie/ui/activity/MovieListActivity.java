@@ -149,6 +149,6 @@ public class MovieListActivity extends SwipeBackActivity implements SwipeRefresh
     }
 
     public int getCurrentSize() {
-        return 10;
+        return 20;
     }
 }
