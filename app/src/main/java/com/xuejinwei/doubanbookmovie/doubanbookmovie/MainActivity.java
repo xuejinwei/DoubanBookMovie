@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.github.siyamed.shapeimageview.CircularImageView;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.Setting;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.AuthActivity;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.SearchActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity.BackActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.BookFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.HotFragment;
@@ -195,10 +196,10 @@ public class MainActivity extends BackActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == android.R.id.home) {
-//            drawer_layout.openDrawer(GravityCompat.START);
-//            return true;
-//        }
+        if (item.getItemId() == R.id.action_search) {
+            startActivity(new Intent(this, SearchActivity.class));
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

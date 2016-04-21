@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/box_padding">
+
+    <com.xuejinwei.doubanbookmovie.doubanbookmovie.widget.AutoNewLineLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_filter_book_fiction_hot"
+            style="@style/TagTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="小说"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_love_hot"
+            style="@style/TagTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="爱情"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_history_hot"
+            style="@style/TagTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="历史"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_foreign_hot"
+            style="@style/TagTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="外国文学"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_youth_hot"
+            style="@style/TagTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="青春"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_inspiration_hot"
+            style="@style/TagTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="励志"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_essay_hot"
+            style="@style/TagTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="随笔"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_biography_hot"
+            style="@style/TagTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="传记"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_detective_hot"
+            style="@style/TagTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="推理"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_travel_hot"
+            style="@style/TagTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="旅行"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_fantasy_hot"
+            style="@style/TagTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="奇幻"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_economic_hot"
+            style="@style/TagTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="经营"/>
+
+    </com.xuejinwei.doubanbookmovie.doubanbookmovie.widget.AutoNewLineLinearLayout>
+</LinearLayout>

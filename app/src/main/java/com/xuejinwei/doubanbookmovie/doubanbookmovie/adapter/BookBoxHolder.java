@@ -12,17 +12,17 @@ import com.twiceyuan.commonadapter.library.LayoutId;
 import com.twiceyuan.commonadapter.library.ViewId;
 import com.twiceyuan.commonadapter.library.holder.CommonHolder;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
-import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieSimple;
-import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.MovieDetailActivity;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Book;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.BookDetailActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.DensityUtil;
 
 /**
- * Created by xuejinwei on 16/3/25.
- * MovieBox 的holder
+ * Created by xuejinwei on 16/4/21.
+ * Email:xuejinwei@outlook.com
+ * BookBox 的 holder
  */
 @LayoutId(R.layout.item_movie_box)
-public class MovieBoxHolder extends CommonHolder<MovieSimple> {
-
+public class BookBoxHolder extends CommonHolder<Book> {
     // 绑定 View 资源
     @ViewId(R.id.img_avatar)   ImageView      img_avatar;
     @ViewId(R.id.tv_title)     TextView       tv_title;
@@ -32,29 +32,29 @@ public class MovieBoxHolder extends CommonHolder<MovieSimple> {
     static                     int            img_weigth;
     static                     int            img_heigh;
 
-    public MovieBoxHolder(View itemView) {
+    public BookBoxHolder(View itemView) {
         super(itemView);
         /**
          *  图片的高度，是 图片宽度的1.5倍，宽度是 屏幕宽度减去padding等的三分之一
          */
         img_weigth = (int) ((DensityUtil.getScreenW(getItemView().getContext())) / 3.5);
         img_heigh = (int) ((DensityUtil.getScreenW(getItemView().getContext())) / 2.2);
-
     }
 
     @Override
-    public void bindData(MovieSimple movieSimple) {
+    public void bindData(Book book) {
         rl_root_view.setLayoutParams(new RelativeLayout.LayoutParams(img_weigth, img_heigh));
-        Glide.with(getItemView().getContext()).load(movieSimple.images.large).crossFade().into(img_avatar);
-        tv_title.setText(movieSimple.title);
-        if (movieSimple.rating.average.equals("0")) {
+        Glide.with(getItemView().getContext()).load(book.images.large).crossFade().into(img_avatar);
+        tv_title.setText(book.title);
+        if (book.rating.average.equals("0")) {
             tv_rating.setText("暂无评分");
             ratingBar.setVisibility(View.GONE);
         } else {
-            tv_rating.setText(movieSimple.rating.average);
-            ratingBar.setRating(Float.parseFloat(movieSimple.rating.average) / 2);
+            tv_rating.setText(book.rating.average);
+            ratingBar.setRating(Float.parseFloat(book.rating.average) / 2);
             ratingBar.setVisibility(View.VISIBLE);
         }
-        getItemView().setOnClickListener(v -> MovieDetailActivity.start((AppCompatActivity) getItemView().getContext(), movieSimple.id));
+        getItemView().setOnClickListener(v -> BookDetailActivity.start((AppCompatActivity) getItemView().getContext(), book.id));
+
     }
 }

@@ -24,7 +24,8 @@ import butterknife.ButterKnife;
 import rx.Observable;
 
 public class MovieListActivity extends SwipeBackActivity implements SwipeRefreshLayout.OnRefreshListener {
-    public static final String ARG_TYPE = "type";
+    public static final String ARG_TYPE   = "type";
+    public static final String SEARCH_KEY = "search_key";
 
     @Bind(R.id.toolbar)       Toolbar            toolbar;
     @Bind(R.id.rv_movie_list) RecyclerView       rv_movie_list;
@@ -38,6 +39,7 @@ public class MovieListActivity extends SwipeBackActivity implements SwipeRefresh
     }
 
     private Type                                        mType; // 类型
+    private String                                      mSearchKey; // 类型
     private CommonAdapter<MovieSimple, MovieListHolder> mMovieListAdapter;
 
     private int     mStart       = 0; // 当前页
@@ -51,12 +53,20 @@ public class MovieListActivity extends SwipeBackActivity implements SwipeRefresh
         context.startActivity(starter);
     }
 
+    public static void start(Context context, MovieListActivity.Type type, String searchKey) {
+        Intent starter = new Intent(context, MovieListActivity.class);
+        starter.putExtra(ARG_TYPE, type);
+        starter.putExtra(SEARCH_KEY, searchKey);
+        context.startActivity(starter);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
         ButterKnife.bind(this);
         mType = (Type) getIntent().getSerializableExtra(ARG_TYPE);
+        mSearchKey = getIntent().getStringExtra(SEARCH_KEY);
 
         mMovieListAdapter = new CommonAdapter<>(this, MovieListHolder.class);
         mMovieListAdapter.setOnItemClickListener((position, movieSimple) -> MovieDetailActivity.start(MovieListActivity.this, movieSimple.id));
@@ -92,19 +102,20 @@ public class MovieListActivity extends SwipeBackActivity implements SwipeRefresh
     /**
      * 提供数分页据源
      */
-    public Observable<MovieResult> provideDataSource(int page, int size) {
+    public Observable<MovieResult> provideDataSource(int star, int count) {
         switch (mType) {
             case IN_THEATERS:
                 setTitle("正在热映");
-                return mApiWrapper.getMovieInTheaters(page, size);
+                return mApiWrapper.getMovieInTheaters(star, count);
             case COMMING_SOON:
                 setTitle("即将上映");
-                return mApiWrapper.getMovieComingSoon(page, size);
+                return mApiWrapper.getMovieComingSoon(star, count);
             case TOP250:
                 setTitle("Top250");
-                return mApiWrapper.getMovieTop250(page, size);
+                return mApiWrapper.getMovieTop250(star, count);
             case SEARCH:
-                return null;
+                setTitle("“" + mSearchKey + "“" + "搜索结果");
+                return mApiWrapper.searchMovie(star, count, mSearchKey);
             default:
                 return null;
         }

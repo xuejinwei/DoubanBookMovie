@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_root_"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_heigh">
+
+        <include layout="@layout/include_toolbar"/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="6dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="@dimen/toolbar_heigh"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="@dimen/toolbar_heigh"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/edit_text_chat_input"
+            android:hint="图书、电影"
+            android:padding="4dp"
+            android:singleLine="true"
+            android:textColor="@color/md_white_100"
+            android:textColorHint="@color/md_white_70"
+            android:textCursorDrawable="@drawable/et_cursor"
+            app:backgroundTint="@color/md_white_100"/>
+
+        <ImageView
+            android:id="@+id/img_search"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="8dp"
+            android:paddingRight="20dp"
+            android:src="@drawable/ic_search"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_search_hint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_root_"
+        android:orientation="vertical"
+        android:paddingTop="32dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="快速筛选图书"
+            android:textColor="@color/text_color_grey_full"/>
+
+        <FrameLayout
+            android:id="@+id/framelayout_book_class"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="快速筛选电影"
+            android:textColor="@color/text_color_grey_full"/>
+
+        <FrameLayout
+            android:id="@+id/framelayout_movie_class"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_search_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_root_"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/img_search_book"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="图书"
+                android:textColor="@color/text_color_dark_full"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/tv_book_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:padding="16dp"
+                android:text="@string/more"
+                android:textColor="#1378BA"/>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_search_book_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/img_search_movie"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="电影"
+                android:textColor="@color/text_color_dark_full"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/tv_movie_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:padding="16dp"
+                android:text="@string/more"
+                android:textColor="#D04037"/>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_search_movie_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</RelativeLayout>
+
