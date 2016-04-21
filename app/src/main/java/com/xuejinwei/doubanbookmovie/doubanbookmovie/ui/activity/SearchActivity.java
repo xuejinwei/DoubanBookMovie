@@ -62,17 +62,20 @@ public class SearchActivity extends SwipeBackActivity {
         initRecyclerView(rv_search_book_result, mBookBoxAdapter);
         initRecyclerView(rv_search_movie_result, mMovieBoxAdapter);
         img_search.setOnClickListener(v -> onSearch());
-        tv_movie_more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mSearchKey.equals("")) {
-                    CommonUtil.toast("关键字不能为空");
-                    return;
-                }
-                MovieListActivity.start(SearchActivity.this, MovieListActivity.Type.SEARCH, mSearchKey);
+        tv_movie_more.setOnClickListener(v -> {
+            if (mSearchKey.equals("")) {
+                CommonUtil.toast("关键字不能为空");
+                return;
             }
+            MovieListActivity.start(SearchActivity.this, MovieListActivity.Type.SEARCH, mSearchKey);
         });
-        tv_book_more.setOnClickListener(v -> CommonUtil.toast("待添加……"));
+        tv_book_more.setOnClickListener(v -> {
+            if (mSearchKey.equals("")) {
+                CommonUtil.toast("关键字不能为空");
+                return;
+            }
+            BookListActivity.start(SearchActivity.this, BookListActivity.Type.SEARCH, mSearchKey);
+        });
 
     }
 

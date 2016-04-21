@@ -34,4 +34,18 @@ public class Book {
     public BookSeries series;
     public Images     images;
     public List<Tags> tags;
+
+    public String getAuthor() {
+
+        if (author != null) {
+            String string = "";
+            for (int i = 0; i < author.length; i++) {
+                string = string + author[i] + "\n\n";
+            }
+            return string;
+        } else {
+            return "";
+        }
+
+    }
 }

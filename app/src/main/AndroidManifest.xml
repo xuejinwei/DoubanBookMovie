@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.MovieListActivity"/>
+        <activity android:name=".ui.activity.BookListActivity"/>
         <activity android:name=".ui.activity.AuthActivity"/>
         <activity android:name=".ui.activity.SubjectCollectionActivity"/>
         <activity android:name=".ui.activity.SearchActivity"/>
