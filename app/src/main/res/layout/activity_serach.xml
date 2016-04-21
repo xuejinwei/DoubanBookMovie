@@ -47,13 +47,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/rl_root_"
-        android:orientation="vertical"
-        android:paddingTop="32dp">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
             android:text="快速筛选图书"
             android:textColor="@color/text_color_grey_full"/>
 
@@ -65,7 +65,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
             android:text="快速筛选电影"
             android:textColor="@color/text_color_grey_full"/>
 

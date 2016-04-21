@@ -21,7 +21,7 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.BookResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieSimple;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity.SwipeBackActivity;
-import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.BookClassFragment;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.ClassFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.CommonUtil;
 
 import butterknife.Bind;
@@ -55,8 +55,8 @@ public class SearchActivity extends SwipeBackActivity {
         setContentView(R.layout.activity_serach);
         ButterKnife.bind(this);
         setTitle("");
-        BookClassFragment.inject(this, R.id.framelayout_book_class);
-        BookClassFragment.inject(this, R.id.framelayout_movie_class);
+        ClassFragment.inject(this, R.id.framelayout_book_class, ClassFragment.Type.BOOK);
+        ClassFragment.inject(this, R.id.framelayout_movie_class, ClassFragment.Type.MOVIE);
         mMovieBoxAdapter = new CommonAdapter<>(this, MovieBoxHolder.class);
         mBookBoxAdapter = new CommonAdapter<>(this, BookBoxHolder.class);
         initRecyclerView(rv_search_book_result, mBookBoxAdapter);

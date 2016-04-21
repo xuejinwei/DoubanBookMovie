@@ -37,15 +37,11 @@ public class Book {
 
     public String getAuthor() {
 
-        if (author != null) {
-            String string = "";
-            for (int i = 0; i < author.length; i++) {
-                string = string + author[i] + "\n\n";
-            }
-            return string;
-        } else {
-            return "";
+        String string = "";
+        for (String anAuthor : author) {
+            string = string + anAuthor + "\n\n";
         }
+        return string;
 
     }
 }

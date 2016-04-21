@@ -70,4 +70,6 @@ dependencies {
     compile 'com.zhy:okhttputils:2.3.8'
 
     compile 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
+
+    compile 'org.apmem.tools:layouts:1.10@aar'//自动换行
 }
