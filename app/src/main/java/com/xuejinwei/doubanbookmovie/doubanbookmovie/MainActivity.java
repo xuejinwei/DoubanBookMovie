@@ -27,6 +27,7 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.HotFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.MovieFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.MyFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.CommonUtil;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.widget.DialogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,9 +71,11 @@ public class MainActivity extends BackActivity {
         tabLayout.setupWithViewPager(viewPager);
         tv_header_login.setOnClickListener(v -> {
             if (Setting.getAuthState()) {
-                Setting.Logout();
-                refresh();
-                CommonUtil.toast("注销成功");
+                DialogUtil.simpleMessage(this, "确定注销？", () -> {
+                    Setting.Logout();
+                    refresh();
+                    CommonUtil.toast("注销成功");
+                });
             } else {
                 AuthActivity.start(MainActivity.this);
             }
@@ -93,7 +96,7 @@ public class MainActivity extends BackActivity {
             tv_header_desc.setText(Setting.getSetting(Setting.Key.desc, ""));
             tv_header_login.setText("注销");
         } else {
-            img_header_avatars.setImageBitmap(null);
+            img_header_avatars.setImageResource(R.drawable.default_avatar);
             tv_header_title.setText("");
             tv_header_desc.setText("");
             tv_header_login.setText("登录");
@@ -119,33 +122,29 @@ public class MainActivity extends BackActivity {
 
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem -> {
+                    switch (menuItem.getItemId()) {
 
-                        switch (menuItem.getItemId()) {
+                        case R.id.navigation_hot:
+                            selectPage(0);
+                            menuItem.setChecked(true);
+                            break;
+                        case R.id.navigation_movies:
+                            selectPage(1);
+                            menuItem.setChecked(true);
+                            break;
+                        case R.id.navigation_book:
+                            selectPage(2);
+                            menuItem.setChecked(true);
+                            break;
+                        case R.id.navigation_my:
+                            selectPage(3);
+                            menuItem.setChecked(true);
+                            break;
 
-                            case R.id.navigation_hot:
-                                selectPage(0);
-                                menuItem.setChecked(true);
-                                break;
-                            case R.id.navigation_movies:
-                                selectPage(1);
-                                menuItem.setChecked(true);
-                                break;
-                            case R.id.navigation_book:
-                                selectPage(2);
-                                menuItem.setChecked(true);
-                                break;
-                            case R.id.navigation_my:
-                                selectPage(3);
-                                menuItem.setChecked(true);
-                                break;
-
-                        }
-                        drawer_layout.closeDrawers();
-                        return true;
                     }
+                    drawer_layout.closeDrawers();
+                    return true;
                 });
     }
 
