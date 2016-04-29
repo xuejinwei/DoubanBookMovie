@@ -7,6 +7,7 @@ import com.orhanobut.logger.Logger;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.Setting;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.ErrorResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Result;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Success;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.AuthActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.CommonUtil;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.RxUtils;
@@ -78,5 +79,22 @@ public class FlatHandler {
             return;
         }
         Log.e("Error", String.valueOf(exception));
+    }
+
+    /**
+     * 转换为 Void 对象，主要用于只需要获取操作是否成功的操作，例如插入、删除数据
+     *
+     * @param result retrofit 直接返回的结果
+     * @return 如果通过 onNext 返回，则是成功（返回数据为 null），错误依然交给 onError 处理
+     */
+    public static Observable<Success> flatToSuccess(Result result) {
+        return Observable.create(subscriber -> {
+            switch (result.code) {
+                case 204:
+                    subscriber.onNext(new Success());
+                    break;
+            }
+            subscriber.onCompleted();
+        });
     }
 }

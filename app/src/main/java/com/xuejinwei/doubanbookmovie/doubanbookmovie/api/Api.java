@@ -1,8 +1,11 @@
 package com.xuejinwei.doubanbookmovie.doubanbookmovie.api;
 
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Book;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.BookCollections;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.BookResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Celebrity;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.CollectionUpdate;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.CollectionsResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.HtmlResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Me;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Movie;
@@ -10,12 +13,15 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.OAuthResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Result;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.SubjectCollectionResult;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Success;
 
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -100,4 +106,20 @@ public interface Api {
     @GET("https://frodo.douban.com/jsonp/subject_collection/{type}/items")
     Observable<Result<SubjectCollectionResult>> getSubjectCollection(@Path("type") String type, @Query("start") int start, @Query("count") int count);
 
+    @GET("book/user/{user}/collections")
+    Observable<Result<CollectionsResult>> getBookCollections(@Path("user") String user, @Header("Authorization") String Authorization);
+
+    @GET("book/{book_id}/collection")
+    Observable<Result<BookCollections>> getBookCollectionsDetail(@Path("book_id") String user, @Header("Authorization") String Authorization);
+
+    @FormUrlEncoded
+    @POST("book/{book_id}/collection")
+    Observable<Result<CollectionUpdate>> addBookCollection(@Header("Authorization") String Authorization, @Path("book_id") String book_id, @Field("status") String status, @Field("comment") String comment, @Field("rating") String rating);
+
+    @FormUrlEncoded
+    @PUT("book/{book_id}/collection")
+    Observable<Result<CollectionUpdate>> updateBookCollection(@Header("Authorization") String Authorization, @Path("book_id") String book_id, @Field("status") String status, @Field("comment") String comment, @Field("rating") String rating);
+
+    @DELETE("book/{book_id}/collection")
+    Observable<Result<Success>> deleteBookCollection(@Header("Authorization") String Authorization, @Path("book_id") String book_id);
 }

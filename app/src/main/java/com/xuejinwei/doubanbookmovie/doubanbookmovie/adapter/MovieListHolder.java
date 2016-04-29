@@ -17,7 +17,7 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieSimple;
  * Created by xuejinwei on 16/3/28.
  * Email:xuejinwei@outlook.com
  */
-@LayoutId(R.layout.item_movie_list)
+@LayoutId(R.layout.item_book_list)
 public class MovieListHolder extends CommonHolder<MovieSimple> {
 
     // 绑定 View 资源

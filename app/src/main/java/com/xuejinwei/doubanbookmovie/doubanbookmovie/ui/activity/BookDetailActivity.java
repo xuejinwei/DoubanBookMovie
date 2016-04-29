@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -34,6 +35,7 @@ public class BookDetailActivity extends SwipeBackActivity {
     @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsing_toolbar;
     @Bind(R.id.sliding_tabs)       TabLayout               sliding_tabs;
     @Bind(R.id.viewpager)          ViewPager               viewpager;
+    @Bind(R.id.fab_collection)     FloatingActionButton    fab_collection;
     private                        Book                    mBook;
     private static final String BOOK_ID = "book_id";
 
@@ -55,6 +57,7 @@ public class BookDetailActivity extends SwipeBackActivity {
                 upDate(book);
             }
         });
+        fab_collection.setOnClickListener(v -> BookCollectionDetailEditActivity.start(this, BookCollectionDetailEditActivity.Type.ADD, book_id));
 
     }
 

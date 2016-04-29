@@ -76,10 +76,15 @@ public class SearchActivity extends SwipeBackActivity {
             }
             BookListActivity.start(SearchActivity.this, BookListActivity.Type.SEARCH, mSearchKey);
         });
+        et_search.setOnEditorActionListener((v, actionId, event) -> {
+            onSearch();
+            return true;
+        });
 
     }
 
     private void onSearch() {
+        CommonUtil.hideKeyboard(this);
         mSearchKey = et_search.getText().toString();
         if (mSearchKey.equals("")) {
             CommonUtil.toast("关键字不能为空");

@@ -2,14 +2,18 @@ package com.xuejinwei.doubanbookmovie.doubanbookmovie.api;
 
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.Setting;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Book;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.BookCollections;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.BookResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Celebrity;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.CollectionUpdate;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.CollectionsResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.HtmlResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Me;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Movie;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.OAuthResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.SubjectCollectionResult;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Success;
 
 import rx.Observable;
 
@@ -107,4 +111,23 @@ public class ApiWrapper {
         return mApi.getSubjectCollection(type, star, count).flatMap(FlatHandler::flatResult);
     }
 
+    public Observable<CollectionsResult> getBookCollections(String userid) {
+        return mApi.getBookCollections(userid, Setting.getSetting(Setting.Key.access_token, "")).flatMap(FlatHandler::flatResult);
+    }
+
+    public Observable<BookCollections> getBookCollectionsDetail(String bookid) {
+        return mApi.getBookCollectionsDetail(bookid, Setting.getSetting(Setting.Key.access_token, "")).flatMap(FlatHandler::flatResult);
+    }
+
+    public Observable<CollectionUpdate> addBookCollections(String bookid, CollectionUpdate collectionUpdate) {
+        return mApi.addBookCollection(Setting.getSetting(Setting.Key.access_token, ""), bookid, collectionUpdate.status, collectionUpdate.comment, collectionUpdate.rating).flatMap(FlatHandler::flatResult);
+    }
+
+    public Observable<CollectionUpdate> updateBookCollections(String bookid, CollectionUpdate collectionUpdate) {
+        return mApi.updateBookCollection(Setting.getSetting(Setting.Key.access_token, ""), bookid, collectionUpdate.status, collectionUpdate.comment, collectionUpdate.rating).flatMap(FlatHandler::flatResult);
+    }
+
+    public Observable<Success> deleteBookCollections(String bookid) {
+        return mApi.deleteBookCollection(Setting.getSetting(Setting.Key.access_token, ""), bookid).flatMap(FlatHandler::flatToSuccess);
+    }
 }

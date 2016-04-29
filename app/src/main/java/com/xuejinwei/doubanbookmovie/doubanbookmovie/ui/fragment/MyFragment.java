@@ -1,11 +1,13 @@
 package com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,6 +18,7 @@ import com.github.siyamed.shapeimageview.CircularImageView;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.App;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.Setting;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.BookCollectionListActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.fragment.BaseFragment;
 
 import butterknife.Bind;
@@ -27,10 +30,11 @@ import butterknife.ButterKnife;
  */
 public class MyFragment extends BaseFragment {
 
-    @Bind(R.id.iv_avatar)      CircularImageView iv_avatar;
-    @Bind(R.id.tv_title)       TextView          tv_title;
-    @Bind(R.id.tv_description) TextView          tv_description;
-    @Bind(R.id.ll_root_my)     LinearLayout      ll_root_my;
+    @Bind(R.id.iv_avatar)            CircularImageView iv_avatar;
+    @Bind(R.id.tv_title)             TextView          tv_title;
+    @Bind(R.id.tv_description)       TextView          tv_description;
+    @Bind(R.id.ll_root_my)           LinearLayout      ll_root_my;
+    @Bind(R.id.btn_book_collections) Button            btn_book_collections;
 
     @Nullable
     @Override
@@ -59,5 +63,6 @@ public class MyFragment extends BaseFragment {
             tv_title.setText("");
             tv_description.setText("");
         }
+        btn_book_collections.setOnClickListener(v -> startActivity(new Intent(getActivity(), BookCollectionListActivity.class)));
     }
 }

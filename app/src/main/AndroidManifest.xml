@@ -23,7 +23,10 @@
         </activity>
         <activity android:name=".ui.activity.MovieListActivity"/>
         <activity android:name=".ui.activity.BookListActivity"/>
+        <activity android:name=".ui.activity.BookCollectionListActivity"/>
         <activity android:name=".ui.activity.AuthActivity"/>
+        <activity android:name=".ui.activity.BookCollectionDetailActivity"/>
+        <activity android:name=".ui.activity.BookCollectionDetailEditActivity"/>
         <activity android:name=".ui.activity.SubjectCollectionActivity"/>
         <activity android:name=".ui.activity.SearchActivity"/>
         <activity android:name=".ui.activity.WebViewActivity"

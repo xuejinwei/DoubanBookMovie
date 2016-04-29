@@ -35,6 +35,7 @@ public class BookListHolder extends CommonHolder<Book> {
 
     @Override
     public void bindData(Book book) {
+        iv_avatar.setImageResource(R.drawable.img_america);
         Glide.with(getItemView().getContext()).load(book.images.large).crossFade().into(iv_avatar);
         tv_title.setText(book.title);
         if (!book.rating.average.equals("0")) {

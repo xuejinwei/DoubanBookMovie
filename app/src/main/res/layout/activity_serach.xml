@@ -25,6 +25,7 @@
             android:layout_marginTop="6dp"
             android:background="@drawable/edit_text_chat_input"
             android:hint="图书、电影"
+            android:imeOptions="actionSearch"
             android:padding="4dp"
             android:singleLine="true"
             android:textColor="@color/md_white_100"
