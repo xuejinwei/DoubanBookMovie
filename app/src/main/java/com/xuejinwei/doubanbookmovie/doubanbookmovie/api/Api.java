@@ -4,7 +4,6 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Book;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.BookCollections;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.BookResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Celebrity;
-import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.CollectionUpdate;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.CollectionsResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.HtmlResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Me;
@@ -114,11 +113,11 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("book/{book_id}/collection")
-    Observable<Result<CollectionUpdate>> addBookCollection(@Header("Authorization") String Authorization, @Path("book_id") String book_id, @Field("status") String status, @Field("comment") String comment, @Field("rating") String rating);
+    Observable<Result<BookCollections>> addBookCollection(@Header("Authorization") String Authorization, @Path("book_id") String book_id, @Field("status") String status, @Field("comment") String comment, @Field("rating") String rating);
 
     @FormUrlEncoded
     @PUT("book/{book_id}/collection")
-    Observable<Result<CollectionUpdate>> updateBookCollection(@Header("Authorization") String Authorization, @Path("book_id") String book_id, @Field("status") String status, @Field("comment") String comment, @Field("rating") String rating);
+    Observable<Result<BookCollections>> updateBookCollection(@Header("Authorization") String Authorization, @Path("book_id") String book_id, @Field("status") String status, @Field("comment") String comment, @Field("rating") String rating);
 
     @DELETE("book/{book_id}/collection")
     Observable<Result<Success>> deleteBookCollection(@Header("Authorization") String Authorization, @Path("book_id") String book_id);

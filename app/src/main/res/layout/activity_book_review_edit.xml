@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"/>
+
+    <com.xuejinwei.doubanbookmovie.doubanbookmovie.widget.ClearEditText
+        android:id="@+id/et_title"
+        style="@style/SDEditText.Title"
+        android:hint="请输入评价标题"/>
+
+    <include layout="@layout/include_line_margin_20left_20right"/>
+
+    <com.xuejinwei.doubanbookmovie.doubanbookmovie.widget.CountEditText
+        android:id="@+id/et_description"
+        style="@style/SDEditText.Instruction"
+        android:hint="描述一下你的服务：内容，方式，费用，时间等信息。最少200字"/>
+</LinearLayout>

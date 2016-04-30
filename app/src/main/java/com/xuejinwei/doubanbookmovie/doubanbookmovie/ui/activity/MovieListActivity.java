@@ -114,7 +114,7 @@ public class MovieListActivity extends SwipeBackActivity implements SwipeRefresh
                 setTitle("Top250");
                 return mApiWrapper.getMovieTop250(star, count);
             case SEARCH:
-                setTitle("“" + mSearchKey + "“" + "搜索结果");
+                setTitle("“" + mSearchKey + "“" + "电影搜索结果");
                 return mApiWrapper.searchMovie(star, count, mSearchKey);
             default:
                 return null;

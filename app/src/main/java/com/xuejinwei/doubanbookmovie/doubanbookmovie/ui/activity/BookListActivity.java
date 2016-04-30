@@ -106,7 +106,7 @@ public class BookListActivity extends SwipeBackActivity implements SwipeRefreshL
     public Observable<BookResult> provideDataSource(int star, int count) {
         switch (mType) {
             case SEARCH:
-                setTitle("“" + mSearchKey + "“" + "搜索结果");
+                setTitle("“" + mSearchKey + "“" + "图书搜索结果");
                 return mApiWrapper.searchBook(star, count, mSearchKey);
             default:
                 return null;

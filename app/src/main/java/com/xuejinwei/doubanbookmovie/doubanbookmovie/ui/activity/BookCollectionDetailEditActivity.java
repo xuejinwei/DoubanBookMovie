@@ -19,7 +19,6 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.CommonUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import rx.functions.Action1;
 
 /**
  * Created by xuejinwei on 16/4/25.
@@ -101,21 +100,15 @@ public class BookCollectionDetailEditActivity extends SwipeBackActivity {
             collectionUpdate.rating = String.valueOf((int) ratingBar.getRating());
             collectionUpdate.status = getStatus();
             if (mType == Type.EDIT) {
-                runRxTaskOnUi(mApiWrapper.updateBookCollections(book_id, collectionUpdate), new Action1<CollectionUpdate>() {
-                    @Override
-                    public void call(CollectionUpdate collectionUpdate1) {
-                        CommonUtil.toast("更新搜藏成功");
-                        finish();
+                runRxTaskOnUi(mApiWrapper.updateBookCollections(book_id, collectionUpdate), bookCollections -> {
+                    CommonUtil.toast("更新搜藏成功");
+                    finish();
 
-                    }
                 });
             } else if (mType == Type.ADD) {
-                runRxTaskOnUi(mApiWrapper.addBookCollections(book_id, collectionUpdate), new Action1<CollectionUpdate>() {
-                    @Override
-                    public void call(CollectionUpdate collectionUpdate1) {
-                        CommonUtil.toast("添加搜藏成功");
-                        finish();
-                    }
+                runRxTaskOnUi(mApiWrapper.addBookCollections(book_id, collectionUpdate), bookCollections -> {
+                    CommonUtil.toast("添加搜藏成功");
+                    finish();
                 });
             }
         });

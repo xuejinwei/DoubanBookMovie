@@ -119,11 +119,11 @@ public class ApiWrapper {
         return mApi.getBookCollectionsDetail(bookid, Setting.getSetting(Setting.Key.access_token, "")).flatMap(FlatHandler::flatResult);
     }
 
-    public Observable<CollectionUpdate> addBookCollections(String bookid, CollectionUpdate collectionUpdate) {
+    public Observable<BookCollections> addBookCollections(String bookid, CollectionUpdate collectionUpdate) {
         return mApi.addBookCollection(Setting.getSetting(Setting.Key.access_token, ""), bookid, collectionUpdate.status, collectionUpdate.comment, collectionUpdate.rating).flatMap(FlatHandler::flatResult);
     }
 
-    public Observable<CollectionUpdate> updateBookCollections(String bookid, CollectionUpdate collectionUpdate) {
+    public Observable<BookCollections> updateBookCollections(String bookid, CollectionUpdate collectionUpdate) {
         return mApi.updateBookCollection(Setting.getSetting(Setting.Key.access_token, ""), bookid, collectionUpdate.status, collectionUpdate.comment, collectionUpdate.rating).flatMap(FlatHandler::flatResult);
     }
 
