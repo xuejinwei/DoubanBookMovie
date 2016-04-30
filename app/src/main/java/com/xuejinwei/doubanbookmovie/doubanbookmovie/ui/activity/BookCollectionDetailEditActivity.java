@@ -52,7 +52,7 @@ public class BookCollectionDetailEditActivity extends SwipeBackActivity {
         Intent starter = new Intent(context, BookCollectionDetailEditActivity.class);
         starter.putExtra(ARG_TYPE, type);
         starter.putExtra(BOOK_ID, book_id);
-        context.startActivity(starter);
+        context.startActivityForResult(starter,0);
     }
 
     @Override
@@ -102,12 +102,14 @@ public class BookCollectionDetailEditActivity extends SwipeBackActivity {
             if (mType == Type.EDIT) {
                 runRxTaskOnUi(mApiWrapper.updateBookCollections(book_id, collectionUpdate), bookCollections -> {
                     CommonUtil.toast("更新搜藏成功");
+                    setResult(RESULT_OK);
                     finish();
 
                 });
             } else if (mType == Type.ADD) {
                 runRxTaskOnUi(mApiWrapper.addBookCollections(book_id, collectionUpdate), bookCollections -> {
                     CommonUtil.toast("添加搜藏成功");
+                    setResult(RESULT_OK);
                     finish();
                 });
             }
