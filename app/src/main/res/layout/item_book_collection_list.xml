@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="129dp"
-              android:orientation="horizontal"
-              android:paddingBottom="6dp"
-              android:paddingLeft="12dp"
-              android:paddingRight="12dp"
-              android:paddingTop="6dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="129dp"
+                android:orientation="horizontal"
+                android:paddingBottom="6dp"
+                android:paddingLeft="12dp">
 
     <ImageView
         android:id="@+id/iv_avatar"
         android:layout_width="80dp"
         android:layout_height="match_parent"
+        android:layout_marginTop="6dp"
         android:background="@color/md_grey_200"
         android:scaleType="centerCrop"/>
 
@@ -20,9 +19,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@+id/iv_avatar"
         android:orientation="vertical"
-        android:paddingRight="8dp"
-        android:paddingTop="2dp">
+        android:paddingRight="20dp"
+        android:paddingTop="8dp">
 
         <TextView
             android:id="@+id/tv_title"
@@ -40,6 +40,12 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="我的评分："/>
+
             <android.support.v7.widget.AppCompatRatingBar
                 android:id="@+id/ratingBar"
                 style="?android:attr/ratingBarStyleSmall"
@@ -50,6 +56,7 @@
                 android:isIndicator="true"
                 android:maxHeight="14dp"
                 android:maxWidth="14dp"
+                android:layout_marginBottom="1dp"
                 android:minHeight="14dp"
                 android:numStars="5"
                 android:stepSize="0.1"/>
@@ -61,31 +68,6 @@
                 android:text="7.9"
                 android:textColor="@color/google_red"
                 android:textSize="16sp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="状态："
-                android:textSize="13sp"
-                />
-
-            <TextView
-                android:id="@+id/tv_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:singleLine="true"
-                android:textColor="@color/google_blue"
-                android:textSize="13sp"
-                tools:text="冯小刚"
-                />
         </LinearLayout>
 
         <LinearLayout
@@ -138,4 +120,11 @@
                 />
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        tools:src="@drawable/img_wish"/>
+</RelativeLayout>

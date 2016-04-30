@@ -26,9 +26,9 @@ public class BookCollectionListHolder extends CommonHolder<BookCollections> {
     @ViewId(R.id.ll_rating) LinearLayout       ll_rating;
     @ViewId(R.id.ratingBar) AppCompatRatingBar mRatingBar;
     @ViewId(R.id.tv_rating) TextView           tv_rating;
-    @ViewId(R.id.tv_status) TextView           tv_status;
     @ViewId(R.id.tv_commit) TextView           tv_commit;
     @ViewId(R.id.tv_update) TextView           tv_update;
+    @ViewId(R.id.iv_status) ImageView           iv_status;
 
     public BookCollectionListHolder(View itemView) {
         super(itemView);
@@ -45,6 +45,20 @@ public class BookCollectionListHolder extends CommonHolder<BookCollections> {
         }
         tv_commit.setText(bookCollections.comment);
         tv_update.setText(bookCollections.updated);
-        tv_status.setText(bookCollections.getStatus());
+        iv_status.setImageResource(getStatus(bookCollections));
+    }
+
+    int getStatus(BookCollections bookCollections) {
+        if (bookCollections.status.equals("wish")) {
+            return R.drawable.img_wish;
+        }
+        if (bookCollections.status.equals("reading")) {
+            return R.drawable.img_reading;
+        }
+        if (bookCollections.status.equals("read")) {
+            return R.drawable.img_readed;
+        }
+
+        return -1;
     }
 }
