@@ -12,10 +12,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.BookCollections;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity.SwipeBackActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.CommonUtil;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.widget.DialogUtil;
@@ -38,13 +40,20 @@ public class BookCollectionDetailActivity extends SwipeBackActivity {
     @Bind(R.id.ll_rating)   LinearLayout       ll_rating;
     @Bind(R.id.tv_author)   TextView           tv_author;
     @Bind(R.id.tv_price)    TextView           tv_price;
-    @Bind(R.id.tv_status)   TextView           tv_status;
     @Bind(R.id.tv_update)   TextView           tv_update;
     @Bind(R.id.tv_commit)   TextView           tv_commit;
     @Bind(R.id.progressBar) ProgressBar        progressBar;
     @Bind(R.id.ll_root)     LinearLayout       ll_root;
     @Bind(R.id.cardview)    CardView           cardview;
+    @Bind(R.id.rl_card)     RelativeLayout     rl_card;
+    @Bind(R.id.iv_status)   ImageView          iv_status;
 
+    int[] bg_card = {
+            R.drawable.widget_big_blue,
+            R.drawable.widget_big_gray,
+            R.drawable.widget_big_green,
+            R.drawable.widget_big_red,
+            R.drawable.widget_big_yellow};
 
     public static void start(Activity activity, String book_id) {
         Intent starter = new Intent(activity, BookCollectionDetailActivity.class);
@@ -58,6 +67,7 @@ public class BookCollectionDetailActivity extends SwipeBackActivity {
         setContentView(R.layout.activity_book_collection_detail);
         ButterKnife.bind(this);
         bookid = getIntent().getStringExtra(COLLECTION_ID);
+        rl_card.setBackgroundResource(bg_card[(int) (System.currentTimeMillis() % 5)]);
         onRefresh();
     }
 
@@ -81,9 +91,10 @@ public class BookCollectionDetailActivity extends SwipeBackActivity {
             }
             tv_price.setText(bookCollections.book.price);
             tv_author.setText(bookCollections.book.getAuthor());
-            tv_commit.setText(bookCollections.comment);
-            tv_status.setText(bookCollections.getStatus());
-            tv_update.setText(bookCollections.updated);
+
+            tv_commit.setText("        " + bookCollections.comment);
+            iv_status.setImageResource(getStatus(bookCollections));
+            tv_update.setText(bookCollections.updated.substring(0, 16));
             ll_root.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);
             cardview.setOnClickListener(v -> BookDetailActivity.start(this, bookCollections.book_id));
@@ -120,5 +131,19 @@ public class BookCollectionDetailActivity extends SwipeBackActivity {
         if (resultCode == RESULT_OK) {
             onRefresh();
         }
+    }
+
+    int getStatus(BookCollections bookCollections) {
+        if (bookCollections.status.equals("wish")) {
+            return R.drawable.img_wish;
+        }
+        if (bookCollections.status.equals("reading")) {
+            return R.drawable.img_reading;
+        }
+        if (bookCollections.status.equals("read")) {
+            return R.drawable.img_readed;
+        }
+
+        return -1;
     }
 }

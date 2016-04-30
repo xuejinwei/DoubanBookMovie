@@ -28,7 +28,7 @@
             android:id="@+id/cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_margin="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -147,23 +147,58 @@
         </android.support.v7.widget.CardView>
 
 
-        <TextView
-            android:id="@+id/tv_status"
+        <RelativeLayout
+            android:id="@+id/rl_card"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"/>
+            android:layout_height="240dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/widget_big_blue">
 
-        <TextView
-            android:id="@+id/tv_update"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"/>
+            <TextView
+                android:id="@+id/tv_jiyu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:text="搜藏寄语："
+                android:textSize="12sp"/>
 
-        <TextView
-            android:id="@+id/tv_commit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"/>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/tv_update"
+                android:layout_below="@+id/tv_jiyu"
+                android:layout_marginLeft="30dp"
+                android:scrollbars="none"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="12dp"
+                >
+
+                <TextView
+                    android:id="@+id/tv_commit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="     《草房子》是一部讲究品位的少年长篇小说。作品写了男孩桑桑刻骨铭心，终身难忘的六年小学生活。六年中，他亲眼目睹或直接参与了一连"/>
+            </ScrollView>
+
+            <ImageView
+                android:id="@+id/iv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"/>
+
+            <TextView
+                android:id="@+id/tv_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="24dp"
+                tools:text="2012-01-02 22:10"/>
+        </RelativeLayout>
+
     </LinearLayout>
 
 
