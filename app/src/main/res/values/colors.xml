@@ -67,4 +67,9 @@
     <color name="md_white_40">#66ffffff</color>
     <color name="md_white_30">#4cffffff</color>
     <color name="md_white_20">#33ffffff</color>
+
+    <color name="md_green_300">#42bd41</color>
+    <color name="md_green_400">#2baf2b</color>
+    <color name="md_green_500">#259b24</color>
+    <color name="md_green_600">#0a8f08</color>
 </resources>
