@@ -102,8 +102,8 @@ public interface Api {
     @GET("https://movie.douban.com/subject/{id}/reviews")
     Observable<HtmlResult> getMovieReviews(@Path("id") String id, @Query("start") int start, @Query("limit") int limit, @Query("sort") String sortType);
 
-    @GET("https://book.douban.com/subject/{id}/comments")
-    Observable<HtmlResult> getBookComment(@Path("id") String id, @Query("start") int start, @Query("limit") int limit, @Query("sort") String sortType);
+    @GET("https://book.douban.com/subject/{id}/comments/hot")
+    Observable<HtmlResult> getBookComment(@Path("id") String id);
 
     @GET("https://book.douban.com/subject/{id}/reviews")
     Observable<HtmlResult> getBookReviews(@Path("id") String id, @Query("start") int start, @Query("limit") int limit, @Query("sort") String sortType);

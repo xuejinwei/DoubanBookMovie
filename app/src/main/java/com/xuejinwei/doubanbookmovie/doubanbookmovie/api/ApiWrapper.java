@@ -114,7 +114,7 @@ public class ApiWrapper {
     }
 
     public Observable<List<Comments>> getBookComment(String id, int start, int limit, String sortType) {
-        return mApi.getBookComment(id, start, limit, sortType).map(htmlResult -> {
+        return mApi.getBookComment(id).map(htmlResult -> {
             List<Comments> commentsList = HtmlParser.getBookCommentList(htmlResult.htmlBody);
             return commentsList;
         });

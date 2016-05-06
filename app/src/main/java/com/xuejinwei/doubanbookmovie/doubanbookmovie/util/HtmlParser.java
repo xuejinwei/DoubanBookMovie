@@ -28,13 +28,8 @@ public class HtmlParser {
     public static List<Comments> getMovieCommentList(String htmlResult) {
         List<Comments> data = new ArrayList<>();
 
-        Document doc = Jsoup.parse(htmlResult);
-        Element commentBody = doc.select("div.article").get(0);
 
-        if (commentBody == null) {
-            return data;
-        }
-        Document document = Jsoup.parse(commentBody.toString());
+        Document document = Jsoup.parse(htmlResult);
         Element list = document.select("div.mod-bd").first();
         if (list == null)
             return data;
@@ -84,11 +79,11 @@ public class HtmlParser {
     public static List<Comments> getBookCommentList(String htmlResult) {
         List<Comments> data = new ArrayList<>();
 
-        Document document = Jsoup.parse(htmlResult.toString());
-        Element list = document.select("div.mod-bd").first();
+        Document document = Jsoup.parse(htmlResult);
+        Element list = document.select("div.article").first();
         if (list == null)
             return data;
-        Elements comments = list.select("div.comment-item");
+        Elements comments = list.select("li.comment-item");
         if (comments == null) {
             return data;
         }
@@ -106,12 +101,12 @@ public class HtmlParser {
                 rating = "0";
             } else {
                 rating = span.get(1).attr("class");
-                rating = rating.substring(7, 9);
+                rating = rating.substring(18, 20);
             }
-            Element span_votes = item.select("span.votes").first();
+            Element span_votes = item.select("span.vote-count").first();
             String vote = "";
             if (span_votes != null) {
-                vote = item.select("span.votes").first().text();
+                vote = item.select("span.vote-count").first().text();
             }
             String time = span.get(span.size() - 1).text();
             comment.time = time;
