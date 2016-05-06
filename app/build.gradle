@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "com.xuejinwei.doubanbookmovie.doubanbookmovie"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
     }
@@ -72,4 +72,8 @@ dependencies {
     compile 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
 
     compile 'org.apmem.tools:layouts:1.10@aar'//自动换行
+
+    compile 'com.google.zxing:core:3.1.0'
+    compile 'cn.bingoogolapple:bga-qrcodecore:1.0.7@aar'
+    compile 'cn.bingoogolapple:bga-zxing:1.0.7@aar'
 }

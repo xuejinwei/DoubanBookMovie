@@ -87,6 +87,9 @@ public interface Api {
     @GET("book/search")
     Observable<Result<BookResult>> searchBook(@Query("start") int start, @Query("count") int count, @Query("q") String q);
 
+    @GET("book/isbn/{isbn}")
+    Observable<Result<Book>> searchBookByIsbn(@Path("isbn") String isbn);
+
     @GET("movie/subject/{id}")
     Observable<Result<Movie>> getMovieById(@Path("id") String id);
 

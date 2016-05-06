@@ -34,6 +34,15 @@
             app:backgroundTint="@color/md_white_100"/>
 
         <ImageView
+            android:id="@+id/img_qrcode"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/img_search"
+            android:paddingLeft="8dp"
+            android:paddingRight="20dp"
+            android:src="@drawable/ic_qrcode_24dp"/>
+
+        <ImageView
             android:id="@+id/img_search"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

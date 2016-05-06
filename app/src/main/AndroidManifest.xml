@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".app.App"
@@ -30,6 +32,7 @@
         <activity android:name=".ui.activity.BookReviewEditActivity"/>
         <activity android:name=".ui.activity.SubjectCollectionActivity"/>
         <activity android:name=".ui.activity.SearchActivity"/>
+        <activity android:name=".ui.activity.QrCodeActivity"/>
         <activity android:name=".ui.activity.WebViewActivity"
                   android:hardwareAccelerated="true"/>
         <activity

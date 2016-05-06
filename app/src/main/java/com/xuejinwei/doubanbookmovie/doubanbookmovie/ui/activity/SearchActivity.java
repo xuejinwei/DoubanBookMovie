@@ -46,6 +46,7 @@ public class SearchActivity extends SwipeBackActivity {
     String mSearchKey;
     @Bind(R.id.tv_book_more)  TextView                                   tv_book_more;
     @Bind(R.id.tv_movie_more) TextView                                   tv_movie_more;
+    @Bind(R.id.img_qrcode)    ImageView                                  img_qrcode;
     private                   CommonAdapter<MovieSimple, MovieBoxHolder> mMovieBoxAdapter;
     private                   CommonAdapter<Book, BookBoxHolder>         mBookBoxAdapter;
 
@@ -62,6 +63,7 @@ public class SearchActivity extends SwipeBackActivity {
         initRecyclerView(rv_search_book_result, mBookBoxAdapter);
         initRecyclerView(rv_search_movie_result, mMovieBoxAdapter);
         img_search.setOnClickListener(v -> onSearch());
+        img_qrcode.setOnClickListener(v1 -> QrCodeActivity.start(this));
         tv_movie_more.setOnClickListener(v -> {
             if (mSearchKey.equals("")) {
                 CommonUtil.toast("关键字不能为空");

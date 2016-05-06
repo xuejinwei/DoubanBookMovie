@@ -72,6 +72,9 @@ public class FlatHandler {
                 case 1998:
                     CommonUtil.toast("访问太频繁，请更换IP");
                     break;
+                case 6000:
+                    CommonUtil.toast("未找到该图书");
+                    break;
                 default:
                     Logger.e("code:" + ((ErrorResult) exception).code + ".msg:" + ((ErrorResult) exception).msg + ".request:" + ((ErrorResult) exception).request);
                     break;

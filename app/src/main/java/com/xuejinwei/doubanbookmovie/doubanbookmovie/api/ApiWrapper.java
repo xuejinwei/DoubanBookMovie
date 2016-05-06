@@ -87,6 +87,10 @@ public class ApiWrapper {
         return mApi.searchBook(star, count, q).flatMap(FlatHandler::flatResult);
     }
 
+    public Observable<Book> searchBookByIsbn(String isbn) {
+        return mApi.searchBookByIsbn(isbn).flatMap(FlatHandler::flatResult);
+    }
+
     public Observable<Movie> getMovieById(String movie_id) {
         return mApi.getMovieById(movie_id).flatMap(FlatHandler::flatResult);
     }
