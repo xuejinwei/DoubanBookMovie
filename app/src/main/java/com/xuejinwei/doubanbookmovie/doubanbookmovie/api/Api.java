@@ -96,8 +96,17 @@ public interface Api {
     @GET("movie/celebrity/{id}")
     Observable<Result<Celebrity>> getCelebrityDetail(@Path("id") String id);
 
-    @GET("https://movie.douban.com/subject/24750534/comments?start=0&limit=20&sort=new_score")
-    Observable<HtmlResult> getComment();
+    @GET("https://movie.douban.com/subject/{id}/comments")
+    Observable<HtmlResult> getMovieComment(@Path("id") String id, @Query("start") int start, @Query("limit") int limit, @Query("sort") String sortType);
+
+    @GET("https://movie.douban.com/subject/{id}/reviews")
+    Observable<HtmlResult> getMovieReviews(@Path("id") String id, @Query("start") int start, @Query("limit") int limit, @Query("sort") String sortType);
+
+    @GET("https://book.douban.com/subject/{id}/comments")
+    Observable<HtmlResult> getBookComment(@Path("id") String id, @Query("start") int start, @Query("limit") int limit, @Query("sort") String sortType);
+
+    @GET("https://book.douban.com/subject/{id}/reviews")
+    Observable<HtmlResult> getBookReviews(@Path("id") String id, @Query("start") int start, @Query("limit") int limit, @Query("sort") String sortType);
 
     @GET("book/25843319/collection")
     Observable<Result<String>> getCollectionDetail(@Header("Authorization") String Authorization);

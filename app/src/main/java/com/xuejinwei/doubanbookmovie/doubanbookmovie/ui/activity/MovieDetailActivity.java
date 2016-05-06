@@ -25,6 +25,7 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.adapter.CelebrityHolder;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.SimpleCelebrity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity.SwipeBackActivity;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.CommentsFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.CommonUtil;
 
 import net.qiujuer.genius.blur.StackBlur;
@@ -40,23 +41,24 @@ import butterknife.ButterKnife;
 public class MovieDetailActivity extends SwipeBackActivity {
 
     private static final String MOVIE_ID = "movie_id";
-    @Bind(R.id.imagehead)             ImageView                                       imagehead;
-    @Bind(R.id.toolbar)               Toolbar                                         toolbar;
-    @Bind(R.id.collapsing_toolbar)    CollapsingToolbarLayout                         collapsing_toolbar;
-    @Bind(R.id.tv_title)              TextView                                        tv_titles;
-    @Bind(R.id.tv_genres)             TextView                                        tv_genres;
-    @Bind(R.id.tv_directors)          TextView                                        tv_directors;
-    @Bind(R.id.tv_casts)              TextView                                        tv_casts;
-    @Bind(R.id.expandable_tv_summary) ExpandableTextView                              expandable_tv_summary;
-    @Bind(R.id.tv_rating)             TextView                                        tv_rating;
-    @Bind(R.id.ratingBar)             AppCompatRatingBar                              ratingBar;
-    @Bind(R.id.tv_rating_sum)         TextView                                        tv_rating_sum;
-    @Bind(R.id.imagehead_bg)          ImageView                                       imagehead_bg;
-    @Bind(R.id.ll_root)               LinearLayout                                    ll_root;
-    @Bind(R.id.progressBar)           ProgressBar                                     progressBar;
-    @Bind(R.id.rv_casts)              RecyclerView                                    rv_casts;
-    private                           String                                          mMovieId;
-    private                           CommonAdapter<SimpleCelebrity, CelebrityHolder> mSimpleCelebrityCommonAdapter;
+    @Bind(R.id.imagehead)             ImageView               imagehead;
+    @Bind(R.id.toolbar)               Toolbar                 toolbar;
+    @Bind(R.id.collapsing_toolbar)    CollapsingToolbarLayout collapsing_toolbar;
+    @Bind(R.id.tv_title)              TextView                tv_titles;
+    @Bind(R.id.tv_genres)             TextView                tv_genres;
+    @Bind(R.id.tv_directors)          TextView                tv_directors;
+    @Bind(R.id.tv_casts)              TextView                tv_casts;
+    @Bind(R.id.expandable_tv_summary) ExpandableTextView      expandable_tv_summary;
+    @Bind(R.id.tv_rating)             TextView                tv_rating;
+    @Bind(R.id.ratingBar)             AppCompatRatingBar      ratingBar;
+    @Bind(R.id.tv_rating_sum)         TextView                tv_rating_sum;
+    @Bind(R.id.imagehead_bg)          ImageView               imagehead_bg;
+    @Bind(R.id.ll_root)               LinearLayout            ll_root;
+    @Bind(R.id.progressBar)           ProgressBar             progressBar;
+    @Bind(R.id.rv_casts)              RecyclerView            rv_casts;
+
+    private String                                          mMovieId;
+    private CommonAdapter<SimpleCelebrity, CelebrityHolder> mSimpleCelebrityCommonAdapter;
 
     public static void start(Activity activity, String movie_id) {
 
@@ -85,7 +87,8 @@ public class MovieDetailActivity extends SwipeBackActivity {
 
         rv_casts.setLayoutManager(linearLayoutManager);
         rv_casts.setAdapter(mSimpleCelebrityCommonAdapter);
-
+        CommentsFragment.inject(this, R.id.framelayout_movie_comments, CommentsFragment.Type.MOVIE_COMMENTS, mMovieId);
+        CommentsFragment.inject(this, R.id.framelayout_movie_reviews, CommentsFragment.Type.MOVIE_REVIEWS, mMovieId);
         runRxTaskOnUi(mApiWrapper.getMovieById(mMovieId), movie -> {
             Glide.with(MovieDetailActivity.this).load(movie.images.large).into(imagehead);
             Glide.with(MovieDetailActivity.this).load(movie.images.small).asBitmap().into(new SimpleTarget<Bitmap>() {

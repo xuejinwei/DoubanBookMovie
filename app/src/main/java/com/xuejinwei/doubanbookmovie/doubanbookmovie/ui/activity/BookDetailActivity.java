@@ -2,30 +2,36 @@ package com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.AppCompatRatingBar;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Book;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity.SwipeBackActivity;
-import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.DetailFragment;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.CommentsFragment;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.CommonUtil;
 
-import java.util.ArrayList;
-import java.util.List;
+import net.qiujuer.genius.blur.StackBlur;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import rx.functions.Action1;
 
 /**
  * Created by xuejinwei on 16/4/19.
@@ -33,12 +39,27 @@ import rx.functions.Action1;
  */
 public class BookDetailActivity extends SwipeBackActivity {
 
-    @Bind(R.id.ivImage)            ImageView               ivImage;
-    @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsing_toolbar;
-    @Bind(R.id.sliding_tabs)       TabLayout               sliding_tabs;
-    @Bind(R.id.viewpager)          ViewPager               viewpager;
-    @Bind(R.id.fab_collection)     FloatingActionButton    fab_collection;
-    private                        Book                    mBook;
+
+    @Bind(R.id.fab_collection)               FloatingActionButton    fab_collection;
+    @Bind(R.id.imagehead_bg)                 ImageView               imagehead_bg;
+    @Bind(R.id.imagehead)                    ImageView               imagehead;
+    @Bind(R.id.toolbar)                      Toolbar                 toolbar;
+    @Bind(R.id.collapsing_toolbar)           CollapsingToolbarLayout collapsing_toolbar;
+    @Bind(R.id.app_bar_layout)               AppBarLayout            app_bar_layout;
+    @Bind(R.id.progressBar)                  ProgressBar             progressBar;
+    @Bind(R.id.tv_title)                     TextView                tv_title;
+    @Bind(R.id.ratingBar)                    AppCompatRatingBar      ratingBar;
+    @Bind(R.id.tv_rating)                    TextView                tv_rating;
+    @Bind(R.id.tv_author)                    TextView                tv_author;
+    @Bind(R.id.tv_publisher)                 TextView                tv_publisher;
+    @Bind(R.id.tv_publish_date)              TextView                tv_publish_date;
+    @Bind(R.id.expandable_tv_summary)        ExpandableTextView      expandable_tv_summary;
+    @Bind(R.id.expandable_tv_summary_author) ExpandableTextView      expandable_tv_summary_author;
+    @Bind(R.id.expandable_tv_catalog)        ExpandableTextView      expandable_tv_catalog;
+    @Bind(R.id.ll_root)                      LinearLayout            ll_root;
+    @Bind(R.id.nested_scroll_view)           NestedScrollView        nested_scroll_view;
+
+    private Book mBook;
     private static final String BOOK_ID = "book_id";
 
     public static void start(Activity activity, String book_id) {
@@ -52,68 +73,52 @@ public class BookDetailActivity extends SwipeBackActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
         ButterKnife.bind(this);
+        collapsing_toolbar.setTitle("");
+        progressBar.setVisibility(View.VISIBLE);
+        ll_root.setVisibility(View.GONE);
+
         String book_id = getIntent().getStringExtra(BOOK_ID);
-        runRxTaskOnUi(mApiWrapper.getBookById(book_id), new Action1<Book>() {
-            @Override
-            public void call(Book book) {
-                upDate(book);
+        if (book_id == null) {
+            finish();
+            CommonUtil.toast("movie_id无效");
+        }
+        CommentsFragment.inject(this, R.id.framelayout_book_comments, CommentsFragment.Type.BOOK_COMMENTS, book_id);
+        CommentsFragment.inject(this, R.id.framelayout_book_reviews, CommentsFragment.Type.BOOK_REVIEWS, book_id);
+        runRxTaskOnUi(mApiWrapper.getBookById(book_id), book -> {
+            Glide.with(BookDetailActivity.this).load(book.images.large).into(imagehead);
+            Glide.with(BookDetailActivity.this).load(book.images.small).asBitmap().into(new SimpleTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
+
+                    Bitmap scaledBitmap = Bitmap.createScaledBitmap(resource,
+                            resource.getWidth() / 2,
+                            resource.getHeight() / 2,
+                            false);
+                    Bitmap blurBitmap = StackBlur.blur(scaledBitmap, 8, true);
+                    imagehead_bg.setImageBitmap(blurBitmap);
+
+                }
+            });
+
+            if (!book.rating.average.equals("0")) {
+                ratingBar.setRating(Float.parseFloat(book.rating.average));
+                tv_rating.setText(book.rating.average);
+            } else {
+                tv_rating.setText("(暂无评分)");
             }
+            tv_title.setText(book.title);
+            tv_publisher.setText(book.publisher);
+            tv_publish_date.setText(book.pubdate);
+            tv_author.setText(book.getAuthor());
+            expandable_tv_summary.setText(book.summary);
+            expandable_tv_summary_author.setText(book.author_intro);
+            expandable_tv_catalog.setText(book.catalog);
+
+            ll_root.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
         });
         fab_collection.setOnClickListener(v -> BookCollectionDetailEditActivity.start(this, BookCollectionDetailEditActivity.Type.ADD, book_id));
 
-    }
-
-    public void upDate(Book book) {
-        mBook = book;
-        collapsing_toolbar.setTitle(mBook.title);
-
-        Glide.with(BookDetailActivity.this)
-                .load(mBook.images.large)
-                .fitCenter()
-                .into(ivImage);
-        setupViewPager(viewpager);
-        sliding_tabs.addTab(sliding_tabs.newTab().setText("内容简介"));
-        sliding_tabs.addTab(sliding_tabs.newTab().setText("作者简介"));
-        sliding_tabs.addTab(sliding_tabs.newTab().setText("目录"));
-        sliding_tabs.setupWithViewPager(viewpager);
-    }
-
-    private void setupViewPager(ViewPager mViewPager) {
-        MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(DetailFragment.newInstance(mBook.summary), "内容简介");
-        adapter.addFragment(DetailFragment.newInstance(mBook.author_intro), "作者简介");
-        adapter.addFragment(DetailFragment.newInstance(mBook.catalog), "目录");
-        mViewPager.setAdapter(adapter);
-    }
-
-
-    static class MyPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragments      = new ArrayList<>();
-        private final List<String>   mFragmentTitles = new ArrayList<>();
-
-        public MyPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragments.add(fragment);
-            mFragmentTitles.add(title);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragments.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragments.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitles.get(position);
-        }
     }
 
     @Override

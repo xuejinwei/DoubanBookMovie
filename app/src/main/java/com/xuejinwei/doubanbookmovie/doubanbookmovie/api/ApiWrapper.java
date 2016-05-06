@@ -7,13 +7,17 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.BookResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Celebrity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.CollectionUpdate;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.CollectionsResult;
-import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.HtmlResult;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Comments;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Me;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Movie;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.OAuthResult;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Reviews;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.SubjectCollectionResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Success;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.HtmlParser;
+
+import java.util.List;
 
 import rx.Observable;
 
@@ -95,8 +99,32 @@ public class ApiWrapper {
         return mApi.getCelebrityDetail(celebrity_id).flatMap(FlatHandler::flatResult);
     }
 
-    public Observable<HtmlResult> getComment() {
-        return mApi.getComment();
+    public Observable<List<Comments>> getMovieComment(String id, int start, int limit, String sortType) {
+        return mApi.getMovieComment(id, start, limit, sortType).map(htmlResult -> {
+            List<Comments> commentsList = HtmlParser.getMovieCommentList(htmlResult.htmlBody);
+            return commentsList;
+        });
+    }
+
+    public Observable<List<Reviews>> getMovieReviews(String id, int start, int limit, String sortType) {
+        return mApi.getMovieReviews(id, start, limit, sortType).map(htmlResult -> {
+            List<Reviews> data = HtmlParser.getBookReviewList(htmlResult.htmlBody);
+            return data;
+        });
+    }
+
+    public Observable<List<Comments>> getBookComment(String id, int start, int limit, String sortType) {
+        return mApi.getBookComment(id, start, limit, sortType).map(htmlResult -> {
+            List<Comments> commentsList = HtmlParser.getBookCommentList(htmlResult.htmlBody);
+            return commentsList;
+        });
+    }
+
+    public Observable<List<Reviews>> getBookReviews(String id, int start, int limit, String sortType) {
+        return mApi.getBookReviews(id, start, limit, sortType).map(htmlResult -> {
+            List<Reviews> data = HtmlParser.getBookReviewList(htmlResult.htmlBody);
+            return data;
+        });
     }
 
     /**

@@ -61,12 +61,12 @@
         android:id="@+id/nested_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="fill_vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="12dp">
 
             <include layout="@layout/include_progressbar"/>
 
@@ -74,153 +74,177 @@
                 android:id="@+id/ll_root"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-
-                <TextView
-                    android:id="@+id/tv_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:text="电影名称"
-                    android:textColor="@color/text_color_dark_full"
-                    android:textSize="18sp"/>
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <android.support.v7.widget.AppCompatRatingBar
-                        android:id="@+id/ratingBar"
-                        style="?android:attr/ratingBarStyleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        android:isIndicator="true"
-                        android:maxHeight="14dp"
-                        android:maxWidth="14dp"
-                        android:minHeight="14dp"
-                        android:numStars="5"
-                        android:stepSize="0.1"/>
+                    android:layout_marginTop="12dp"
+                    android:background="@color/md_white_100"
+                    android:orientation="vertical"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="8dp">
 
                     <TextView
-                        android:id="@+id/tv_rating"
+                        android:id="@+id/tv_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="7.9"
-                        android:textColor="@color/google_red"
-                        android:textSize="16sp"/>
-
-                    <TextView
-                        android:id="@+id/tv_rating_sum"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:text="(112人评分)"
-                        android:textSize="13sp"/>
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_genres"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:singleLine="true"
-                    android:text="剧情\t\t科幻"
-                    android:textColor="@color/google_blue"
-                    android:textSize="13sp"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="导演："
-                        android:textSize="13sp"
-                        />
-
-                    <TextView
-                        android:id="@+id/tv_directors"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
                         android:singleLine="true"
-                        android:text="冯小刚"
-                        android:textColor="@color/google_blue"
-                        android:textSize="13sp"
-                        />
-                </LinearLayout>
+                        android:text="电影名称"
+                        android:textColor="@color/text_color_dark_full"
+                        android:textSize="18sp"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="主演："
-                        android:textSize="13sp"
-                        />
-
-                    <TextView
-                        android:id="@+id/tv_casts"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:singleLine="true"
-                        android:text="冯小刚"
-                        android:textColor="@color/google_blue"
-                        android:textSize="13sp"
-                        />
-                </LinearLayout>
-
-
-                <com.ms.square.android.expandabletextview.ExpandableTextView
-                    android:id="@+id/expandable_tv_summary"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:maxCollapsedLines="4">
-
-                    <TextView
-                        android:id="@id/expandable_text"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:lineSpacingMultiplier="1.4"
-                        android:paddingTop="8dp"
-                        android:text="简介"
-                        android:textColor="@color/text_color_dark"
-                        android:textSize="14sp"/>
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-                    <ImageButton
-                        android:id="@id/expand_collapse"
+                        <android.support.v7.widget.AppCompatRatingBar
+                            android:id="@+id/ratingBar"
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:isIndicator="true"
+                            android:maxHeight="14dp"
+                            android:maxWidth="14dp"
+                            android:minHeight="14dp"
+                            android:numStars="5"
+                            android:stepSize="0.1"/>
+
+                        <TextView
+                            android:id="@+id/tv_rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="7.9"
+                            android:textColor="@color/google_red"
+                            android:textSize="16sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_rating_sum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:text="(112人评分)"
+                            android:textSize="13sp"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_genres"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right|bottom"
-                        android:background="@android:color/transparent"
-                        android:padding="8dp"/>
-                </com.ms.square.android.expandabletextview.ExpandableTextView>
+                        android:layout_marginTop="4dp"
+                        android:singleLine="true"
+                        android:text="剧情\t\t科幻"
+                        android:textColor="@color/google_blue"
+                        android:textSize="13sp"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="导演："
+                            android:textSize="13sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_directors"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:singleLine="true"
+                            android:text="冯小刚"
+                            android:textColor="@color/google_blue"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="主演："
+                            android:textSize="13sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_casts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:singleLine="true"
+                            android:text="冯小刚"
+                            android:textColor="@color/google_blue"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+
+
+                    <com.ms.square.android.expandabletextview.ExpandableTextView
+                        android:id="@+id/expandable_tv_summary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:maxCollapsedLines="4">
+
+                        <TextView
+                            android:id="@id/expandable_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingMultiplier="1.4"
+                            android:paddingTop="8dp"
+                            android:text="简介"
+                            android:textColor="@color/text_color_dark"
+                            android:textSize="14sp"/>
+
+                        <ImageButton
+                            android:id="@id/expand_collapse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|bottom"
+                            android:background="@android:color/transparent"
+                            android:padding="8dp"/>
+                    </com.ms.square.android.expandabletextview.ExpandableTextView>
+
+                </LinearLayout>
+
+
+                <FrameLayout
+                    android:id="@+id/framelayout_movie_comments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <FrameLayout
+                    android:id="@+id/framelayout_movie_reviews"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_casts"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/md_white_100"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp">
 
                 </android.support.v7.widget.RecyclerView>
             </LinearLayout>
         </FrameLayout>
-
-
     </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

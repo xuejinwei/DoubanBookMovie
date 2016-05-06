@@ -27,7 +27,9 @@ public class CelebrityHolder extends CommonHolder<SimpleCelebrity> {
 
     @Override
     public void bindData(SimpleCelebrity simpleCelebrity) {
-        Glide.with(getItemView().getContext()).load(simpleCelebrity.avatars.large).into(iv_avatar);
+        if (simpleCelebrity.avatars != null && simpleCelebrity.avatars.large != null) {
+            Glide.with(getItemView().getContext()).load(simpleCelebrity.avatars.large).into(iv_avatar);
+        }
         tv_title.setText(simpleCelebrity.name);
     }
 }
