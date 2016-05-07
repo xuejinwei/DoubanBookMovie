@@ -20,6 +20,7 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.adapter.ReviewsHolder;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Comments;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Reviews;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.SortType;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.CommentsListActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.fragment.BaseFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.widget.DividerItemDecoration;
 
@@ -129,7 +130,7 @@ public class CommentsFragment extends BaseFragment {
                 break;
             case BOOK_REVIEWS:
                 tv_comments_title.setText("影评");
-                tv_comments_more.setText("更多影评");
+                tv_comments_more.setText("更多书评");
                 mCommentsHolder = new CommonAdapter<>(getActivity(), ReviewsHolder.class);
                 initRecyclerView(rv_comments, mCommentsHolder);
                 runRxTaskOnUi(mApiWrapper.getBookReviews(mId, 0, 3, SortType.new_score), commentses -> {
@@ -149,15 +150,20 @@ public class CommentsFragment extends BaseFragment {
                 break;
         }
 
-        tv_comments_more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (mType) {
-                    case MOVIE_COMMENTS:
-                        break;
-                    case MOVIE_REVIEWS:
-                        break;
-                }
+        tv_comments_more.setOnClickListener(v -> {
+            switch (mType) {
+                case MOVIE_COMMENTS:
+                    CommentsListActivity.start(getActivity(), CommentsListActivity.Type.MOVIE_COMMENTS, "短评", mId);
+                    break;
+                case MOVIE_REVIEWS:
+                    CommentsListActivity.start(getActivity(), CommentsListActivity.Type.MOVIE_REVIEWS, "影评", mId);
+                    break;
+                case BOOK_COMMENTS:
+                    CommentsListActivity.start(getActivity(), CommentsListActivity.Type.BOOK_COMMENTS, "短评", mId);
+                    break;
+                case BOOK_REVIEWS:
+                    CommentsListActivity.start(getActivity(), CommentsListActivity.Type.BOOK_REVIEWS, "书评", mId);
+                    break;
             }
         });
     }

@@ -1,32 +1,30 @@
-package com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.fragment;
+package com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.paginate.Paginate;
 import com.twiceyuan.commonadapter.library.adapter.CommonAdapter;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.api.FlatHandler;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.widget.DividerItemDecoration;
 
 import java.util.List;
 
 import rx.Observable;
 
 /**
- * Created by xuejinwei on 16/4/14.
+ * Created by xuejinwei on 16/5/7.
  * Email:xuejinwei@outlook.com
- * 一般 List 类型 RecyclerView 数据
  */
-public abstract class PageRecyclerViewFragment<Entity> extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+public abstract class PageRecyclerViewActivity<Entity> extends SwipeBackActivity implements SwipeRefreshLayout.OnRefreshListener {
     private View                     mEmptyView; // 无数据View
     private RecyclerView             mRecyclerView; // 操作的 RecyclerView
     private SwipeRefreshLayout       mRefreshLayout; // 控制刷新的控件
@@ -37,8 +35,6 @@ public abstract class PageRecyclerViewFragment<Entity> extends BaseFragment impl
     private boolean mIsLoading   = false;
     private boolean mIsCompleted = false;
     private Paginate mPaginate;
-
-    public String mTitle = "";
 
     /**
      * 提供布局 ID
@@ -81,32 +77,18 @@ public abstract class PageRecyclerViewFragment<Entity> extends BaseFragment impl
     @IdRes
     int provideEmptyViewId();
 
-    /**
-     * Fragment 需要传递的参数取值
-     *
-     * @param args 传递给 fragment 的参数
-     */
-    public abstract void getArguments(Bundle args);
+    public abstract RecyclerView.LayoutManager provideLayoutManager();
 
     /**
-     * 配置事件监听器
+     * activity需要传递的参数取值
      */
-//    public abstract void bindClickListener();
+    public abstract void getExtra(Intent intent);
+
     @Override
-    public final void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getArguments(getArguments());
-    }
-
-    @Nullable
-    @Override
-    public final View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(provideLayoutId(), container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        setContentView(provideLayoutId());
+        getExtra(getIntent());
 
         mPaginate = Paginate.with(getRecyclerView(), new Paginate.Callbacks() {
             @Override
@@ -127,7 +109,6 @@ public abstract class PageRecyclerViewFragment<Entity> extends BaseFragment impl
         }).setLoadingTriggerThreshold(2).build();
 
         getRefreshLayout().setOnRefreshListener(this);
-
     }
 
     @Override
@@ -151,11 +132,10 @@ public abstract class PageRecyclerViewFragment<Entity> extends BaseFragment impl
             }
             mAdapter.addAll(entities);
             mAdapter.notifyDataSetChanged();
-            getActivity().setTitle(mTitle);
             mIsLoading = false;
             if (entities.size() == 0) {
                 mIsCompleted = true;
-                Snackbar.make(getView(), "到底了……", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(this.getWindow().getDecorView().findViewById(provideRecyclerViewId()), "到底了……", Snackbar.LENGTH_LONG).show();
                 mPaginate.setHasMoreDataToLoad(false);
             } else {
                 mStart = mStart + getCurrentSize();
@@ -165,7 +145,7 @@ public abstract class PageRecyclerViewFragment<Entity> extends BaseFragment impl
             getRefreshLayout().setRefreshing(false);
         }, throwable -> {
 
-            FlatHandler.handleError(getActivity(), throwable);
+            FlatHandler.handleError(this, throwable);
             getRefreshLayout().setRefreshing(false);
         });
 
@@ -195,7 +175,7 @@ public abstract class PageRecyclerViewFragment<Entity> extends BaseFragment impl
      */
     public <T extends View> T bind(int id) {
         //noinspection unchecked,ConstantConditions
-        return (T) getView().findViewById(id);
+        return (T) this.getWindow().getDecorView().findViewById(id);
     }
 
     /**
@@ -208,12 +188,12 @@ public abstract class PageRecyclerViewFragment<Entity> extends BaseFragment impl
     public RecyclerView getRecyclerView() {
         if (mRecyclerView == null) {
             mRecyclerView = bind(provideRecyclerViewId());
-            mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+            mRecyclerView.setLayoutManager(provideLayoutManager());
             mRecyclerView.setAdapter(getAdapter());
             // 分割线
-//            mRecyclerView.addItemDecoration(
-//                    new DividerItemDecoration(
-//                            ContextCompat.getDrawable(getActivity(), R.drawable.divider)));
+            mRecyclerView.addItemDecoration(
+                    new DividerItemDecoration(
+                            ContextCompat.getDrawable(this, R.drawable.divider)));
         }
         return mRecyclerView;
     }

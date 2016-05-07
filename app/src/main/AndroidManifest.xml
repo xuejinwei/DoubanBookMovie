@@ -33,6 +33,7 @@
         <activity android:name=".ui.activity.SubjectCollectionActivity"/>
         <activity android:name=".ui.activity.SearchActivity"/>
         <activity android:name=".ui.activity.QrCodeActivity"/>
+        <activity android:name=".ui.activity.CommentsListActivity"/>
         <activity android:name=".ui.activity.WebViewActivity"
                   android:hardwareAccelerated="true"/>
         <activity
