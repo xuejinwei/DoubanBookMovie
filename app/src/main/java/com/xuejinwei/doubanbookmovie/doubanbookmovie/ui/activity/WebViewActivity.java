@@ -31,7 +31,7 @@ public class WebViewActivity extends SwipeBackActivity {
 
 
     /**
-     * @param title toolbar title
+     * @param title toolbar name
      * @param url   webview 要访问的URL
      */
     public static void start(Context context, String title, String url) {

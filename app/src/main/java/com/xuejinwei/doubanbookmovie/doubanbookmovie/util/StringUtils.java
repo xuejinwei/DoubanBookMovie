@@ -3519,7 +3519,7 @@ public class StringUtils {
     }
 
     /**
-     * <p>Capitalizes a String changing the first letter to title case as
+     * <p>Capitalizes a String changing the first letter to name case as
      * per {@link Character#toTitleCase(char)}. No other letters are changed.</p>
      * <p/>
      * <p>For a word based algorithm, see {@link WordUtils#capitalize(String)}.
@@ -3550,7 +3550,7 @@ public class StringUtils {
     }
 
     /**
-     * <p>Capitalizes a String changing the first letter to title case as
+     * <p>Capitalizes a String changing the first letter to name case as
      * per {@link Character#toTitleCase(char)}. No other letters are changed.</p>
      *
      * @param str the String to capitalize, may be null
@@ -3563,7 +3563,7 @@ public class StringUtils {
     }
 
     /**
-     * <p>Uncapitalizes a String changing the first letter to title case as
+     * <p>Uncapitalizes a String changing the first letter to name case as
      * per {@link Character#toLowerCase(char)}. No other letters are changed.</p>
      * <p/>
      * <p>For a word based algorithm, see {@link WordUtils#uncapitalize(String)}.
@@ -3594,7 +3594,7 @@ public class StringUtils {
     }
 
     /**
-     * <p>Uncapitalizes a String changing the first letter to title case as
+     * <p>Uncapitalizes a String changing the first letter to name case as
      * per {@link Character#toLowerCase(char)}. No other letters are changed.</p>
      *
      * @param str the String to uncapitalize, may be null
@@ -3607,7 +3607,7 @@ public class StringUtils {
     }
 
     /**
-     * <p>Swaps the case of a String changing upper and title case to
+     * <p>Swaps the case of a String changing upper and name case to
      * lower case, and lower case to upper case.</p>
      * <p/>
      * <ul>

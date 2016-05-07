@@ -204,137 +204,158 @@
 
                 </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:background="@color/md_white_100"
-                    android:paddingBottom="12dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:paddingTop="12dp"
-                    android:text="图书简介："
-                    android:textColor="@color/text_color_grey_full"/>
-
-                <include layout="@layout/include_line"/>
-
-                <com.ms.square.android.expandabletextview.ExpandableTextView
-                    android:id="@+id/expandable_tv_summary"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/md_white_100"
-                    android:paddingBottom="12dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:paddingTop="12dp"
-                    app:maxCollapsedLines="4">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
-                        android:id="@id/expandable_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:lineSpacingMultiplier="1.4"
-                        android:paddingTop="8dp"
-                        android:text="简介"
-                        android:textColor="@color/text_color_dark"
-                        android:textSize="14sp"/>
+                        android:layout_marginTop="12dp"
+                        android:background="@color/md_white_100"
+                        android:paddingBottom="12dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="12dp"
+                        android:text="图书简介："
+                        android:textColor="@color/text_color_grey_full"/>
 
-                    <ImageButton
-                        android:id="@id/expand_collapse"
-                        android:layout_width="wrap_content"
+                    <include layout="@layout/include_line"/>
+
+                    <com.ms.square.android.expandabletextview.ExpandableTextView
+                        android:id="@+id/expandable_tv_summary"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right|bottom"
-                        android:background="@android:color/transparent"
-                        android:padding="8dp"/>
-                </com.ms.square.android.expandabletextview.ExpandableTextView>
+                        android:background="@color/md_white_100"
+                        android:paddingBottom="12dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="12dp"
+                        app:maxCollapsedLines="4">
 
-                <TextView
+                        <TextView
+                            android:id="@id/expandable_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingMultiplier="1.4"
+                            android:paddingTop="8dp"
+                            android:text="简介"
+                            android:textColor="@color/text_color_dark"
+                            android:textSize="14sp"/>
+
+                        <ImageButton
+                            android:id="@id/expand_collapse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|bottom"
+                            android:background="@android:color/transparent"
+                            android:padding="8dp"/>
+                    </com.ms.square.android.expandabletextview.ExpandableTextView>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:background="@color/md_white_100"
-                    android:paddingBottom="12dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:paddingTop="12dp"
-                    android:text="作者简介："
-                    android:textColor="@color/text_color_grey_full"/>
-
-                <include layout="@layout/include_line"/>
-
-                <com.ms.square.android.expandabletextview.ExpandableTextView
-                    android:id="@+id/expandable_tv_summary_author"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/md_white_100"
-                    android:paddingBottom="12dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:paddingTop="12dp"
-                    app:maxCollapsedLines="4">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
-                        android:id="@id/expandable_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:lineSpacingMultiplier="1.4"
-                        android:paddingTop="8dp"
-                        android:text="简介"
-                        android:textColor="@color/text_color_dark"
-                        android:textSize="14sp"/>
+                        android:layout_marginTop="12dp"
+                        android:background="@color/md_white_100"
+                        android:paddingBottom="12dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="12dp"
+                        android:text="作者简介："
+                        android:textColor="@color/text_color_grey_full"/>
 
-                    <ImageButton
-                        android:id="@id/expand_collapse"
-                        android:layout_width="wrap_content"
+                    <include layout="@layout/include_line"/>
+
+                    <com.ms.square.android.expandabletextview.ExpandableTextView
+                        android:id="@+id/expandable_tv_summary_author"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right|bottom"
-                        android:background="@android:color/transparent"
-                        android:padding="8dp"/>
-                </com.ms.square.android.expandabletextview.ExpandableTextView>
+                        android:background="@color/md_white_100"
+                        android:paddingBottom="12dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="12dp"
+                        app:maxCollapsedLines="4">
 
-                <TextView
+                        <TextView
+                            android:id="@id/expandable_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingMultiplier="1.4"
+                            android:paddingTop="8dp"
+                            android:text="简介"
+                            android:textColor="@color/text_color_dark"
+                            android:textSize="14sp"/>
+
+                        <ImageButton
+                            android:id="@id/expand_collapse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|bottom"
+                            android:background="@android:color/transparent"
+                            android:padding="8dp"/>
+                    </com.ms.square.android.expandabletextview.ExpandableTextView>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:background="@color/md_white_100"
-                    android:paddingBottom="12dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:paddingTop="12dp"
-                    android:text="目录："
-                    android:textColor="@color/text_color_grey_full"/>
-
-                <include layout="@layout/include_line"/>
-
-                <com.ms.square.android.expandabletextview.ExpandableTextView
-                    android:id="@+id/expandable_tv_catalog"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/md_white_100"
-                    android:paddingBottom="12dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:paddingTop="12dp"
-                    app:maxCollapsedLines="4">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
-                        android:id="@id/expandable_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:lineSpacingMultiplier="1.4"
-                        android:paddingTop="8dp"
-                        android:text="简介"
-                        android:textColor="@color/text_color_dark"
-                        android:textSize="14sp"/>
+                        android:layout_marginTop="12dp"
+                        android:background="@color/md_white_100"
+                        android:paddingBottom="12dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="12dp"
+                        android:text="目录："
+                        android:textColor="@color/text_color_grey_full"/>
 
-                    <ImageButton
-                        android:id="@id/expand_collapse"
-                        android:layout_width="wrap_content"
+                    <include layout="@layout/include_line"/>
+
+                    <com.ms.square.android.expandabletextview.ExpandableTextView
+                        android:id="@+id/expandable_tv_catalog"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right|bottom"
-                        android:background="@android:color/transparent"
-                        android:padding="8dp"/>
-                </com.ms.square.android.expandabletextview.ExpandableTextView>
+                        android:background="@color/md_white_100"
+                        android:paddingBottom="12dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="12dp"
+                        app:maxCollapsedLines="4">
+
+                        <TextView
+                            android:id="@id/expandable_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingMultiplier="1.4"
+                            android:paddingTop="8dp"
+                            android:text="简介"
+                            android:textColor="@color/text_color_dark"
+                            android:textSize="14sp"/>
+
+                        <ImageButton
+                            android:id="@id/expand_collapse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|bottom"
+                            android:background="@android:color/transparent"
+                            android:padding="8dp"/>
+                    </com.ms.square.android.expandabletextview.ExpandableTextView>
+                </LinearLayout>
 
                 <FrameLayout
                     android:id="@+id/framelayout_book_comments"

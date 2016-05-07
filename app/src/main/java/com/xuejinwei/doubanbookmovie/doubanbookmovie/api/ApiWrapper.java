@@ -52,39 +52,39 @@ public class ApiWrapper {
     /**
      * 查询正在热映movie
      *
-     * @param star  int 开始数
+     * @param start  int 开始数
      * @param count 查询数量，传入0 为默认数量
      */
-    public Observable<MovieResult> getMovieInTheaters(int star, int count) {
-        return mApi.getMovieInTheaters(star, count).flatMap(FlatHandler::flatResult);
+    public Observable<MovieResult> getMovieInTheaters(int start, int count) {
+        return mApi.getMovieInTheaters(start, count).flatMap(FlatHandler::flatResult);
     }
 
     /**
      * 查询即将上映映movie
      *
-     * @param star  int 开始数
+     * @param start  int 开始数
      * @param count 查询数量，传入0 为默认数量
      */
-    public Observable<MovieResult> getMovieComingSoon(int star, int count) {
-        return mApi.getMovieComingSoon(star, count).flatMap(FlatHandler::flatResult);
+    public Observable<MovieResult> getMovieComingSoon(int start, int count) {
+        return mApi.getMovieComingSoon(start, count).flatMap(FlatHandler::flatResult);
     }
 
     /**
      * 查询Top250
      *
-     * @param star  int 开始数
+     * @param start  int 开始数
      * @param count 查询数量，传入0 为默认数量
      */
-    public Observable<MovieResult> getMovieTop250(int star, int count) {
-        return mApi.getMovieTop250(star, count).flatMap(FlatHandler::flatResult);
+    public Observable<MovieResult> getMovieTop250(int start, int count) {
+        return mApi.getMovieTop250(start, count).flatMap(FlatHandler::flatResult);
     }
 
-    public Observable<MovieResult> searchMovie(int star, int count, String q) {
-        return mApi.searchMovie(star, count, q).flatMap(FlatHandler::flatResult);
+    public Observable<MovieResult> searchMovie(int start, int count, String q) {
+        return mApi.searchMovie(start, count, q).flatMap(FlatHandler::flatResult);
     }
 
-    public Observable<BookResult> searchBook(int star, int count, String q) {
-        return mApi.searchBook(star, count, q).flatMap(FlatHandler::flatResult);
+    public Observable<BookResult> searchBook(int start, int count, String q) {
+        return mApi.searchBook(start, count, q).flatMap(FlatHandler::flatResult);
     }
 
     public Observable<Book> searchBookByIsbn(String isbn) {
@@ -103,32 +103,20 @@ public class ApiWrapper {
         return mApi.getCelebrityDetail(celebrity_id).flatMap(FlatHandler::flatResult);
     }
 
-    public Observable<List<Comments>> getMovieComment(String id, int start, int limit, String sortType) {
-        return mApi.getMovieComment(id, start, limit, sortType).map(htmlResult -> {
-            List<Comments> commentsList = HtmlParser.getMovieCommentList(htmlResult.htmlBody);
-            return commentsList;
-        });
+    public Observable<List<Comments>> getMovieComment(String id, int start, int count, String sortType) {
+        return mApi.getMovieComment(id, start, count, sortType).map(htmlResult -> HtmlParser.getCommentList(htmlResult.htmlBody));
     }
 
-    public Observable<List<Reviews>> getMovieReviews(String id, int start, int limit, String sortType) {
-        return mApi.getMovieReviews(id, start, limit, sortType).map(htmlResult -> {
-            List<Reviews> data = HtmlParser.getBookReviewList(htmlResult.htmlBody);
-            return data;
-        });
+    public Observable<List<Reviews>> getMovieReviews(String id, int start, int count, String sortType) {
+        return mApi.getMovieReviews(id, start, count, sortType).map(htmlResult -> HtmlParser.getReviewList(htmlResult.htmlBody));
     }
 
-    public Observable<List<Comments>> getBookComment(String id, int start, int limit, String sortType) {
-        return mApi.getBookComment(id).map(htmlResult -> {
-            List<Comments> commentsList = HtmlParser.getBookCommentList(htmlResult.htmlBody);
-            return commentsList;
-        });
+    public Observable<List<Comments>> getBookComment(String id, int start, int count, String sortType) {
+        return mApi.getBookComment(id,start,count,sortType).map(htmlResult -> HtmlParser.getCommentList(htmlResult.htmlBody));
     }
 
-    public Observable<List<Reviews>> getBookReviews(String id, int start, int limit, String sortType) {
-        return mApi.getBookReviews(id, start, limit, sortType).map(htmlResult -> {
-            List<Reviews> data = HtmlParser.getBookReviewList(htmlResult.htmlBody);
-            return data;
-        });
+    public Observable<List<Reviews>> getBookReviews(String id, int start, int count, String sortType) {
+        return mApi.getBookReviews(id, start, count, sortType).map(htmlResult -> HtmlParser.getReviewList(htmlResult.htmlBody));
     }
 
     /**

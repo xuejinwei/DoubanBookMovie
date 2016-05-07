@@ -99,17 +99,17 @@ public interface Api {
     @GET("movie/celebrity/{id}")
     Observable<Result<Celebrity>> getCelebrityDetail(@Path("id") String id);
 
-    @GET("https://movie.douban.com/subject/{id}/comments")
-    Observable<HtmlResult> getMovieComment(@Path("id") String id, @Query("start") int start, @Query("limit") int limit, @Query("sort") String sortType);
+    @GET("https://m.douban.com/movie/subject/{id}/comments")
+    Observable<HtmlResult> getMovieComment(@Path("id") String id, @Query("start") int start, @Query("count") int count, @Query("sort") String sortType);
 
-    @GET("https://movie.douban.com/subject/{id}/reviews")
-    Observable<HtmlResult> getMovieReviews(@Path("id") String id, @Query("start") int start, @Query("limit") int limit, @Query("sort") String sortType);
+    @GET("https://m.douban.com/movie/subject/{id}/reviews")
+    Observable<HtmlResult> getMovieReviews(@Path("id") String id, @Query("start") int start, @Query("count") int count, @Query("sort") String sortType);
 
-    @GET("https://book.douban.com/subject/{id}/comments/hot")
-    Observable<HtmlResult> getBookComment(@Path("id") String id);
+    @GET("https://m.douban.com/book/subject/{id}/comments")
+    Observable<HtmlResult> getBookComment(@Path("id") String id, @Query("start") int start, @Query("count") int count, @Query("sort") String sortType);
 
-    @GET("https://book.douban.com/subject/{id}/reviews")
-    Observable<HtmlResult> getBookReviews(@Path("id") String id, @Query("start") int start, @Query("limit") int limit, @Query("sort") String sortType);
+    @GET("https://m.douban.com/book/subject/{id}/reviews")
+    Observable<HtmlResult> getBookReviews(@Path("id") String id, @Query("start") int start, @Query("count") int count, @Query("sort") String sortType);
 
     @GET("book/25843319/collection")
     Observable<Result<String>> getCollectionDetail(@Header("Authorization") String Authorization);

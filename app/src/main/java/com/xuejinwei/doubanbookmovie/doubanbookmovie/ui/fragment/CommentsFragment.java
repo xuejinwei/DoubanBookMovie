@@ -19,6 +19,7 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.adapter.CommentsHolder;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.adapter.ReviewsHolder;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Comments;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Reviews;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.SortType;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.fragment.BaseFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.widget.DividerItemDecoration;
 
@@ -89,7 +90,7 @@ public class CommentsFragment extends BaseFragment {
                 tv_comments_more.setText("更多短评");
                 mCommentsHolder = new CommonAdapter<>(getActivity(), CommentsHolder.class);
                 initRecyclerView(rv_comments, mCommentsHolder);
-                runRxTaskOnUi(mApiWrapper.getMovieComment(mId, 0, 3, "new_score"), commentses -> {
+                runRxTaskOnUi(mApiWrapper.getMovieComment(mId, 0, 3, SortType.new_score), commentses -> {
                     if (commentses.size() != 0) {
                         mCommentsHolder.clear();
                         ((CommonAdapter<Comments, CommentsHolder>) mCommentsHolder).addAll(commentses);
@@ -103,7 +104,7 @@ public class CommentsFragment extends BaseFragment {
                 tv_comments_more.setText("更多短评");
                 mCommentsHolder = new CommonAdapter<>(getActivity(), CommentsHolder.class);
                 initRecyclerView(rv_comments, mCommentsHolder);
-                runRxTaskOnUi(mApiWrapper.getBookComment(mId, 0, 3, "new_score"), commentses -> {
+                runRxTaskOnUi(mApiWrapper.getBookComment(mId, 0, 3, SortType.new_score), commentses -> {
                     if (commentses.size() != 0) {
                         mCommentsHolder.clear();
                         ((CommonAdapter<Comments, CommentsHolder>) mCommentsHolder).addAll(commentses);
@@ -117,7 +118,7 @@ public class CommentsFragment extends BaseFragment {
                 tv_comments_more.setText("更多影评");
                 mCommentsHolder = new CommonAdapter<>(getActivity(), ReviewsHolder.class);
                 initRecyclerView(rv_comments, mCommentsHolder);
-                runRxTaskOnUi(mApiWrapper.getMovieReviews(mId, 0, 3, "new_score"), commentses -> {
+                runRxTaskOnUi(mApiWrapper.getMovieReviews(mId, 0, 3, SortType.new_score), commentses -> {
                     if (commentses.size() != 0) {
                         mCommentsHolder.clear();
                         ((CommonAdapter<Reviews, ReviewsHolder>) mCommentsHolder).addAll(commentses);
@@ -131,10 +132,16 @@ public class CommentsFragment extends BaseFragment {
                 tv_comments_more.setText("更多影评");
                 mCommentsHolder = new CommonAdapter<>(getActivity(), ReviewsHolder.class);
                 initRecyclerView(rv_comments, mCommentsHolder);
-                runRxTaskOnUi(mApiWrapper.getBookReviews(mId, 0, 3, "new_score"), commentses -> {
+                runRxTaskOnUi(mApiWrapper.getBookReviews(mId, 0, 3, SortType.new_score), commentses -> {
                     if (commentses.size() != 0) {
                         mCommentsHolder.clear();
-                        ((CommonAdapter<Reviews, ReviewsHolder>) mCommentsHolder).addAll(commentses);
+                        if (commentses.size() > 3) {
+                            ((CommonAdapter<Reviews, ReviewsHolder>) mCommentsHolder).add(commentses.get(0));
+                            ((CommonAdapter<Reviews, ReviewsHolder>) mCommentsHolder).add(commentses.get(1));
+                            ((CommonAdapter<Reviews, ReviewsHolder>) mCommentsHolder).add(commentses.get(2));
+                        } else {
+                            ((CommonAdapter<Reviews, ReviewsHolder>) mCommentsHolder).addAll(commentses);
+                        }
                         mCommentsHolder.notifyDataSetChanged();
                         onRefreshSuccess();
                     }
@@ -164,15 +171,10 @@ public class CommentsFragment extends BaseFragment {
     private void initRecyclerView(RecyclerView recyclerView, CommonAdapter commonAdapter) {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        switch (mType) {
-            case MOVIE_COMMENTS:
-                break;
-            case MOVIE_REVIEWS:
-                recyclerView.addItemDecoration(
-                        new DividerItemDecoration(
-                                ContextCompat.getDrawable(getActivity(), R.drawable.divider)));
-                break;
-        }
+        recyclerView.addItemDecoration(
+                new DividerItemDecoration(
+                        ContextCompat.getDrawable(getActivity(), R.drawable.divider)));
+
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(commonAdapter);
 

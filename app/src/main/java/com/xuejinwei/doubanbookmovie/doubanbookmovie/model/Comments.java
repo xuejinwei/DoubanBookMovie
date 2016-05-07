@@ -7,12 +7,11 @@ package com.xuejinwei.doubanbookmovie.doubanbookmovie.model;
  */
 public class Comments {
 
-    public String id;
-    public String title;
+    public String name;
     public String img;
     public String comment;
     public String comment_vote;
     public String time;
-    public String rating;
+    public int rating;
 
 }

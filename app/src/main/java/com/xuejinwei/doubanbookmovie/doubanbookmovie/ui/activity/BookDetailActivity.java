@@ -27,6 +27,7 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Book;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity.SwipeBackActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.CommentsFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.CommonUtil;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.StringUtils;
 
 import net.qiujuer.genius.blur.StackBlur;
 
@@ -110,9 +111,21 @@ public class BookDetailActivity extends SwipeBackActivity {
             tv_publisher.setText(book.publisher);
             tv_publish_date.setText(book.pubdate);
             tv_author.setText(book.getAuthor());
-            expandable_tv_summary.setText(book.summary);
-            expandable_tv_summary_author.setText(book.author_intro);
-            expandable_tv_catalog.setText(book.catalog);
+
+            if (StringUtils.isNotEmpty(book.summary)) {
+                expandable_tv_summary.setText(book.summary);
+                ((LinearLayout) expandable_tv_summary.getParent()).setVisibility(View.VISIBLE);
+            }
+
+            if (StringUtils.isNotEmpty(book.author_intro)) {
+                expandable_tv_summary_author.setText(book.author_intro);
+                ((LinearLayout) expandable_tv_summary_author.getParent()).setVisibility(View.VISIBLE);
+            }
+
+            if (StringUtils.isNotEmpty(book.catalog)) {
+                expandable_tv_catalog.setText(book.catalog);
+                ((LinearLayout) expandable_tv_catalog.getParent()).setVisibility(View.VISIBLE);
+            }
 
             ll_root.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);

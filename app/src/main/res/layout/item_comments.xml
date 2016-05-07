@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_white_gray"
     android:orientation="horizontal"
     android:paddingBottom="12dp"
@@ -47,11 +48,28 @@
                 android:stepSize="1"/>
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_comment"
+        <com.ms.square.android.expandabletextview.ExpandableTextView
+            android:id="@+id/expandable_tv_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="短评…………"/>
+            android:layout_marginTop="4dp"
+            app:maxCollapsedLines="2">
+
+            <TextView
+                android:id="@id/expandable_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="简介"/>
+
+            <ImageButton
+                android:id="@id/expand_collapse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:layout_marginRight="4dp"
+                android:background="@android:color/transparent"/>
+        </com.ms.square.android.expandabletextview.ExpandableTextView>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,14 +77,8 @@
             android:gravity="center_vertical"
             android:layout_marginTop="8dp">
 
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/ic_like_18dp"/>
-
             <TextView
                 android:id="@+id/tv_vote"
-                android:layout_marginLeft="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="1001"/>

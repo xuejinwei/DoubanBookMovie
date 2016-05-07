@@ -1,6 +1,5 @@
 package com.xuejinwei.doubanbookmovie.doubanbookmovie.util;
 
-import com.orhanobut.logger.Logger;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Comments;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Reviews;
 
@@ -19,102 +18,26 @@ import java.util.List;
  */
 public class HtmlParser {
 
-    /**
-     * 获取短评评论列表
-     *
-     * @param htmlResult htmlresult返回
-     * @return comments
-     */
-    public static List<Comments> getMovieCommentList(String htmlResult) {
+    public static List<Comments> getCommentList(String htmlResult) {
         List<Comments> data = new ArrayList<>();
-
-
-        Document document = Jsoup.parse(htmlResult);
-        Element list = document.select("div.mod-bd").first();
-        if (list == null)
-            return data;
-        Logger.i(list.toString());
-        Elements comments = list.select("div.comment-item");
-        Logger.i(comments.toString());
-        if (comments == null) {
+        Document doc = Jsoup.parse(htmlResult);
+        Element review_list_parent = doc.select("div.card>section>ol.comments").first();
+        if (review_list_parent == null) {
             return data;
         }
-        for (Element item : comments) {
-            Comments comment = new Comments();
-            Element avatar = item.select("a").first();
-            Element title = item.select("p").first();
-            comment.comment = title.text();
-            Element img = avatar.select("img").first();
-            comment.img = img.attr("src");
-            Element comment_info = item.select("span.comment-info").first();
-            Logger.i(comment_info.toString());
-            Elements span = comment_info.select("span");
-            String rating = "";
-            if (span.size() != 3) {
-                rating = "0";
-            } else {
-                Logger.i(span.size() + "");
-                rating = span.get(1).attr("class");
-                rating = rating.substring(7, 9);
-                Logger.i(span.get(0).toString());
-                Logger.i( span.get(1).toString() + "-" + rating);
-                Logger.i(span.get(2).toString());
-            }
-            Element span_votes = item.select("span.votes").first();
-            String vote = "";
-            if (span_votes != null) {
-                vote = item.select("span.votes").first().text();
-            }
-            String time = span.get(span.size() - 1).text();
-            comment.time = time;
-            comment.rating = rating;
-            comment.title = avatar.attr("title");
-            comment.id = item.attr("mData-cid");
-            comment.comment_vote = vote;
-            data.add(comment);
-        }
-        return data;
-    }
+        Elements comments = review_list_parent.getElementsByClass("comment-item");
 
-    public static List<Comments> getBookCommentList(String htmlResult) {
-        List<Comments> data = new ArrayList<>();
+        for (Element comment : comments) {
+            Comments bean = new Comments();
 
-        Document document = Jsoup.parse(htmlResult);
-        Element list = document.select("div.article").first();
-        if (list == null)
-            return data;
-        Elements comments = list.select("li.comment-item");
-        if (comments == null) {
-            return data;
-        }
-        for (Element item : comments) {
-            Comments comment = new Comments();
-            Element avatar = item.select("a").first();
-            Element title = item.select("p").first();
-            comment.comment = title.text();
-            Element img = avatar.select("img").first();
-            comment.img = img.attr("src");
-            Element comment_info = item.select("span.comment-info").first();
-            Elements span = comment_info.select("span");
-            String rating = "";
-            if (span.size() != 3) {
-                rating = "0";
-            } else {
-                rating = span.get(1).attr("class");
-                rating = rating.substring(18, 20);
-            }
-            Element span_votes = item.select("span.vote-count").first();
-            String vote = "";
-            if (span_votes != null) {
-                vote = item.select("span.vote-count").first().text();
-            }
-            String time = span.get(span.size() - 1).text();
-            comment.time = time;
-            comment.rating = rating;
-            comment.title = avatar.attr("title");
-            comment.id = item.attr("mData-cid");
-            comment.comment_vote = vote;
-            data.add(comment);
+            bean.name = comment.select("div.comment-author>img.avatar").first().attr("alt");
+            bean.img = comment.select("div.comment-author>img.avatar").first().attr("src");
+            bean.comment = comment.select("p.comment-content").first().ownText();
+            bean.comment_vote = comment.select("div.comment-info>span.vote").first().ownText();
+            bean.time = comment.select("div.comment-info>span.time").first().ownText();
+            int rating = (int) Double.parseDouble(comment.select("div.comment-author>span.rating-stars").first().attr("data-rating"));
+            bean.rating = rating / 20;
+            data.add(bean);
         }
         return data;
     }
@@ -125,38 +48,25 @@ public class HtmlParser {
      * @param src source
      * @return mData
      */
-    public static List<Reviews> getBookReviewList(String src) {
+    public static List<Reviews> getReviewList(String src) {
         List<Reviews> data = new ArrayList<>();
         Document doc = Jsoup.parse(src);
-        Element content = doc.select("div.article").first();
-        if (content == null) {
+        Element review_list_parent = doc.select("div.card>section.review-list>div.bd>ul.list").first();
+        if (review_list_parent == null) {
             return data;
         }
-        Elements reviews = content.select("div.review");
+        Elements reviews = review_list_parent.getElementsByTag("li");
+        ;
         for (Element review : reviews) {
             Reviews bean = new Reviews();
-            Element review_hd_avatar = review.select("a.review-hd-avatar").first();
-            bean.name = review_hd_avatar.attr("title");
-            bean.img = review_hd_avatar.child(0).attr("src");
-            Element h3 = review.select("h3").first();
-            Element a = h3.child(h3.children().size() - 1);
-            bean.title = a.text();
+            Element a = review.child(0);
+
+            bean.img = a.select("div>img").first().attr("src");
+            bean.title = a.select("h3").first().ownText();
+            bean.rating = Integer.parseInt(a.select("div>span").first().attr("data-rating")) / 20;
+            bean.useful = a.select("div.info").first().ownText();
             bean.link = a.attr("href");
-            Element review_hd_info = review.select("div.review-hd-info").first();
-            //review_hd_info.ownText()
-            bean.time = review_hd_info.ownText();
-            Element span = review_hd_info.select("span").first();
-            String rating = span.attr("class").substring(7);
-            if (rating.equals("None0")) {
-                rating = "0";
-            }
-            bean.rating = rating;
-            Element review_short = review.select("div.review-short").first();
-            Element review_short_span = review_short.select("span").first();
-            bean.review = review_short_span.text();
-            Element review_short_ft = review.select("div.review-short-ft").first();
-            Element review_short_ft_span = review_short_ft.select("span").first();
-            bean.useful = review_short_ft_span.text();
+
             data.add(bean);
         }
         return data;
