@@ -2,6 +2,7 @@ package com.xuejinwei.doubanbookmovie.doubanbookmovie.util;
 
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Comments;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Reviews;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.ReviewsDetail;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -69,6 +70,27 @@ public class HtmlParser {
 
             data.add(bean);
         }
+        return data;
+    }
+
+    public static ReviewsDetail getReviewDetail(String src) {
+        ReviewsDetail data = new ReviewsDetail();
+        Document doc = Jsoup.parse(src);
+        Element card = doc.select("div.card").first();
+        Element user = card.select("div.user-title").first();
+        Element paperfull = card.select("section.paper>div.full").first();
+
+        if (paperfull!=null){
+            data.reviews_text = paperfull.ownText();
+        }else {
+            data.reviews_text = card.select("section.paper").first().ownText();
+        }
+        data.title = card.select("h1.title").first().ownText();
+
+        data.user_img = user.select("img").first().attr("src");
+        data.user_name = user.select("span").first().ownText();
+        data.rating = Integer.parseInt(user.select("span.rating-stars").first().attr("data-rating")) / 20;
+
         return data;
     }
 }

@@ -32,8 +32,7 @@ import butterknife.ButterKnife;
  * Email:xuejinwei@outlook.com
  */
 public class CommentsFragment extends BaseFragment {
-    public static final String ARG_TYPE = "type";
-    public static final String ID       = "id";
+
     @Bind(R.id.rv_comments)       RecyclerView rv_comments;
     @Bind(R.id.tv_comments_more)  TextView     tv_comments_more;
     @Bind(R.id.tv_comments_title) TextView     tv_comments_title;
@@ -129,7 +128,7 @@ public class CommentsFragment extends BaseFragment {
                 });
                 break;
             case BOOK_REVIEWS:
-                tv_comments_title.setText("影评");
+                tv_comments_title.setText("书评");
                 tv_comments_more.setText("更多书评");
                 mCommentsHolder = new CommonAdapter<>(getActivity(), ReviewsHolder.class);
                 initRecyclerView(rv_comments, mCommentsHolder);

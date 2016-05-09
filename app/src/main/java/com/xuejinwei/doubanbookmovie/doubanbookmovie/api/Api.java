@@ -111,6 +111,9 @@ public interface Api {
     @GET("https://m.douban.com/book/subject/{id}/reviews")
     Observable<HtmlResult> getBookReviews(@Path("id") String id, @Query("start") int start, @Query("count") int count, @Query("sort") String sortType);
 
+    @GET("https://m.douban.com/{link}")
+    Observable<HtmlResult> getReviewsDetail(@Path("link") String link);
+
     @GET("book/25843319/collection")
     Observable<Result<String>> getCollectionDetail(@Header("Authorization") String Authorization);
 

@@ -14,6 +14,7 @@ import com.twiceyuan.commonadapter.library.ViewId;
 import com.twiceyuan.commonadapter.library.holder.CommonHolder;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Reviews;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.ReviewsDetailActivity;
 
 /**
  * Created by xuejinwei on 16/5/5.
@@ -46,5 +47,7 @@ public class ReviewsHolder extends CommonHolder<Reviews> {
         int rating = comments.rating;
         rb_comment.setRating(rating);
         tv_vote.setText(comments.useful);
+
+        getItemView().setOnClickListener(v -> ReviewsDetailActivity.start(getItemView().getContext(),comments.link));
     }
 }

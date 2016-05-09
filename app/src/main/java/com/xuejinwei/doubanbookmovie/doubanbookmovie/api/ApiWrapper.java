@@ -13,6 +13,7 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Movie;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.OAuthResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Reviews;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.ReviewsDetail;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.SubjectCollectionResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Success;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.HtmlParser;
@@ -117,6 +118,10 @@ public class ApiWrapper {
 
     public Observable<List<Reviews>> getBookReviews(String id, int start, int count, String sortType) {
         return mApi.getBookReviews(id, start, count, sortType).map(htmlResult -> HtmlParser.getReviewList(htmlResult.htmlBody));
+    }
+
+    public Observable<ReviewsDetail> getReviewsDetail(String link) {
+        return mApi.getReviewsDetail(link).map(htmlResult -> HtmlParser.getReviewDetail(htmlResult.htmlBody));
     }
 
     /**
