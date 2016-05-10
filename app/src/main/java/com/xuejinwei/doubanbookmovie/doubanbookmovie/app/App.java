@@ -2,6 +2,7 @@ package com.xuejinwei.doubanbookmovie.doubanbookmovie.app;
 
 import android.app.Application;
 
+import com.avos.avoscloud.AVOSCloud;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.orhanobut.logger.Logger;
 
@@ -18,6 +19,9 @@ public class App extends Application {
         instance = this;
         Fresco.initialize(this);
         Logger.init("Api_json");
+
+        // 初始化参数依次为 this, AppId, AppKey
+        AVOSCloud.initialize(this,"45zfVSyyntekSLHioGDBccz5-gzGzoHsz","OcBW6svtdveOO2Lr142iVixB");
     }
     /**
      * 获得 Application 实例
