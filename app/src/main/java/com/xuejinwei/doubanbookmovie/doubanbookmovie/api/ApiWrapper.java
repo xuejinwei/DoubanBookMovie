@@ -32,7 +32,13 @@ public class ApiWrapper {
      * @param authorization_code auth认证上一步获取到的authorization_code
      */
     public Observable<OAuthResult> getOauthResult(String authorization_code) {
-        return mApi.getOauthResult(Setting.APIKEY, Setting.SERCET, Setting.REDIRECT_URL, "authorization_code", authorization_code).flatMap(FlatHandler::flatResult);
+        return mApi.getOauthResult(
+                Setting.APIKEY,
+                Setting.SERCET,
+                Setting.REDIRECT_URL,
+                "authorization_code",
+                authorization_code)
+                .flatMap(FlatHandler::flatResult);
     }
 
     /**

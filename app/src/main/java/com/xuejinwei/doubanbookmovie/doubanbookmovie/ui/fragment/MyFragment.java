@@ -21,6 +21,7 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.App;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.Setting;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.AuthActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.BookCollectionListActivity;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.MovieCollectionListActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.fragment.BaseFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.CommonUtil;
 
@@ -73,6 +74,7 @@ public class MyFragment extends BaseFragment {
             tv_title.setText(Setting.getSetting(Setting.Key.douban_user_name, ""));
             tv_description.setText(Setting.getSetting(Setting.Key.desc, ""));
             ll_book_collection.setOnClickListener(v -> startActivity(new Intent(getActivity(), BookCollectionListActivity.class)));
+            ll_movie_collection.setOnClickListener(v -> startActivity(new Intent(getActivity(), MovieCollectionListActivity.class)));
         } else {
             ll_root_my.setVisibility(View.GONE);
             btn_login.setVisibility(View.VISIBLE);

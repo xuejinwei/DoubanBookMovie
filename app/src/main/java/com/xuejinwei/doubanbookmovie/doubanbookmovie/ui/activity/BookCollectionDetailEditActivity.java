@@ -72,7 +72,7 @@ public class BookCollectionDetailEditActivity extends SwipeBackActivity {
         });
 
         if (mType == Type.EDIT) {
-            setTitle("编辑搜藏");
+            setTitle("编辑图书搜藏");
             runRxTaskOnUi(mApiWrapper.getBookCollectionsDetail(book_id), bookCollections -> {
                 collectionUpdate.comment = bookCollections.comment;
                 collectionUpdate.status = bookCollections.status;
@@ -93,7 +93,7 @@ public class BookCollectionDetailEditActivity extends SwipeBackActivity {
                 }
             });
         } else if (mType == Type.ADD) {
-            setTitle("添加搜藏");
+            setTitle("添加图书搜藏");
             ratingBar.setRating(3);
         } else {
             CommonUtil.toast("类型错误");
@@ -104,7 +104,7 @@ public class BookCollectionDetailEditActivity extends SwipeBackActivity {
                 CommonUtil.toast("请设置一个评分");
                 return;
             }
-            if (StringUtils.isEmpty(count_desc.getCountText().getText().toString())) {
+            if (StringUtils.isEmpty(count_desc.getEditText().getText().toString())) {
                 CommonUtil.toast("请输入搜藏寄语");
                 return;
             }

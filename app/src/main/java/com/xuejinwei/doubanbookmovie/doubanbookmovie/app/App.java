@@ -3,8 +3,10 @@ package com.xuejinwei.doubanbookmovie.doubanbookmovie.app;
 import android.app.Application;
 
 import com.avos.avoscloud.AVOSCloud;
+import com.avos.avoscloud.AVObject;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.orhanobut.logger.Logger;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieCollections;
 
 /**
  * 自己的application
@@ -21,6 +23,7 @@ public class App extends Application {
         Logger.init("Api_json");
 
         // 初始化参数依次为 this, AppId, AppKey
+        AVObject.registerSubclass(MovieCollections.class);
         AVOSCloud.initialize(this,"45zfVSyyntekSLHioGDBccz5-gzGzoHsz","OcBW6svtdveOO2Lr142iVixB");
     }
     /**

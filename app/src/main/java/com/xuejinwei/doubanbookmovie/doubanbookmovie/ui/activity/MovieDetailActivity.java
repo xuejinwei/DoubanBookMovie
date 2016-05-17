@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -56,6 +57,7 @@ public class MovieDetailActivity extends SwipeBackActivity {
     @Bind(R.id.ll_root)               LinearLayout            ll_root;
     @Bind(R.id.progressBar)           ProgressBar             progressBar;
     @Bind(R.id.rv_casts)              RecyclerView            rv_casts;
+    @Bind(R.id.fab_collection)        FloatingActionButton    fab_collection;
 
     private String                                          mMovieId;
     private CommonAdapter<SimpleCelebrity, CelebrityHolder> mSimpleCelebrityCommonAdapter;
@@ -122,6 +124,7 @@ public class MovieDetailActivity extends SwipeBackActivity {
             mSimpleCelebrityCommonAdapter.notifyDataSetChanged();
             ll_root.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);
+            fab_collection.setOnClickListener(v -> MovieCollectionDetailEditActivity.start(MovieDetailActivity.this, MovieCollectionDetailEditActivity.Type.ADD, movie.id, movie.title, movie.images.large));
         });
 
     }

@@ -39,6 +39,9 @@
         <activity android:name=".ui.activity.QrCodeActivity"/>
         <activity android:name=".ui.activity.CommentsListActivity"/>
         <activity android:name=".ui.activity.ReviewsDetailActivity"/>
+        <activity android:name=".ui.activity.MovieCollectionDetailEditActivity"/>
+        <activity android:name=".ui.activity.MovieCollectionListActivity"/>
+        <activity android:name=".ui.activity.MovieCollectionDetailActivity"/>
         <activity android:name=".ui.activity.WebViewActivity"
                   android:hardwareAccelerated="true"/>
         <activity

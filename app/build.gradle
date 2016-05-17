@@ -42,6 +42,7 @@ dependencies {
     compile 'com.android.support:palette-v7:23.2.0'
     compile 'com.android.support:cardview-v7:23.2.0'
     compile 'com.android.support:recyclerview-v7:23.2.0'
+    // 依赖注入，方便findviewbyid
     compile 'com.jakewharton:butterknife:7.0.1'
 
     // rxjava rxandroid retrofit 网络 相关

@@ -15,23 +15,28 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.DeleteCallback;
 import com.bumptech.glide.Glide;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
-import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.BookCollections;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieCollections;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity.SwipeBackActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.CommonUtil;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.DateUtil;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.widget.DialogUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by xuejinwei on 16/4/25.
+ * Created by xuejinwei on 16/5/17.
  * Email:xuejinwei@outlook.com
  */
-public class BookCollectionDetailActivity extends SwipeBackActivity {
-    public static final String COLLECTION_ID = "collection_id";
-    String bookid;
+public class MovieCollectionDetailActivity extends SwipeBackActivity {
+    public static final String MOVIE_ID = "movie_id";
+    public static final String MOVIE_COLLECTION = "movie_collection";
+    String mMovieid;
+    MovieCollections mMovieCollections;
     @Bind(R.id.toolbar)     Toolbar            toolbar;
     @Bind(R.id.iv_avatar)   ImageView          iv_avatar;
     @Bind(R.id.tv_title)    TextView           tv_title;
@@ -47,6 +52,7 @@ public class BookCollectionDetailActivity extends SwipeBackActivity {
     @Bind(R.id.cardview)    CardView           cardview;
     @Bind(R.id.rl_card)     RelativeLayout     rl_card;
     @Bind(R.id.iv_status)   ImageView          iv_status;
+    @Bind(R.id.tv_genres)   TextView           tv_genres;
 
     int[] bg_card = {
             R.drawable.widget_big_blue,
@@ -55,19 +61,21 @@ public class BookCollectionDetailActivity extends SwipeBackActivity {
             R.drawable.widget_big_red,
             R.drawable.widget_big_yellow};
 
-    public static void start(Activity activity, String book_id) {
-        Intent starter = new Intent(activity, BookCollectionDetailActivity.class);
-        starter.putExtra(COLLECTION_ID, book_id);
-        activity.startActivity(starter);
+    public static void start(Activity activity, String movie_id, MovieCollections movieCollections) {
+        Intent starter = new Intent(activity, MovieCollectionDetailActivity.class);
+        starter.putExtra(MOVIE_ID, movie_id);
+        starter.putExtra(MOVIE_COLLECTION, movieCollections);
+        activity.startActivityForResult(starter,0);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_collection_detail);
+        setContentView(R.layout.activity_movie_collection_detail);
         ButterKnife.bind(this);
-        setTitle("图书搜藏详情");
-        bookid = getIntent().getStringExtra(COLLECTION_ID);
+        setTitle("电影搜藏详情");
+        mMovieid = getIntent().getStringExtra(MOVIE_ID);
+        mMovieCollections = getIntent().getParcelableExtra(MOVIE_COLLECTION);
         rl_card.setBackgroundResource(bg_card[(int) (System.currentTimeMillis() % 5)]);
         onRefresh();
     }
@@ -76,30 +84,32 @@ public class BookCollectionDetailActivity extends SwipeBackActivity {
         ll_root.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
 
-        runRxTaskOnUi(mApiWrapper.getBookCollectionsDetail(bookid), bookCollections -> {
+        runRxTaskOnUi(mApiWrapper.getMovieById(mMovieid), movie -> {
 
-            Glide.with(BookCollectionDetailActivity.this)
-                    .load(bookCollections.book.images.large)
+            Glide.with(MovieCollectionDetailActivity.this)
+                    .load(movie.images.large)
                     .fitCenter()
                     .into(iv_avatar);
-            tv_title.setText(bookCollections.book.title);
-            if (!bookCollections.book.rating.average.equals("0")) {
-                tv_rating.setText(bookCollections.book.rating.average);
-                ratingBar.setRating(Float.parseFloat(bookCollections.book.rating.average));
+            tv_title.setText(movie.title);
+            if (!movie.rating.average.equals("0")) {
+                tv_rating.setText(movie.rating.average);
+                ratingBar.setRating(Float.parseFloat(movie.rating.average));
                 ll_rating.setVisibility(View.VISIBLE);
             } else {
                 ll_rating.setVisibility(View.GONE);
             }
-            tv_price.setText(bookCollections.book.price);
-            tv_author.setText(bookCollections.book.getAuthor());
+            tv_genres.setText(movie.getGenres());
+            tv_price.setText(movie.getDirectors());
+            tv_author.setText(movie.getCasts());
 
-            tv_commit.setText("        " + bookCollections.comment);
-            iv_status.setImageResource(getStatus(bookCollections));
-            tv_update.setText(bookCollections.updated.substring(0, 16));
             ll_root.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);
-            cardview.setOnClickListener(v -> BookDetailActivity.start(this, bookCollections.book_id));
+            cardview.setOnClickListener(v -> MovieDetailActivity.start(this, movie.id));
         });
+
+        tv_commit.setText("        " + mMovieCollections.getMovieCollectionText());
+        iv_status.setImageResource(getStatus(mMovieCollections));
+        tv_update.setText(DateUtil.translateDate(mMovieCollections.getCreatedAt().getTime()));
     }
 
     @Override
@@ -111,15 +121,26 @@ public class BookCollectionDetailActivity extends SwipeBackActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_book_collection_edit) {
-            BookCollectionDetailEditActivity.start(BookCollectionDetailActivity.this, BookCollectionDetailEditActivity.Type.EDIT, bookid);
+            MovieCollectionDetailEditActivity.start(MovieCollectionDetailActivity.this, MovieCollectionDetailEditActivity.Type.EDIT, mMovieCollections);
             return true;
         }
 
         if (item.getItemId() == R.id.action_book_collection_delete) {
-            DialogUtil.simpleMessage(this, "确定删除？", () -> runRxTaskOnUi(mApiWrapper.deleteBookCollections(bookid), success -> {
-                CommonUtil.toast("删除成功");
-                finish();
-            }));
+            DialogUtil.simpleMessage(this, "确定删除？", new DialogUtil.OnConfirm() {
+                @Override
+                public void onConfirm() {
+                    mMovieCollections.deleteInBackground(new DeleteCallback() {
+                        @Override
+                        public void done(AVException e) {
+                            if (e == null) {
+                                CommonUtil.toast("删除成功");
+                                setResult(RESULT_OK);
+                                finish();
+                            }
+                        }
+                    });
+                }
+            });
 
             return true;
         }
@@ -134,14 +155,14 @@ public class BookCollectionDetailActivity extends SwipeBackActivity {
         }
     }
 
-    int getStatus(BookCollections bookCollections) {
-        if (bookCollections.status.equals("wish")) {
+    int getStatus(MovieCollections movieCollections) {
+        if (movieCollections.getMovieCollectionType()==0) {
             return R.drawable.img_wish;
         }
-        if (bookCollections.status.equals("reading")) {
+        if (movieCollections.getMovieCollectionType()==1) {
             return R.drawable.img_reading;
         }
-        if (bookCollections.status.equals("read")) {
+        if (movieCollections.getMovieCollectionType()==2) {
             return R.drawable.img_readed;
         }
 
