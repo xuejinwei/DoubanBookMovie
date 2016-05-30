@@ -55,11 +55,11 @@ public class MovieCollectionDetailActivity extends SwipeBackActivity {
     @Bind(R.id.tv_genres)   TextView           tv_genres;
 
     int[] bg_card = {
-            R.drawable.widget_big_blue,
-            R.drawable.widget_big_gray,
-            R.drawable.widget_big_green,
-            R.drawable.widget_big_red,
-            R.drawable.widget_big_yellow};
+            R.drawable.bg_blue,
+            R.drawable.bg_gray,
+            R.drawable.bg_green,
+            R.drawable.bg_red,
+            R.drawable.bg_yellow};
 
     public static void start(Activity activity, String movie_id, MovieCollections movieCollections) {
         Intent starter = new Intent(activity, MovieCollectionDetailActivity.class);

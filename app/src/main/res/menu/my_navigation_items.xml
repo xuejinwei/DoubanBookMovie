@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/navigation_hot"
-            android:checked="true"
-            android:icon="@drawable/ic_whatshot_white_24dp"
-            android:title="热门"/>
+
         <item
             android:id="@+id/navigation_movies"
             android:icon="@drawable/ic_local_movies_white_24dp"
@@ -24,10 +20,6 @@
     <group
         android:id="@+id/menu_bottom"
         android:checkableBehavior="none">
-        <item
-            android:id="@+id/navigation_settings"
-            android:icon="@drawable/ic_settings"
-            android:title="设置"/>
         <item
             android:id="@+id/navigation_about"
             android:icon="@drawable/ic_report_white_24dp"

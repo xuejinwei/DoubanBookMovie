@@ -23,7 +23,6 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.AuthActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.SearchActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity.BackActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.BookFragment;
-import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.HotFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.MovieFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.MyFragment;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.util.CommonUtil;
@@ -65,10 +64,7 @@ public class MainActivity extends BackActivity {
         drawer_layout.addDrawerListener(drawerToggle);
         setupDrawerContent(navigation);
 
-        if (viewPager != null) {
-            setupViewPager(viewPager);
-        }
-        tabLayout.setupWithViewPager(viewPager);
+
         tv_header_login.setOnClickListener(v -> {
             if (Setting.getAuthState()) {
                 DialogUtil.simpleMessage(this, "确定注销？", () -> {
@@ -101,6 +97,10 @@ public class MainActivity extends BackActivity {
             tv_header_desc.setText("");
             tv_header_login.setText("登录");
         }
+        if (viewPager != null) {
+            setupViewPager(viewPager);
+        }
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
@@ -112,7 +112,6 @@ public class MainActivity extends BackActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new HotFragment(), "热门");
         adapter.addFragment(new MovieFragment(), "电影");
         adapter.addFragment(new BookFragment(), "读书");
         adapter.addFragment(new MyFragment(), "我的");
@@ -125,20 +124,16 @@ public class MainActivity extends BackActivity {
                 menuItem -> {
                     switch (menuItem.getItemId()) {
 
-                        case R.id.navigation_hot:
+                        case R.id.navigation_movies:
                             selectPage(0);
                             menuItem.setChecked(true);
                             break;
-                        case R.id.navigation_movies:
+                        case R.id.navigation_book:
                             selectPage(1);
                             menuItem.setChecked(true);
                             break;
-                        case R.id.navigation_book:
-                            selectPage(2);
-                            menuItem.setChecked(true);
-                            break;
                         case R.id.navigation_my:
-                            selectPage(3);
+                            selectPage(2);
                             menuItem.setChecked(true);
                             break;
 

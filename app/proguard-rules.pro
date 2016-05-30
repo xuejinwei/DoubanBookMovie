@@ -15,3 +15,10 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-keep class com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieCollections
+-keep class com.xuejinwei.doubanbookmovie.doubanbookmovie.model.** { *; }
+
+-keepattributes *Annotation*
+-keepclassmembers class * extends com.twiceyuan.commonadapter.library.holder.CommonHolder {
+    public <init>(...);
+}

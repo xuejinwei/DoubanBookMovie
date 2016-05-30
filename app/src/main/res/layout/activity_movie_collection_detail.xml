@@ -164,7 +164,7 @@
             android:layout_height="240dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/widget_big_blue">
+            android:background="@drawable/bg_blue">
 
             <TextView
                 android:id="@+id/tv_jiyu"
