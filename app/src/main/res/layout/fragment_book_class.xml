@@ -164,7 +164,7 @@
         <TextView
             android:id="@+id/tv_filter_movie_chinese_hot"
             style="@style/TagTheme"
-            android:text="话语"
+            android:text="华语"
             />
 
         <TextView

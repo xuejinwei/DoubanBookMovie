@@ -36,7 +36,6 @@ public class SubjectCollectionType {
     public static final String book_fiction                = "book_fiction";//最受关注图书|虚构类
     public static final String book_nonfiction             = "book_nonfiction";//最受关注图书|非虚构类
     public static final String book_bestseller             = "book_bestseller";//畅销书图书榜
-    public static final String ebook_hot                   = "ebook_hot";//热门电子书
     //图书分类
     public static final String filter_book_fiction_hot     = "filter_book_fiction_hot";//小说
     public static final String filter_book_love_hot        = "filter_book_love_hot";//爱情

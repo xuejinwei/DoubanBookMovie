@@ -27,7 +27,6 @@ public class BookFragment extends BaseFragment {
     @Bind(R.id.tv_filter_book_history_hot)  TextView tv_filter_book_history_hot;
     @Bind(R.id.tv_filter_book_foreign_hot)  TextView tv_filter_book_foreign_hot;
     @Bind(R.id.tv_filter_book_youth_hot)    TextView tv_filter_book_youth_hot;
-    @Bind(R.id.tv_filter_book_economic_hot) TextView tv_filter_book_economic_hot;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,7 +37,6 @@ public class BookFragment extends BaseFragment {
         Box3Fragment.inject((AppCompatActivity) getActivity(), R.id.framelayout_book_fiction, SubjectCollectionType.book_fiction, "最受关注图书|虚构类");
         Box3Fragment.inject((AppCompatActivity) getActivity(), R.id.framelayout_book_nonfiction, SubjectCollectionType.book_nonfiction, "最受关注图书|非虚构类");
         Box3Fragment.inject((AppCompatActivity) getActivity(), R.id.framelayout_book_bestseller, SubjectCollectionType.book_bestseller, "畅销图书榜");
-        Box3Fragment.inject((AppCompatActivity) getActivity(), R.id.framelayout_ebook_hot, SubjectCollectionType.ebook_hot, "热门电子书");
         return view;
     }
 
@@ -50,7 +48,5 @@ public class BookFragment extends BaseFragment {
         tv_filter_book_history_hot.setOnClickListener(v -> SubjectCollectionActivity.start(getActivity(), SubjectCollectionType.filter_book_history_hot));
         tv_filter_book_foreign_hot.setOnClickListener(v -> SubjectCollectionActivity.start(getActivity(), SubjectCollectionType.filter_book_foreign_hot));
         tv_filter_book_youth_hot.setOnClickListener(v -> SubjectCollectionActivity.start(getActivity(), SubjectCollectionType.filter_book_youth_hot));
-        tv_filter_book_economic_hot.setOnClickListener(v -> SubjectCollectionActivity.start(getActivity(), SubjectCollectionType.filter_book_economic_hot));
-
     }
 }
