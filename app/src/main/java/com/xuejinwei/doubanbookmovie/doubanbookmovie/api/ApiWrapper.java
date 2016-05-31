@@ -161,4 +161,8 @@ public class ApiWrapper {
     public Observable<Success> deleteBookCollections(String bookid) {
         return mApi.deleteBookCollection(Setting.getSetting(Setting.Key.access_token, ""), bookid).flatMap(FlatHandler::flatToSuccess);
     }
+
+    public Observable<Object> addBookReviews(String bookid,String title,String comment,String rating) {
+        return mApi.addBookReviews(Setting.getSetting(Setting.Key.access_token, ""), bookid,title,comment,rating).flatMap(FlatHandler::flatResult);
+    }
 }

@@ -136,4 +136,9 @@ public interface Api {
 
     @DELETE("book/{book_id}/collection")
     Observable<Result<Success>> deleteBookCollection(@Header("Authorization") String Authorization, @Path("book_id") String book_id);
+
+    @FormUrlEncoded
+    @POST("book/reviews")
+    Observable<Result<Object>> addBookReviews(@Header("Authorization") String Authorization, @Field("book") String book_id, @Field("title") String title, @Field("content") String content, @Field("rating") String rating);
+
 }

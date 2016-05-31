@@ -132,7 +132,7 @@ public class CommentsFragment extends BaseFragment {
                 tv_comments_more.setText("更多书评");
                 mCommentsHolder = new CommonAdapter<>(getActivity(), ReviewsHolder.class);
                 initRecyclerView(rv_comments, mCommentsHolder);
-                runRxTaskOnUi(mApiWrapper.getBookReviews(mId, 0, 3, SortType.new_score), commentses -> {
+                runRxTaskOnUi(mApiWrapper.getBookReviews(mId, 0, 3, SortType.time), commentses -> {
                     if (commentses.size() != 0) {
                         mCommentsHolder.clear();
                         if (commentses.size() > 3) {
