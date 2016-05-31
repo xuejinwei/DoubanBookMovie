@@ -8,6 +8,7 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Celebrity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.CollectionUpdate;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.CollectionsResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Comments;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.JvHeResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Me;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Movie;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieResult;
@@ -164,5 +165,9 @@ public class ApiWrapper {
 
     public Observable<Object> addBookReviews(String bookid,String title,String comment,String rating) {
         return mApi.addBookReviews(Setting.getSetting(Setting.Key.access_token, ""), bookid,title,comment,rating).flatMap(FlatHandler::flatResult);
+    }
+
+    public Observable<JvHeResult> getBoxOffice() {
+        return mApi.getBoxOffice().flatMap(FlatHandler::flatResult);
     }
 }

@@ -6,6 +6,7 @@ import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.BookResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Celebrity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.CollectionsResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.HtmlResult;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.JvHeResult;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Me;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Movie;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.MovieResult;
@@ -140,5 +141,8 @@ public interface Api {
     @FormUrlEncoded
     @POST("book/reviews")
     Observable<Result<Object>> addBookReviews(@Header("Authorization") String Authorization, @Field("book") String book_id, @Field("title") String title, @Field("content") String content, @Field("rating") String rating);
+
+    @GET("http://v.juhe.cn/boxoffice/rank.php?key=163e506acf7a021d10538803c8f5d134&area=CN")
+    Observable<Result<JvHeResult>> getBoxOffice();
 
 }

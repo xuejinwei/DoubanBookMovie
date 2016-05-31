@@ -1,6 +1,7 @@
 package com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.SubjectCollectionType;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.BoxOfficeActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.MovieListActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.fragment.BaseFragment;
 
@@ -47,7 +49,7 @@ public class MovieFragment extends BaseFragment {
 
         ll_in_theaters.setOnClickListener(v -> MovieListActivity.start(getActivity(), MovieListActivity.Type.IN_THEATERS));
         ll_coming_soon.setOnClickListener(v -> MovieListActivity.start(getActivity(), MovieListActivity.Type.COMMING_SOON));
-//        ll_america.setOnClickListener(v -> startActivity(new Intent(getActivity(), SubjectCollectionActivity.class)));
+        ll_america.setOnClickListener(v -> startActivity(new Intent(getActivity(), BoxOfficeActivity.class)));
         ll_top250.setOnClickListener(v -> MovieListActivity.start(getActivity(), MovieListActivity.Type.TOP250));
 
     }
