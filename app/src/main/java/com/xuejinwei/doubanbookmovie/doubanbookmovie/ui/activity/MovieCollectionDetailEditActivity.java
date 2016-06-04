@@ -80,7 +80,7 @@ public class MovieCollectionDetailEditActivity extends SwipeBackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_collection_detail_edit);
+        setContentView(R.layout.activity_movie_collection_detail_edit);
         ButterKnife.bind(this);
         mType = (Type) getIntent().getSerializableExtra(ARG_TYPE);
         movie_id = getIntent().getStringExtra(MOVIE_ID);

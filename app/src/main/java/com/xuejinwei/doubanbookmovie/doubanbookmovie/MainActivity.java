@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.github.siyamed.shapeimageview.CircularImageView;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.app.Setting;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.AboutActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.AuthActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity.SearchActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity.BackActivity;
@@ -136,6 +137,9 @@ public class MainActivity extends BackActivity {
                             selectPage(2);
                             menuItem.setChecked(true);
                             break;
+                        case R.id.navigation_about:
+                            startActivity(new Intent(this, AboutActivity.class));
+                            break;
 
                     }
                     drawer_layout.closeDrawers();
@@ -192,6 +196,10 @@ public class MainActivity extends BackActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_search) {
             startActivity(new Intent(this, SearchActivity.class));
+            return true;
+        }
+        if (item.getItemId() == R.id.action_about) {
+            startActivity(new Intent(this, AboutActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

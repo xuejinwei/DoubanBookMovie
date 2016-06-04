@@ -1,5 +1,6 @@
 package com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -80,6 +81,14 @@ public class BookCollectionListActivity extends SwipeBackActivity implements Swi
     public void onRefresh() {
         mStart = 0;
         load();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            onRefresh();
+        }
     }
 
     /**

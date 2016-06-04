@@ -157,13 +157,13 @@ public class MovieCollectionDetailActivity extends SwipeBackActivity {
 
     int getStatus(MovieCollections movieCollections) {
         if (movieCollections.getMovieCollectionType()==0) {
-            return R.drawable.img_wish;
+            return R.drawable.img_wish_m;
         }
         if (movieCollections.getMovieCollectionType()==1) {
-            return R.drawable.img_reading;
+            return R.drawable.img_reading_m;
         }
         if (movieCollections.getMovieCollectionType()==2) {
-            return R.drawable.img_readed;
+            return R.drawable.img_readed_m;
         }
 
         return -1;

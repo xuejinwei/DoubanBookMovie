@@ -60,7 +60,7 @@ public class BookDetailActivity extends SwipeBackActivity {
     @Bind(R.id.ll_root)                      LinearLayout            ll_root;
     @Bind(R.id.nested_scroll_view)           NestedScrollView        nested_scroll_view;
 
-    private Book mBook;
+    private Book   mBook;
     private String book_id;
     private static final String BOOK_ID = "book_id";
 
@@ -100,7 +100,12 @@ public class BookDetailActivity extends SwipeBackActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_book_review_edit) {
-            BookReviewEditActivity.start(this,BookReviewEditActivity.Type.ADD,book_id);
+            BookReviewEditActivity.start(this, BookReviewEditActivity.Type.ADD, book_id);
+            return true;
+        }
+
+        if (item.getItemId() == R.id.action_book_share) {
+            CommonUtil.share("我在豆瓣书影发现了好书:" + mBook.title + "。" + mBook.alt);
             return true;
         }
 
@@ -110,13 +115,14 @@ public class BookDetailActivity extends SwipeBackActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==RESULT_OK){
+        if (resultCode == RESULT_OK) {
             CommentsFragment.inject(this, R.id.framelayout_book_comments, CommentsFragment.Type.BOOK_COMMENTS, book_id);
             CommentsFragment.inject(this, R.id.framelayout_book_reviews, CommentsFragment.Type.BOOK_REVIEWS, book_id);
         }
     }
 
-    private void refresh(Book book){
+    private void refresh(Book book) {
+        mBook = book;
         Glide.with(BookDetailActivity.this).load(book.images.large).into(imagehead);
         Glide.with(BookDetailActivity.this).load(book.images.small).asBitmap().into(new SimpleTarget<Bitmap>() {
             @Override

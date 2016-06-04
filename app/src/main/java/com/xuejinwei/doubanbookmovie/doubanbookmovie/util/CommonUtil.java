@@ -2,6 +2,7 @@ package com.xuejinwei.doubanbookmovie.doubanbookmovie.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Log;
@@ -71,5 +72,18 @@ public class CommonUtil {
                 }
             }
         });
+    }
+
+    /**
+     * 分享一段文本内容
+     *
+     * @param shareContent 文本内容
+     */
+    public static void share(String shareContent) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, shareContent);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        App.getApp().startActivity(intent);
     }
 }

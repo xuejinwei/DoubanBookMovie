@@ -58,7 +58,7 @@ public class BookCollectionDetailActivity extends SwipeBackActivity {
     public static void start(Activity activity, String book_id) {
         Intent starter = new Intent(activity, BookCollectionDetailActivity.class);
         starter.putExtra(COLLECTION_ID, book_id);
-        activity.startActivity(starter);
+        activity.startActivityForResult(starter,0);
     }
 
     @Override
@@ -118,6 +118,7 @@ public class BookCollectionDetailActivity extends SwipeBackActivity {
         if (item.getItemId() == R.id.action_book_collection_delete) {
             DialogUtil.simpleMessage(this, "确定删除？", () -> runRxTaskOnUi(mApiWrapper.deleteBookCollections(bookid), success -> {
                 CommonUtil.toast("删除成功");
+                setResult(RESULT_OK);
                 finish();
             }));
 

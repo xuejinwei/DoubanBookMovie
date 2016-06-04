@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,6 +25,7 @@ import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.twiceyuan.commonadapter.library.adapter.CommonAdapter;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.R;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.adapter.CelebrityHolder;
+import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.Movie;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.model.SimpleCelebrity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.base.activity.SwipeBackActivity;
 import com.xuejinwei.doubanbookmovie.doubanbookmovie.ui.fragment.CommentsFragment;
@@ -60,6 +62,7 @@ public class MovieDetailActivity extends SwipeBackActivity {
     @Bind(R.id.fab_collection)        FloatingActionButton    fab_collection;
 
     private String                                          mMovieId;
+    private Movie                                           mMovie;
     private CommonAdapter<SimpleCelebrity, CelebrityHolder> mSimpleCelebrityCommonAdapter;
 
     public static void start(Activity activity, String movie_id) {
@@ -92,6 +95,7 @@ public class MovieDetailActivity extends SwipeBackActivity {
         CommentsFragment.inject(this, R.id.framelayout_movie_comments, CommentsFragment.Type.MOVIE_COMMENTS, mMovieId);
         CommentsFragment.inject(this, R.id.framelayout_movie_reviews, CommentsFragment.Type.MOVIE_REVIEWS, mMovieId);
         runRxTaskOnUi(mApiWrapper.getMovieById(mMovieId), movie -> {
+            mMovie = movie;
             Glide.with(MovieDetailActivity.this).load(movie.images.large).into(imagehead);
             Glide.with(MovieDetailActivity.this).load(movie.images.small).asBitmap().into(new SimpleTarget<Bitmap>() {
                 @Override
@@ -131,7 +135,18 @@ public class MovieDetailActivity extends SwipeBackActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_movie_detail, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.action_book_share) {
+            CommonUtil.share("我在豆瓣书影发现了一部好电影:" + mMovie.title + "。" + mMovie.share_url);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
