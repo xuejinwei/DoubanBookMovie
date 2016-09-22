@@ -38,13 +38,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="6dp"
-            android:text="学号:202120838"
-            android:textSize="16sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:autoLink="email"
             android:padding="6dp"
             android:text="邮箱: xuejinwei@outlook.com"
