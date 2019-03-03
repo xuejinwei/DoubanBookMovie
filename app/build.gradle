@@ -1,10 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.2"
-
     defaultConfig {
         applicationId "com.xuejinwei.doubanbookmovie.doubanbookmovie"
         minSdkVersion 15
@@ -33,64 +30,65 @@ android {
         }
 
         dependencies {
-            compile fileTree(dir: 'libs', include: ['*.jar'])
-            testCompile 'junit:junit:4.12'
+            implementation fileTree(dir: 'libs', include: ['*.jar'])
+            testImplementation 'junit:junit:4.12'
             // google 依赖
-            compile 'com.android.support:appcompat-v7:24.2.1'
-            compile 'com.android.support:design:24.2.1'
-            compile 'com.android.support:palette-v7:24.2.1'
-            compile 'com.android.support:cardview-v7:24.2.1'
-            compile 'com.android.support:recyclerview-v7:24.2.1'
+            implementation 'com.android.support:appcompat-v7:24.2.1'
+            implementation 'com.android.support:design:24.2.1'
+            implementation 'com.android.support:palette-v7:24.2.1'
+            implementation 'com.android.support:cardview-v7:24.2.1'
+            implementation 'com.android.support:recyclerview-v7:24.2.1'
             // 依赖注入，方便findviewbyid
-            compile 'com.jakewharton:butterknife:7.0.1'
+            implementation 'com.jakewharton:butterknife:7.0.1'
+            annotationProcessor 'com.jakewharton:butterknife:7.0.1'
 
             // rxjava rxandroid retrofit 网络 相关
-            compile 'io.reactivex:rxandroid:1.1.0'
-            compile 'io.reactivex:rxjava:1.1.2'
-            compile 'com.squareup.retrofit2:retrofit:2.0.0'
-            compile 'com.squareup.retrofit2:converter-gson:2.0.0'  // retrofit gson驱动
-            compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0'  // retrofit rxjava驱动
-            compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'// okhttp日志
-            compile 'com.google.code.gson:gson:2.6.2' // json to 实体
+            implementation 'io.reactivex:rxandroid:1.1.0'
+            implementation 'io.reactivex:rxjava:1.1.2'
+            implementation 'com.squareup.retrofit2:retrofit:2.0.0'
+            implementation 'com.squareup.retrofit2:converter-gson:2.0.0'  // retrofit gson驱动
+            implementation 'com.squareup.retrofit2:adapter-rxjava:2.0.0'  // retrofit rxjava驱动
+            implementation 'com.squareup.okhttp3:logging-interceptor:3.2.0'// okhttp日志
+            implementation 'com.google.code.gson:gson:2.6.2' // json to 实体
 
             // 打印漂亮日志
-            compile 'com.github.orhanobut:logger:1.12'
+            implementation 'com.github.orhanobut:logger:1.12'
             //滑动返回
-            compile 'me.imid.swipebacklayout.lib:library:1.0.0'
+            implementation 'me.imid.swipebacklayout.lib:library:1.1.0'
 
-            compile 'com.facebook.fresco:fresco:0.7.0'
+            implementation 'com.facebook.fresco:fresco:0.7.0'
             // 通用适配器
-            compile('com.github.twiceyuan:CommonAdapter:0.4.4') {
+            implementation('com.github.twiceyuan:CommonAdapter:0.4.4') {
                 exclude module: 'support-v4', group: 'com.android.support'
                 exclude module: 'support-v7', group: 'com.android.support'
                 exclude module: 'appcompat', group: 'com.android.support'
                 exclude module: 'recyclerview', group: 'com.android.support'
 
             }
-            compile 'com.github.bumptech.glide:glide:3.7.0'
-            compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
-            compile 'jp.wasabeef:glide-transformations:2.0.0'
+            implementation 'com.github.bumptech.glide:glide:3.7.0'
+            implementation 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
+            implementation 'jp.wasabeef:glide-transformations:2.0.0'
             // 分页器
-            compile 'com.github.markomilos:paginate:0.5.1'
+            implementation 'com.github.markomilos:paginate:0.5.1'
 
             // 分页textview
-            compile 'com.ms-square:expandableTextView:0.1.4'
-            compile 'net.qiujuer.genius:blur:1.5.0'
-            compile 'com.zhy:okhttputils:2.3.8'
+            implementation 'com.ms-square:expandableTextView:0.1.4'
+            implementation 'net.qiujuer.genius:blur:1.5.0'
+            implementation 'com.zhy:okhttputils:2.3.8'
 
-            compile 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
+            implementation 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
 
-            compile 'org.apmem.tools:layouts:1.10@aar'//自动换行
+            implementation 'org.apmem.tools:layouts:1.10@aar'//自动换行
 
-            compile 'com.google.zxing:core:3.1.0'
-            compile 'cn.bingoogolapple:bga-qrcodecore:1.0.7@aar'
-            compile 'cn.bingoogolapple:bga-zxing:1.0.7@aar'
+            implementation 'com.google.zxing:core:3.1.0'
+            implementation 'cn.bingoogolapple:bga-qrcodecore:1.0.7@aar'
+            implementation 'cn.bingoogolapple:bga-zxing:1.0.7@aar'
 
             //avoscloud-sdk 为 LeanCloud基础包
-            compile('cn.leancloud.android:avoscloud-sdk:v3.+')
+            implementation('cn.leancloud.android:avoscloud-sdk:v3.+')
 
             // LeanCloud Rx 插件
-            compile 'com.github.twiceyuan:RxLeanCloud:1.1.3-alpha'
+            implementation 'com.github.twiceyuan:RxLeanCloud:1.1.3-alpha'
         }
     }
 }
