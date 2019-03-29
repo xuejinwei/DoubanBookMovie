@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">豆瓣书影kotlin</string>
+
+    <string name="in_theaters">正在热映</string>
+    <string name="more">更多</string>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_movie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/box_padding"
+        android:background="@color/md_white_100"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="4dp"
+        android:paddingLeft="@dimen/box_padding"
+        android:paddingRight="@dimen/box_padding"
+        android:paddingTop="@dimen/box_padding">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Box3标题"
+            android:textColor="@color/text_color_dark_full"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="@string/more"
+            android:textColor="@color/colorPrimary"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_box3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

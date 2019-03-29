@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/ll_comments_root"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:paddingTop="12dp">
+
+    <TextView
+        android:id="@+id/tv_comments_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_gray"
+        android:paddingBottom="12dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="12dp"
+        android:textColor="@color/text_color_grey_full"
+        tools:text="@string/more"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_comments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <include layout="@layout/include_line"/>
+
+    <TextView
+        android:id="@+id/tv_comments_more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_gray"
+        android:gravity="center_horizontal"
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp"
+        android:textColor="@color/colorPrimary"
+        tools:text="@string/more"/>
+</LinearLayout>

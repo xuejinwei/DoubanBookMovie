@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_gray"
+    android:orientation="vertical"
+    android:paddingBottom="12dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="12dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:textColor="@color/text_color_dark_full"
+        android:textSize="16sp"
+        tools:text="无论是邓布利多，伏地魔，斯内普，卢平，小天无论是邓布利多，伏地魔，斯内普，卢平，小天狼星，狼星，短评…………"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical">
+
+        <com.github.siyamed.shapeimageview.CircularImageView
+            android:id="@+id/iv_comment"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/default_avatar"/>
+
+        <RatingBar
+            android:id="@+id/rb_comment"
+            style="@android:style/Widget.DeviceDefault.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stepSize="1"
+            tools:rating="3"/>
+
+        <TextView
+            android:id="@+id/tv_vote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end|right"
+            tools:text="0有用 1回复"/>
+    </LinearLayout>
+
+
+</LinearLayout>

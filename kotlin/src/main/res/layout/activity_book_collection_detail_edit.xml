@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="我的评分："
+        android:textColor="@color/text_color_dark"
+        tools:ignore="HardcodedText"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="@drawable/bg_shadow_bottom_top"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="?android:attr/ratingBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:max="5"
+            android:rating="5"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            android:stepSize="1"/>
+
+        <Space
+            android:layout_width="12dp"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/tv_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="优秀"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="12dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="搜藏寄语："
+        android:textColor="@color/text_color_dark"
+        tools:ignore="HardcodedText"/>
+
+    <com.xuejinwei.doubanbookmovie.kotlin.widget.CountEditText
+        android:id="@+id/count_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_shadow_bottom_top"
+        android:padding="12dp"
+        app:maxChar="250"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="想读"/>
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="在读"/>
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="读过"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_submit"
+        style="@style/SimpleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="submit"
+        android:text="提交"/>
+
+</LinearLayout>

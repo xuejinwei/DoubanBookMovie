@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <org.apmem.tools.layouts.FlowLayout
+        android:id="@+id/flow_book"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/tv_filter_book_fiction_hot"
+            style="@style/TagTheme"
+            android:text="小说"
+            />
+
+        <TextView
+            android:id="@+id/tv_filter_book_love_hot"
+            style="@style/TagTheme"
+            android:text="爱情"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_history_hot"
+            style="@style/TagTheme"
+            android:text="历史"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_foreign_hot"
+            style="@style/TagTheme"
+            android:text="外国文学"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_youth_hot"
+            style="@style/TagTheme"
+            android:text="青春"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_inspiration_hot"
+            style="@style/TagTheme"
+            android:text="励志"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_essay_hot"
+            style="@style/TagTheme"
+            android:text="随笔"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_biography_hot"
+            style="@style/TagTheme"
+            android:text="传记"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_detective_hot"
+            style="@style/TagTheme"
+            android:text="推理"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_travel_hot"
+            style="@style/TagTheme"
+            android:text="旅行"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_fantasy_hot"
+            style="@style/TagTheme"
+            android:text="奇幻"/>
+
+        <TextView
+            android:id="@+id/tv_filter_book_economic_hot"
+            style="@style/TagTheme"
+            android:text="经营"/>
+    </org.apmem.tools.layouts.FlowLayout>
+
+    <org.apmem.tools.layouts.FlowLayout
+        android:id="@+id/flow_movie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/tv_filter_movie_classic_hot"
+            style="@style/TagTheme"
+            android:text="经典"
+            />
+
+        <TextView
+            android:id="@+id/tv_filter_movie_unpopular_hot"
+            style="@style/TagTheme"
+            android:text="冷门佳片"
+            />
+
+        <TextView
+            android:id="@+id/tv_filter_movie_score_hot"
+            style="@style/TagTheme"
+            android:text="豆瓣高分"
+            />
+
+        <TextView
+            android:id="@+id/tv_filter_movie_action_hot"
+            style="@style/TagTheme"
+            android:text="动作"
+            />
+
+        <TextView
+            android:id="@+id/tv_filter_movie_comedy_hot"
+            style="@style/TagTheme"
+            android:text="喜剧"
+            />
+
+        <TextView
+            android:id="@+id/tv_filter_movie_love_hot"
+            style="@style/TagTheme"
+            android:text="爱情"
+            />
+
+        <TextView
+            android:id="@+id/tv_filter_movie_mystery_hot"
+            style="@style/TagTheme"
+            android:text="悬疑"
+            />
+
+        <TextView
+            android:id="@+id/tv_filter_movie_horror_hot"
+            style="@style/TagTheme"
+            android:text="恐怖"
+            />
+
+        <TextView
+            android:id="@+id/tv_filter_movie_sci_fi_hot"
+            style="@style/TagTheme"
+            android:text="科幻"
+            />
+
+        <TextView
+            android:id="@+id/tv_filter_movie_cure_hot"
+            style="@style/TagTheme"
+            android:text="治愈系"
+            />
+
+        <TextView
+            android:id="@+id/tv_filter_movie_literature_hot"
+            style="@style/TagTheme"
+            android:text="文艺"
+            />
+
+        <TextView
+            android:id="@+id/tv_filter_movie_growth_hot"
+            style="@style/TagTheme"
+            android:text="成长"
+            />
+
+        <TextView
+            android:id="@+id/tv_filter_movie_cartoon_hot"
+            style="@style/TagTheme"
+            android:text="动画"
+            />
+
+        <TextView
+            android:id="@+id/tv_filter_movie_chinese_hot"
+            style="@style/TagTheme"
+            android:text="华语"
+            />
+
+        <TextView
+            android:id="@+id/tv_filter_movie_occident_hot"
+            style="@style/TagTheme"
+            android:text="欧美"
+            />
+
+        <TextView
+            android:id="@+id/tv_filter_movie_korea_hot"
+            style="@style/TagTheme"
+            android:text="韩国"
+            />
+
+        <TextView
+            android:id="@+id/tv_filter_movie_japan_hot"
+            style="@style/TagTheme"
+            android:text="日本"
+            />
+    </org.apmem.tools.layouts.FlowLayout>
+</LinearLayout>

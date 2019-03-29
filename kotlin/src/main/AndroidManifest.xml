@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.xuejinwei.doubanbookmovie.kotlin"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+    <application
+        android:name="com.xuejinwei.doubanbookmovie.kotlin.app.App"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.xuejinwei.doubanbookmovie.kotlin.MainActivity"
+            android:theme="@style/AppTheme.Main">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.MovieListActivity"/>
+        <activity android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.BookListActivity"/>
+        <activity android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.BookCollectionListActivity"/>
+        <activity android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.AuthActivity"/>
+        <activity android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.BookCollectionDetailActivity"/>
+        <activity android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.BookCollectionDetailEditActivity"/>
+        <activity android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.BookReviewEditActivity"/>
+        <activity android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.SubjectCollectionActivity"/>
+        <activity android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.SearchActivity"/>
+        <activity android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.QrCodeActivity"/>
+        <activity android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.CommentsListActivity"/>
+        <activity android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.ReviewsDetailActivity"/>
+        <activity android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.MovieCollectionDetailEditActivity"/>
+        <activity android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.MovieCollectionListActivity"/>
+        <activity android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.MovieCollectionDetailActivity"/>
+        <activity android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.BoxOfficeActivity"/>
+        <activity android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.AboutActivity"/>
+        <activity
+            android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.WebViewActivity"
+            android:hardwareAccelerated="true"/>
+        <activity
+            android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.MovieDetailActivity"
+            android:label=""
+            android:theme="@style/AppTheme.StatusBar"/>
+        <activity
+            android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.BookDetailActivity"
+            android:label=""
+            android:theme="@style/AppTheme.StatusBar"/>
+        <activity
+            android:name="com.xuejinwei.doubanbookmovie.kotlin.ui.activity.CelebrityDetailActivity"
+            android:label=""
+            android:theme="@style/AppTheme.StatusBar"/>
+    </application>
+
+</manifest>

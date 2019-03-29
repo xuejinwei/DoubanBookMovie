@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/navigation_movies"
+            android:icon="@drawable/ic_local_movies_white_24dp"
+            android:title="电影"/>
+        <item
+            android:id="@+id/navigation_book"
+            android:icon="@drawable/ic_book_white_24dp"
+            android:title="图书"/>
+        <item
+            android:id="@+id/navigation_my"
+            android:icon="@drawable/ic_account_box_white_24dp"
+            android:title="我的"/>
+
+    </group>
+
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/navigation_about"
+            android:icon="@drawable/ic_report_white_24dp"
+            android:title="关于"/>
+    </group>
+</menu>

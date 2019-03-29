@@ -1,0 +1,91 @@
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_fragment_book_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="12dp">
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md_white_100"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/tv_filter_book_fiction_hot"
+                    style="@style/TagTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="小说"/>
+
+                <TextView
+                    android:id="@+id/tv_filter_book_love_hot"
+                    style="@style/TagTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="爱情"/>
+
+                <TextView
+                    android:id="@+id/tv_filter_book_history_hot"
+                    style="@style/TagTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="历史"/>
+
+                <TextView
+                    android:id="@+id/tv_filter_book_foreign_hot"
+                    style="@style/TagTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="外国文学"/>
+
+                <TextView
+                    android:id="@+id/tv_filter_book_youth_hot"
+                    style="@style/TagTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="青春"/>
+
+                <TextView
+                    android:id="@+id/tv_filter_book_economic_hot"
+                    style="@style/TagTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="经营"/>
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <FrameLayout
+            android:id="@+id/framelayout_book_latest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <FrameLayout
+            android:id="@+id/framelayout_book_fiction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <FrameLayout
+            android:id="@+id/framelayout_book_nonfiction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <FrameLayout
+            android:id="@+id/framelayout_book_bestseller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
